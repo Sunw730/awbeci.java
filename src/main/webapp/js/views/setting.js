@@ -1,11 +1,5 @@
 $(function () {
-    $('.list-group-item').each(function () {
-        $(this).on('click', function (e) {
-            $('.list-group-item').removeClass('list-group-items');
-            $(this).addClass('list-group-items')
-        })
-    });
-    $('.list-group-item:first-child').addClass('list-group-items');
+    activeProfile();
     var $image = $('#avatorImg');
     var $modal = $('#myModal');
     var cropBoxData;
@@ -47,7 +41,20 @@ $(function () {
 
         $modal.modal('show');
     });
-})
+});
+
+function activeProfile(){
+    $.post('/json/getUserInfo.json',function(data){
+        if(data){
+            $("#userAvatar").attr('src',data.avatarUrl);
+            $("#name").val(data.name);
+            $("#niceName").val(data.niceName);
+            $("#email").val(data.email);
+            $("#url").val(data.url);
+        }
+    },'json');
+}
+
 function settingProfile(type) {
     switch (type) {
         case 1:
@@ -59,6 +66,7 @@ function settingProfile(type) {
     }
 }
 
+//上传头像
 function uploadAvator() {
     var $avatar = $("#userAvatar");
     var $image = $('#avatorImg');

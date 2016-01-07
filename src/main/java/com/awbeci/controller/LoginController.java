@@ -1,6 +1,7 @@
 package com.awbeci.controller;
 
 import com.awbeci.domain.User;
+import com.awbeci.util.MyProperties;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -10,13 +11,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Controller
 public class LoginController {
-
+    MyProperties myProperties = new MyProperties();
     @Autowired
     private IUserService userService;
 
@@ -61,6 +60,11 @@ public class LoginController {
         if (sessionuser != null) {
             return "/";
         }
+        Random random = new Random();
+        int result = random.nextInt(10);
+        Properties prop = myProperties.getPropertiesByName(properties);
+        String avatarDeaultImg = prop.getProperty("avatarDeaultImg");
+        user.setAvatarUrl(avatarDeaultImg + (++result) + ".png");
         //todo:确保名称是唯一的
         boolean data = userService.region(user, properties);
         if (data) {
@@ -76,6 +80,7 @@ public class LoginController {
 
     /**
      * 验证邮箱
+     *
      * @param id
      * @param session
      * @return
@@ -83,8 +88,7 @@ public class LoginController {
     @RequestMapping(value = "validate/{id}", method = RequestMethod.GET)
     public String validate(@PathVariable String id, HttpSession session) {
         Object username = session.getAttribute("user");
-        if (id != null && !id.equals("") && username != null && !username.equals(""))
-        {
+        if (id != null && !id.equals("") && username != null && !username.equals("")) {
             //todo:是否验证了多次，要判断下
             userService.validateEmail(id);
             return "validate/validateEmail";

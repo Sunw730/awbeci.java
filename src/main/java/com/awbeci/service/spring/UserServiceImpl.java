@@ -70,4 +70,13 @@ public class UserServiceImpl implements IUserService {
     public User selectUserByName(String name) {
         return userDao.selectUserByName(name);
     }
+
+    /**
+     * 根据id获取用户数据
+     * @param id
+     * @return
+     */
+    public User selectUserById(String id) {
+        return userDao.selectUserById(id);
+    }
 }

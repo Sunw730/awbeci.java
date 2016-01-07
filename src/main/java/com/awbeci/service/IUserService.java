@@ -17,4 +17,6 @@ public interface IUserService {
     int validateEmail(String id);
 
     User selectUserByName(String name);
+
+    User selectUserById(String id);
 }

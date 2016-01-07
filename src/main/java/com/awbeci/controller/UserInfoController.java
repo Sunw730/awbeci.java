@@ -1,11 +1,13 @@
 package com.awbeci.controller;
+import com.awbeci.domain.User;
+import com.awbeci.service.IUserService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpSession;
 import java.util.HashMap;
@@ -16,6 +18,11 @@ import java.util.Map;
  */
 @Controller
 public class UserInfoController {
+
+    Logger log = LoggerFactory.getLogger(UserInfoController.class);
+
+    @Autowired
+    IUserService userService;
 
     @RequestMapping("/settings/account")
     public ModelAndView login() {
@@ -30,5 +37,18 @@ public class UserInfoController {
     @RequestMapping("/followers")
     public ModelAndView followers() {
         return new ModelAndView("user/followers");
+    }
+
+    @RequestMapping(value = "/json/getUserInfo.json", method = RequestMethod.POST)
+    @ResponseBody
+    public User querySiteByParam(HttpSession session) {
+        try {
+            String uid = (String) session.getAttribute("uid");
+            User user = userService.selectUserById(uid);
+            return user;
+        } catch (Exception e) {
+            log.debug("错误原因:" + e.getMessage());
+            return null;
+        }
     }
 }

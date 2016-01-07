@@ -60,26 +60,26 @@
                         <dl class="form-group clearboth margintop">
                             <dt><label>用户名</label></dt>
                             <dd>
-                                <input type="text" class="form-control form-control-width">
+                                <input id="name" name="name" type="text" class="form-control form-control-width">
                             </dd>
                         </dl>
                         <dl class="form-group clearboth">
                             <dt><label>昵称</label></dt>
                             <dd>
-                                <input type="text" class="form-control form-control-width">
+                                <input id="niceName" name="niceName" type="text" class="form-control form-control-width">
                             </dd>
                         </dl>
                         <dl class="form-group clearboth">
                             <dt><label>邮箱</label></dt>
                             <dd>
-                                <input type="text" class="form-control form-control-width">
+                                <input id="email" name="email" type="text" class="form-control form-control-width">
                             </dd>
                         </dl>
                         <dl class="form-group clearboth">
                             <dt><label>URL</label></dt>
                             <dd>
 
-                                <input type="text" class="form-control form-control-width">
+                                <input id="url" name="url" type="text" class="form-control form-control-width">
                             </dd>
                         </dl>
                         <p>
@@ -93,7 +93,7 @@
 </div>
 <!-- 模态框（Modal） -->
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog"
-     aria-labelledby="myModalLabel" aria-hidden="true">
+     aria-labelledby="myModalLabel" aria-hidden="true" data-backdrop="static">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">

@@ -146,8 +146,8 @@ public class UserSitesImpl implements IUserSitesService {
             String avatorImgPath = out_ossurl + bucketfolder + favicon;
             if (data) {
                 userDao.updateAvatarUrl(uid, avatorImgPath);
-                //如果不为空删除旧头像
-                if (!avatarImgUrl.isEmpty()){
+                //如果不为空删除旧头像，并且不删除默认头像
+                if (!avatarImgUrl.isEmpty() && avatarImgUrl.indexOf("default") == -1) {
                     String key = bucketfolder + avatarImgUrl.split("/")[avatarImgUrl.split("/").length - 1];
                     bucketObject.deleteObject(key);
                 }

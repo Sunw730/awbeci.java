@@ -51,11 +51,11 @@
 }
 a.list-group-item:hover, a.list-group-item:focus {
     background-color: #fff;
+    color: #0084B4;
 }
 
 .list-group-items{
     color: #0084B4 !important;
-    font-weight:bold;
 }
 
 .list-group-item {
