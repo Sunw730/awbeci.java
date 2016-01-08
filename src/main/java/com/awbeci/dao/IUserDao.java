@@ -36,4 +36,10 @@ public interface IUserDao {
 
     @Select("select * from user where id=#{id}")
     User selectUserById(@Param("id") String id);
+
+    @Update("update user set name=#{name},niceName=#{niceName},email=#{email} where id=#{id}")
+    int updateProfile(User user);
+
+    @Update("update user set password=#{password} where id=#{id}")
+    int updatePassword(User user);
 }

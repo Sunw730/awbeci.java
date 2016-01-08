@@ -118,3 +118,11 @@ a.list-group-item:hover, a.list-group-item:focus {
 .form-control-width{
     width: 440px;
 }
+
+.setting-detail-tab{
+    display: none;
+}
+
+.tabActive{
+    display: block;
+}

@@ -1,5 +1,5 @@
 $(function () {
-    activeProfile();
+    settingProfile(1);
     var $image = $('#avatorImg');
     var $modal = $('#myModal');
     var cropBoxData;
@@ -43,27 +43,102 @@ $(function () {
     });
 });
 
-function activeProfile(){
-    $.post('/json/getUserInfo.json',function(data){
-        if(data){
-            $("#userAvatar").attr('src',data.avatarUrl);
+function activeProfile() {
+    $.post('/json/getUserInfo.json', function (data) {
+        if (data) {
+            $("#id").val(data.id);
+            $("#userAvatar").attr('src', data.avatarUrl);
             $("#name").val(data.name);
             $("#niceName").val(data.niceName);
             $("#email").val(data.email);
-            $("#url").val(data.url);
         }
-    },'json');
+    }, 'json');
 }
 
+//更新个人资料
+function updateProfile() {
+    var name = $("#name").val();
+    var niceName = $("#niceName").val();
+    var email = $("#email").val();
+
+    if ($.trim(name).length == 0) {
+        return alert('请输入用户名');
+    }
+    if ($.trim(niceName).length == 0) {
+        return alert('请输入昵称');
+    }
+    if ($.trim(email).length == 0) {
+        return alert('请输入邮箱');
+    }
+
+    $.post("/json/updateProfile.json", {
+        name: name,
+        niceName: niceName,
+        email: email
+    }, function (data) {
+        if (data > 0) {
+            alert('更新成功');
+        }
+        else {
+            alert('更新失败');
+        }
+    })
+}
+
+//点击类型
 function settingProfile(type) {
+    $('.setting-detail-tab').removeClass('tabActive');
     switch (type) {
         case 1:
+            $(".tab1").addClass('tabActive');
+            $(".person-info-header2").text('个人资料');
+            activeProfile();
             break;
         case 2:
+            $(".tab2").addClass('tabActive');
+            $(".person-info-header2").text('修改密码');
+            $("#oldPwd").val('');
+            $("#newPwd").val('');
+            $("#newPwd2").val('');
             break;
         case 3:
+            $(".tab3").addClass('tabActive');
+            $(".person-info-header2").text('其它');
             break;
     }
+}
+
+//更新密码
+function updatePwd() {
+    var oldPwd = $("#oldPwd").val();
+    var newPwd = $("#newPwd").val();
+    var newPwd2 = $("#newPwd2").val();
+
+    if ($.trim(oldPwd).length == 0 || $.trim(oldPwd).length < 7) {
+        return alert('请输入旧密码，并且密码为至少使用一个小写字母，一个数字和七个字符。');
+    }
+    if ($.trim(newPwd).length == 0 || $.trim(newPwd).length < 7) {
+        return alert('请输入新密码，并且密码为至少使用一个小写字母，一个数字和七个字符。');
+    }
+    if ($.trim(newPwd2).length == 0 || $.trim(newPwd2).length < 7) {
+        return alert('请确认新密码，并且密码为至少使用一个小写字母，一个数字和七个字符。');
+    }
+
+    if ($.trim(newPwd).length != $.trim(newPwd2).length || newPwd != newPwd2) {
+        return alert('两次新密码输入不一致');
+    }
+    $.post("/json/updatePassword.json", {
+        oldPwd: oldPwd,
+        newPwd: newPwd,
+        newPwd2: newPwd2
+    }, function (data) {
+        if (data > 0) {
+            alert('更新成功');
+        }
+        else {
+            alert('更新失败');
+        }
+    })
 }
 
 //上传头像

@@ -19,4 +19,8 @@ public interface IUserService {
     User selectUserByName(String name);
 
     User selectUserById(String id);
+
+    int updateProfile(User user);
+
+    int updatePassword(User user);
 }

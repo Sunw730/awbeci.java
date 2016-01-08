@@ -1,4 +1,5 @@
 package com.awbeci.controller;
+
 import com.awbeci.domain.User;
 import com.awbeci.service.IUserService;
 import org.slf4j.Logger;
@@ -13,6 +14,7 @@ import javax.servlet.http.HttpSession;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
 /**
  * Created by zhangwei on 2015/10/8.
  */
@@ -49,6 +51,46 @@ public class UserInfoController {
         } catch (Exception e) {
             log.debug("错误原因:" + e.getMessage());
             return null;
+        }
+    }
+
+
+    /**
+     * 更新用户资料
+     *
+     * @param user
+     * @return
+     */
+    @RequestMapping(value = "/json/updateProfile.json", method = RequestMethod.POST)
+    @ResponseBody
+    public int updateProfile(User user, HttpSession session) {
+        try {
+            String uid = (String) session.getAttribute("uid");
+            user.setId(uid);
+            user.setUrl("http://www.awbeci.com/" + user.getName());
+            int result = userService.updateProfile(user);
+            return result;
+        } catch (Exception e) {
+            log.debug("错误原因:" + e.getMessage());
+            return 0;
+        }
+    }
+
+
+    @RequestMapping(value = "/json/updatePassword.json", method = RequestMethod.POST)
+    @ResponseBody
+    public int updatePassword(String id, String oldPwd, String newPwd, String oldPwd2, HttpSession session) {
+        try {
+            String uid = (String) session.getAttribute("uid");
+            User user = userService.selectUserById(uid);
+            user.setPassword(newPwd);
+            if (user != null) {
+                return userService.updatePassword(user);
+            }
+            return 0;
+        } catch (Exception e) {
+            log.debug("错误原因:" + e.getMessage());
+            return 0;
         }
     }
 }

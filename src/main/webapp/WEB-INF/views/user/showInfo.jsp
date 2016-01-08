@@ -25,23 +25,21 @@
                         个人资料
                         <span class="octicon octicon-chevron-right"></span>
                     </a>
-                    <a href="#" class="list-group-item" onclick="settingProfile(2)">账户设置
-                        <span class="octicon octicon-chevron-right"></span>
-                    </a>
-                    <a href="#" class="list-group-item" onclick="settingProfile(3)">其它
+                    <a href="#" class="list-group-item" onclick="settingProfile(2)">修改密码
                         <span class="octicon octicon-chevron-right"></span>
                     </a>
                 </div>
             </div>
         </div>
         <div class="row-right">
-                <div class="setting-content">
-                    <div class="person-info-content">
-                        <div class="person-info-header2">
-                            个人资料
-                        </div>
+            <div class="setting-content">
+                <div class="person-info-content">
+                    <div class="person-info-header2">
+
                     </div>
-                    <div class="setting-detail">
+                </div>
+                <div class="setting-detail">
+                    <div class="setting-detail-tab tab1">
                         <dl>
                             <dt><label>头像图片</label></dt>
                             <dd>
@@ -66,7 +64,8 @@
                         <dl class="form-group clearboth">
                             <dt><label>昵称</label></dt>
                             <dd>
-                                <input id="niceName" name="niceName" type="text" class="form-control form-control-width">
+                                <input id="niceName" name="niceName" type="text"
+                                       class="form-control form-control-width">
                             </dd>
                         </dl>
                         <dl class="form-group clearboth">
@@ -75,18 +74,41 @@
                                 <input id="email" name="email" type="text" class="form-control form-control-width">
                             </dd>
                         </dl>
-                        <dl class="form-group clearboth">
-                            <dt><label>URL</label></dt>
-                            <dd>
 
-                                <input id="url" name="url" type="text" class="form-control form-control-width">
+                        <p>
+                            <button class="btn btn-success" onclick="updateProfile()">更新资料</button>
+                        </p>
+                    </div>
+                    <div class="setting-detail-tab tab2">
+                        <dl class="form-group clearboth">
+                            <dt><label>原密码</label></dt>
+                            <dd>
+                                <input id="oldPwd" name="oldPwd" type="password"
+                                       class="form-control form-control-width">
+                            </dd>
+                        </dl>
+                        <dl class="form-group clearboth">
+                            <dt><label>新密码</label></dt>
+                            <dd>
+                                <input id="newPwd" name="newPwd" type="password"
+                                       class="form-control form-control-width">
+                            </dd>
+                        </dl>
+                        <dl class="form-group clearboth">
+                            <dt><label>确认新密码</label></dt>
+                            <dd>
+                                <input id="newPwd2" name="newPwd2" type="password"
+                                       class="form-control form-control-width">
                             </dd>
                         </dl>
                         <p>
-                            <button class="btn btn-success">更新资料</button>
+                            <button class="btn btn-success" onclick="updatePwd()">更新密码</button>
                         </p>
                     </div>
+                    <div class="setting-detail-tab tab3">333</div>
+
                 </div>
+            </div>
         </div>
 
     </div>

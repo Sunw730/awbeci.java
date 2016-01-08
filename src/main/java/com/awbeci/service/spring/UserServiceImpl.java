@@ -17,6 +17,7 @@ import java.util.UUID;
 public class UserServiceImpl implements IUserService {
     @Autowired
     private IUserDao userDao;
+
     MyProperties myProperties = new MyProperties();
 
 
@@ -78,5 +79,18 @@ public class UserServiceImpl implements IUserService {
      */
     public User selectUserById(String id) {
         return userDao.selectUserById(id);
+    }
+
+    public int updateProfile(User user) {
+        return userDao.updateProfile(user);
+    }
+
+    /**
+     * 更新用户密码
+     * @param user
+     * @return
+     */
+    public int updatePassword(User user) {
+        return userDao.updatePassword(user);
     }
 }
