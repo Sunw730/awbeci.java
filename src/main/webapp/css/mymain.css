@@ -1,0 +1,23 @@
+.btn-flower-content{
+    padding:5px 10px 10px 10px;
+    margin-bottom: 10px;
+}
+.btn-flower-left{
+    display: inline-block;
+}
+.btn-flower-left h5{
+    font-weight: bold;
+}
+.btn-flower-right{
+    float:right;
+}
+.btn-flower >span{
+    margin-right: 5px;
+}
+
+.myavatar{
+    border-radius: 7px;
+    height: 72px;
+    width: 72px;
+    border: 2px solid #fff;
+}

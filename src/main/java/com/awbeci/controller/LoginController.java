@@ -53,7 +53,8 @@ public class LoginController {
      * @return
      * @throws Exception
      */
-    @RequestMapping("/quickRegion")
+    @RequestMapping(value = "/json/quickRegion.json", method = RequestMethod.POST)
+    @ResponseBody
     public String quickRegion(User user, HttpSession session) throws Exception {
         Object sessionuser = session.getAttribute("user");
         String properties = "awbeci.properties";
@@ -71,10 +72,10 @@ public class LoginController {
             //设置session
             session.setAttribute("user", user.getName());
             session.setAttribute("uid", user.getId());
-            return "redirect:/";
+            return "1";
         } else {
             //邮件发送失败
-            return "/";
+            return "0";
         }
     }
 

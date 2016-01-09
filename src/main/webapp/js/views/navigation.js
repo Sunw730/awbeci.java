@@ -21,22 +21,17 @@ $(function () {
     querySite();
 });
 
-//显示关注按钮
+//显示操作按钮
 function showFlowerBtn() {
     //todo:这里，如果sessin为空，那么关注的时候直接跳到登录页面，如果session不为空，那么
-    //1、如果是自己的主页，那么显示编辑什么的
-    //2、如果不是自己的主页，如果已经关注过了这个人，那么就显示[已关注]，否则显示[关注]
     $.post('/json/getSession.json', function (data) {
-        var html = '';
         if (data) {
-            if (data.session) {
-                $('.treeview-head-icon-right').show();
-                $('.btn-flower-content').hide();
-            }
-            else {
-                $('.treeview-head-icon-right').hide();
-                $('.btn-flower-content').show();
-            }
+            $('.treeview-head-icon-right').show();
+            $('.btn-flower-content').hide();
+        }
+        else {
+            $('.treeview-head-icon-right').hide();
+            $('.btn-flower-content').show();
         }
     });
 }

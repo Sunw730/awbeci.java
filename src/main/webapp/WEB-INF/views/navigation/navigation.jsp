@@ -3,7 +3,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-    <title>个性导航</title>
+    <title>我的导航</title>
     <link href="/js/bootstrap-treeview/src/css/bootstrap-treeview.css" rel="stylesheet">
     <link href="/js/bootstrap-select/css/bootstrap-select.min.css" rel="stylesheet">
     <link href="/js/github/github.css" rel="stylesheet">
@@ -16,14 +16,6 @@
 </head>
 <body>
 <div class="container" id="container-main">
-    <div class="row btn-flower-content">
-        <div class="btn-flower-left">
-            <h5><a href="#">zhangwei</a>的个人主页</h5>
-        </div>
-        <div class="btn-flower-right"><a class="btn btn-success btn-sm btn-flower">
-            <span class="octicon octicon-person"></span>关注</a></div>
-
-    </div>
     <div class="row">
         <div class="col-lg-3 rowcol-left">
             <div class="treeview-head">分类列表
@@ -87,8 +79,6 @@
                     <!-- /btn-group -->
                 </div>
                 <ul id="showmysite">
-
-
                 </ul>
                 <div class="editlinkdlg">
                     <div class="dlgHeader">

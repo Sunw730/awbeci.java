@@ -1,43 +1,43 @@
 $(function () {
     $.post('/json/getSession.json', function (data) {
         var html = '';
+        $('#navbar-collapse-01').empty();
         if (data) {
-            $('#navbar-collapse-01').empty();
-            if (data.session) {
-                //html += '<h1 class="logo"><span class="mega-octicon octicon-mark-github"></span></h1>' +
-                html += '<h1 class="logo"></h1>' +
+            //html += '<h1 class="logo"><span class="mega-octicon octicon-mark-github"></span></h1>' +
+            html += '<h1 class="logo"></h1>' +
                 '<ul class="nav navbar-nav navbar-left">' +
                 ' <li><a href="/" class="header-nav-link">首页</a></li>' +
-                '  <li><a href="/' + data.session + '" class="header-nav-link">我的主页</a></li>' +
-                ' <li><a href="/aboutme/aboutme" class="header-nav-link">关于</a></li>' +
+                '  <li><a href="/' + data.name + '" class="header-nav-link">个人主页</a></li>' +
+                '  <li><a href="/navigation" class="header-nav-link">我的导航</a></li>' +
+                ' <li><a href="/aboutme" class="header-nav-link">关于</a></li>' +
                 '  </ul>' +
                 '  <ul class="nav navbar-nav navbar-right">' +
                 '  <li class="dropdown">' +
-                '  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"' +
-                '  aria-expanded="false">' +
-                '  zhangwei <span class="caret"></span></a>' +
+                '  <a href="#" class="dropdown-toggle" data-toggle="dropdown"  role="button" aria-haspopup="true" aria-expanded="false" >' +
+                '  <span data-toggle="tooltip" data-placement="bottom" title="查看"><img src="' + data.avatarUrl + '" width="20" height="20"  > <span class="caret"></span></span></a>' +
                 '  <ul class="dropdown-menu">' +
                 '  <li><a href="#">当前登入账号：' +
-                '<br>zhangwei</a></li>' +
+                '<br>' + data.name + '</a></li>' +
                 '    <li role="separator" class="divider"></li>' +
-                '    <li><a href="/' + data.session + '">个人主页</a></li>' +
-                '    <li><a href="#">帮助</a></li>' +
+                '    <li><a href="/' + data.name + '">个人主页</a></li>' +
+                '    <li><a href="/navigation">我的导航</a></li>' +
                 '    <li role="separator" class="divider"></li>' +
                 '    <li><a href="/settings/account">设置</a></li>' +
                 '    <li><a href="javascript:void(0)" onclick="quit()">退出</a></li>' +
                 '    </ul>' +
                 '    </li>' +
                 '    </ul>';
-                $('#navbar-collapse-01').append(html);
-                $("#container-main").css({'margin-top': '50px'});
-            }
-            else {
-                html += ' <!--menu2 start-->' +
+            $('#navbar-collapse-01').append(html);
+            $("#container-main").css({'margin-top': '50px'});
+            $("[data-toggle='tooltip']").tooltip();
+        }
+        else {
+            html += ' <!--menu2 start-->' +
                 ' <ul class="nav navbar-nav navbar-left">' +
-                ' <li><a href="/navigation/navigation" class="header-nav-link">探索发现</a></li>' +
-                ' <li><a href="/navigation/navigation" class="header-nav-link">功能特性</a></li>' +
-                ' <li><a href="/navigation/navigation" class="header-nav-link">站点博客</a></li>' +
-                ' <li><a href="/aboutme/aboutme" class="header-nav-link">关于</a></li>' +
+                ' <li><a href="/" class="header-nav-link">探索发现</a></li>' +
+                ' <li><a href="/" class="header-nav-link">功能特性</a></li>' +
+                ' <li><a href="/" class="header-nav-link">站点博客</a></li>' +
+                ' <li><a href="/aboutme" class="header-nav-link">关于</a></li>' +
                 ' </ul>' +
                 ' <ul class="nav navbar-nav navbar-right">' +
                 ' <li>' +
@@ -49,9 +49,9 @@ $(function () {
                 ' </button>' +
                 ' </li>' +
                 ' </ul>';
-                $('#navbar-collapse-01').append(html);
-                $("#container-main").css({'margin-top': '60px'});
-            }
+            $('#navbar-collapse-01').append(html);
+            $("#container-main").css({'margin-top': '60px'});
+
         }
     });
 });

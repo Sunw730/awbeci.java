@@ -35,31 +35,19 @@ public class MainController {
     /**
      * 导航到用户个人主页
      *
-     * @param username
      * @param session
      * @return
      */
-    @RequestMapping(value = "{username}", method = RequestMethod.GET)
-    public String usersPage(@PathVariable String username, HttpSession session) {
-        User data = userService.selectUserByName(username);
-        if (data == null) {
-            return "error/404";
-        } else {
-            session.setAttribute("uid", data.getId());
-            return "navigation/navigation";
-        }
+    @RequestMapping(value = "/navigation", method = RequestMethod.GET)
+    public String usersPage(HttpSession session) {
+        return "navigation/navigation";
     }
 
     @RequestMapping("/json/getSession.json")
     @ResponseBody
-    public Map<String, Object> loginIn(HttpSession session) {
-        Object username = session.getAttribute("user");
-        Map<String, Object> map = new HashMap<String, Object>();
-        if (username == null) {
-            map.put("session", null);
-        } else {
-            map.put("session", username);
-        }
-        return map;
+    public User loginIn(HttpSession session) {
+        String uid = (String) session.getAttribute("uid");
+        User user = userService.selectUserById(uid);
+        return user;
     }
 }

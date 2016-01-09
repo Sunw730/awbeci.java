@@ -65,20 +65,34 @@ body {
     left: 50%;
 }
 
-.dropdown > .dropmenu{
+.dropdown > .dropmenu {
     padding: 10px 0;
 }
-.navbar{
+
+.navbar {
     line-height: 20px;
 }
-.wei-icon{
+
+.wei-icon {
     padding: 0 5px 0 0;
     font-size: 14px;
 }
-.from-group-sm .form-control{
+
+.from-group-sm .form-control {
     height: 30px;
     padding: 5px 10px;
     font-size: 12px;
     line-height: 1.5;
     width: 200px;
+}
+
+.dropdown-menu > li > a:hover, .dropdown-menu > li > a:focus {
+    background-color: #4078c0;
+    color: #fff;
+    background-image: -webkit-linear-gradient(top, #4078c0 0, #4078c0 100%);
+    background-image: -o-linear-gradient(top, #4078c0 0, #4078c0 100%);
+    background-image: -webkit-gradient(linear, left top, left bottom, from(#4078c0), to(#4078c0));
+    background-image: linear-gradient(to bottom, #4078c0 0, #4078c0 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#4078c0 ', endColorstr='#4078c0 ', GradientType=0);
+    background-repeat: repeat-x;
 }

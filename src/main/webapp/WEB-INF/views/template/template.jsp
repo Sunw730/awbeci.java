@@ -15,10 +15,12 @@
     <link href="/js/octicons/octicons.css" rel="stylesheet">
 
     <link href="http://static.bootcss.com/www/assets/ico/favicon.png" rel="shortcut icon">
+    <link href="/js/lobibox/css/Lobibox.min.css" rel="stylesheet">
     <link href="/css/common.css" rel="stylesheet">
     <script src="/js/react-0.14.3/JSXTransformer.js"></script>
     <script src="/js/jquery/jquery-1.11.2.min.js"></script>
-    <script type="text/javascript" src="/js/Bootstrap/js/bootstrap.min.js"></script>
+    <script src="/js/Bootstrap/js/bootstrap.min.js"></script>
+    <script src="/js/lobibox/js/lobibox.min.js"></script>
     <script src="/js/views/common.js"></script>
     <sitemesh:write property="head"/>
     <%if (request.getSession().getAttribute("user") != null) {%>

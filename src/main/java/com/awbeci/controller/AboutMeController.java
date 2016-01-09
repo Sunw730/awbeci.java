@@ -12,13 +12,9 @@ import javax.servlet.http.HttpSession;
  */
 @Controller
 public class AboutMeController {
-    @RequestMapping("/aboutme/aboutme")
+    @RequestMapping("/aboutme")
     public ModelAndView aboutme(HttpSession session) {
-        Object user = session.getAttribute("user");
-        if (user != null) {
-            return new ModelAndView("aboutme/aboutme");
-        } else {
-            return new ModelAndView("redirect:/");
-        }
+        //Object user = session.getAttribute("user");
+        return new ModelAndView("aboutme/aboutme");
     }
 }

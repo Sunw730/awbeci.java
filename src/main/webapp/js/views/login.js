@@ -3,10 +3,18 @@ $(function () {
         var username = $("#username").val();
         var password = $("#password").val();
         if (username.length <= 0) {
-            return $("#username").tooltip('show');
+            Lobibox.notify('info', {
+                title: 'awbeci提示',
+                msg: '请输入用户名.'
+            });
+            return;
         }
         if (password.length < 7) {
-            return $("#password").tooltip('show');
+            Lobibox.notify('info', {
+                title: 'awbeci提示',
+                msg: '请输入密码.'
+            });
+            return;
         }
         $.post('/json/loginIn.json', {
             name: username,
@@ -16,7 +24,10 @@ $(function () {
                 location.href = "/";
             }
             else {
-                alert('登录失败');
+                Lobibox.notify('info', {
+                    title: 'awbeci提示',
+                    msg: '登录失败.'
+                });
             }
         })
     });
@@ -48,13 +59,39 @@ function quickRegion() {
     var email = $("#email").val();
     var password = $("#password").val();
     if (username.length <= 0) {
-        return $("#name").tooltip('show');
+        Lobibox.notify('info', {
+            title: 'awbeci提示',
+            msg: '请输入用户名.'
+        });
+        return;
     }
     if (email.length <= 0) {
-        return $("#email").tooltip('show');
+        Lobibox.notify('info', {
+            title: 'awbeci提示',
+            msg: '请输入邮箱.'
+        });
+        return;
     }
     if (password.length < 7) {
-        return $("#password").tooltip('show');
+        Lobibox.notify('info', {
+            title: 'awbeci提示',
+            msg: '请输入密码.'
+        });
+        return;
     }
-    $('#myform').submit();
+    $.post("/json/quickRegion.json", {
+        name: username,
+        password: password,
+        email: email
+    }, function (data) {
+        if (data == "1") {
+            location.href = "/";
+        }
+        else {
+            Lobibox.notify('info', {
+                title: 'awbeci提示',
+                msg: '注册失败.'
+            });
+        }
+    });
 }

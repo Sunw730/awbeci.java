@@ -26,9 +26,24 @@ public class UserInfoController {
     @Autowired
     IUserService userService;
 
+    @RequestMapping("{username}")
+    public String  mymain(@PathVariable String username, HttpSession session) {
+        User data = userService.selectUserByName(username);
+        if (data == null) {
+            return "error/404";
+        } else {
+            session.setAttribute("uid", data.getId());
+            return "user/mymain";
+        }
+    }
+
     @RequestMapping("/settings/account")
-    public ModelAndView login() {
-        return new ModelAndView("user/showInfo");
+    public ModelAndView login(HttpSession session) {
+        String uid = (String) session.getAttribute("uid");
+        if (uid != null) {
+            return new ModelAndView("user/showInfo");
+        }
+        return new ModelAndView("redirect:/");
     }
 
     @RequestMapping("/following")
@@ -53,7 +68,6 @@ public class UserInfoController {
             return null;
         }
     }
-
 
     /**
      * 更新用户资料

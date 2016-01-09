@@ -33,7 +33,10 @@ $(function () {
 
                 $image.attr('src', blobURL);
             } else {
-                window.alert('Please choose an image file.');
+                Lobibox.notify('info', {
+                    title: 'awbeci提示',
+                    msg: '请选择图片文件.'
+                });
             }
         }
 
@@ -62,13 +65,25 @@ function updateProfile() {
     var email = $("#email").val();
 
     if ($.trim(name).length == 0) {
-        return alert('请输入用户名');
+        Lobibox.notify('info', {
+            title: 'awbeci提示',
+            msg: '请输入用户名.'
+        });
+        return;
     }
     if ($.trim(niceName).length == 0) {
-        return alert('请输入昵称');
+        Lobibox.notify('info', {
+            title: 'awbeci提示',
+            msg: '请输入昵称.'
+        });
+        return;
     }
     if ($.trim(email).length == 0) {
-        return alert('请输入邮箱');
+        Lobibox.notify('info', {
+            title: 'awbeci提示',
+            msg: '请输入邮箱.'
+        });
+        return;
     }
 
     $.post("/json/updateProfile.json", {
@@ -77,10 +92,16 @@ function updateProfile() {
         email: email
     }, function (data) {
         if (data > 0) {
-            alert('更新成功');
+            Lobibox.notify('success', {
+                title: 'awbeci提示',
+                msg: '更新成功.'
+            });
         }
         else {
-            alert('更新失败');
+            Lobibox.notify('error', {
+                title: 'awbeci提示',
+                msg: '更新失败.'
+            });
         }
     })
 }
@@ -115,17 +136,33 @@ function updatePwd() {
     var newPwd2 = $("#newPwd2").val();
 
     if ($.trim(oldPwd).length == 0 || $.trim(oldPwd).length < 7) {
-        return alert('请输入旧密码，并且密码为至少使用一个小写字母，一个数字和七个字符。');
+        Lobibox.notify('info', {
+            title: 'awbeci提示',
+            msg: '请输入原密码，并且密码为至少使用一个小写字母，一个数字和七个字符。'
+        });
+        return ;
     }
     if ($.trim(newPwd).length == 0 || $.trim(newPwd).length < 7) {
-        return alert('请输入新密码，并且密码为至少使用一个小写字母，一个数字和七个字符。');
+        Lobibox.notify('info', {
+            title: 'awbeci提示',
+            msg: '请输入新密码，并且密码为至少使用一个小写字母，一个数字和七个字符。'
+        });
+        return ;
     }
     if ($.trim(newPwd2).length == 0 || $.trim(newPwd2).length < 7) {
-        return alert('请确认新密码，并且密码为至少使用一个小写字母，一个数字和七个字符。');
+        Lobibox.notify('info', {
+            title: 'awbeci提示',
+            msg: '请确认新密码，并且密码为至少使用一个小写字母，一个数字和七个字符。'
+        });
+        return ;
     }
 
     if ($.trim(newPwd).length != $.trim(newPwd2).length || newPwd != newPwd2) {
-        return alert('两次新密码输入不一致');
+        Lobibox.notify('info', {
+            title: 'awbeci提示',
+            msg: '两次新密码输入不一致'
+        });
+        return;
     }
     $.post("/json/updatePassword.json", {
         oldPwd: oldPwd,
@@ -133,10 +170,16 @@ function updatePwd() {
         newPwd2: newPwd2
     }, function (data) {
         if (data > 0) {
-            alert('更新成功');
+            Lobibox.notify('success', {
+                title: 'awbeci提示',
+                msg: '更新成功'
+            });
         }
         else {
-            alert('更新失败');
+            Lobibox.notify('error', {
+                title: 'awbeci提示',
+                msg: '更新失败'
+            });
         }
     })
 }

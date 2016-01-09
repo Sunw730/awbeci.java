@@ -18,7 +18,7 @@ public interface IUserDao {
     @ResultMap("com.awbeci.mapper.UserMapper.UserResult")
     List<User> selectUser();
 
-    @Select("select * from user where name=#{name} or (emailAble='1' and email=#{name}) and password=#{password} ")
+    @Select("select * from user where name=#{name} and password=#{password} or (emailAble='1' and email=#{name})  ")
     User selectUserByParam(@Param("name") String name, @Param("password") String passwd);
 
     @Insert("insert into user(id,name,password,avatarUrl,niceName,email,emailAble,url,status,deleted,createDt,updateDt)" +
