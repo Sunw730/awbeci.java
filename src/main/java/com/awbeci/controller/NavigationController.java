@@ -49,7 +49,7 @@ public class NavigationController {
     @RequestMapping(value = "/json/getCategoryByUid.json", method = RequestMethod.POST)
     @ResponseBody
     public List<UserCategory> selectAllCategory(HttpSession session) {
-        String uid = (String) session.getAttribute("uid");
+        String uid = (String) session.getAttribute("current_navigation_id");
         if (uid != null) {
             List<UserCategory> userCategories = userCategoryService.selectCategoryByUid(uid);
             return userCategories;
@@ -61,7 +61,7 @@ public class NavigationController {
     @RequestMapping(value = "/json/getCategoryParent.json", method = RequestMethod.POST)
     @ResponseBody
     public List<UserCategory> selectCategoryParent(HttpSession session) {
-        String uid = (String) session.getAttribute("uid");
+        String uid = (String) session.getAttribute("current_navigation_id");
         if (uid != null) {
             List<UserCategory> userCategories = userCategoryService.selectCategoryParent(uid);
             return userCategories;
@@ -73,7 +73,7 @@ public class NavigationController {
     @RequestMapping(value = "/json/getCategoryChildByPid.json", method = RequestMethod.POST)
     @ResponseBody
     public List<UserCategory> getCategoryChildByPid(String pid, HttpSession session) {
-        String uid = (String) session.getAttribute("uid");
+        String uid = (String) session.getAttribute("current_navigation_id");
         if (uid != null) {
             List<UserCategory> userCategories = userCategoryService.selectCategoryChildByPid(pid);
             return userCategories;
@@ -85,7 +85,7 @@ public class NavigationController {
     @RequestMapping(value = "/json/getCategoryChild.json", method = RequestMethod.POST)
     @ResponseBody
     public List<UserCategory> getCategoryChild(HttpSession session) {
-        String uid = (String) session.getAttribute("uid");
+        String uid = (String) session.getAttribute("current_navigation_id");
         if (uid != null) {
             List<UserCategory> userCategories = userCategoryService.selectCategoryChild(uid);
             return userCategories;
@@ -137,12 +137,12 @@ public class NavigationController {
 
     @RequestMapping(value = "/json/uploadAvatar.json", method = RequestMethod.POST)
     @ResponseBody
-    public String uploadAvatar(@RequestParam("croppedImage") MultipartFile file,@RequestParam("avatarUrl") String  avatarImg, HttpSession session) {
+    public String uploadAvatar(@RequestParam("croppedImage") MultipartFile file, @RequestParam("avatarUrl") String avatarImg, HttpSession session) {
         try {
             String uid = (String) session.getAttribute("uid");
             InputStream content = file.getInputStream();
             String properties = "aliyun-oss.properties";
-            String filepath = userSitesService.uploadAvatar(properties, content, uid,avatarImg);
+            String filepath = userSitesService.uploadAvatar(properties, content, uid, avatarImg);
             return filepath;
         } catch (Exception ex) {
             log.error("上传头像失败：" + ex.getMessage());
@@ -178,7 +178,7 @@ public class NavigationController {
     @RequestMapping(value = "/json/getSiteByCategoryId.json", method = RequestMethod.POST)
     @ResponseBody
     public List<UserSites> getSiteByCategoryId(String categoryId, HttpSession session) {
-        String uid = (String) session.getAttribute("uid");
+        String uid = (String) session.getAttribute("current_navigation_id");
         if (uid != null) {
             List userSites = userSitesService.getSiteByCategoryId(categoryId);
             return userSites;
@@ -189,7 +189,7 @@ public class NavigationController {
     @RequestMapping(value = "/json/getSiteByMostClick.json", method = RequestMethod.POST)
     @ResponseBody
     public List<UserSites> getSitesByMostClick(HttpSession session) {
-        String uid = (String) session.getAttribute("uid");
+        String uid = (String) session.getAttribute("current_navigation_id");
         if (uid != null) {
             List userSites = userSitesService.getSitesByMostClick(uid);
             return userSites;
@@ -199,9 +199,10 @@ public class NavigationController {
 
     @RequestMapping(value = "/json/querySiteByParam.json", method = RequestMethod.POST)
     @ResponseBody
-    public List<UserSites> querySiteByParam(String param) {
+    public List<UserSites> querySiteByParam(String param, HttpSession session) {
         try {
-            return userSitesService.querySiteByParam(param);
+            String uid = (String) session.getAttribute("current_navigation_id");
+            return userSitesService.querySiteByParam(param,uid);
         } catch (Exception e) {
             log.debug("错误原因:" + e.getMessage());
             return null;

@@ -6,6 +6,7 @@ import org.apache.ibatis.annotations.*;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+
 @Repository("IUserSitesDao")
 public interface IUserSitesDao {
 
@@ -28,6 +29,6 @@ public interface IUserSitesDao {
     @Delete("delete from usersites where id=#{id}")
     int deleteSite(String id);
 
-    @Select("select * from usersites where name like '%${param}%'")
-    List<UserSites> querySiteByParam(@Param("param")String param);
+    @Select("select * from usersites where name like '%${param}%' and uId=#{uid}")
+    List<UserSites> querySiteByParam(@Param("param") String param, @Param("uid") String uid);
 }

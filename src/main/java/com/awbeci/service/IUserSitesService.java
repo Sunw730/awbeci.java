@@ -16,7 +16,7 @@ public interface IUserSitesService {
 
     int deleteSite(String properties, String id, String iconUrl);
 
-    List<UserSites> querySiteByParam(String param);
+    List<UserSites> querySiteByParam(String param,String uid);
 
     String uploadAvatar(String properties,InputStream content,String uid,String avatarImgUrl);
 }

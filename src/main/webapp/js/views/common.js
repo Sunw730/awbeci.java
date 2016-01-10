@@ -8,7 +8,7 @@ $(function () {
                 '<ul class="nav navbar-nav navbar-left">' +
                 ' <li><a href="/" class="header-nav-link">首页</a></li>' +
                 '  <li><a href="/' + data.name + '" class="header-nav-link">个人主页</a></li>' +
-                '  <li><a href="/navigation" class="header-nav-link">我的导航</a></li>' +
+                '  <li><a href="/' + data.name + '/navigation" class="header-nav-link">我的导航</a></li>' +
                 ' <li><a href="/aboutme" class="header-nav-link">关于</a></li>' +
                 '  </ul>' +
                 '  <ul class="nav navbar-nav navbar-right">' +
@@ -20,7 +20,7 @@ $(function () {
                 '<br>' + data.name + '</a></li>' +
                 '    <li role="separator" class="divider"></li>' +
                 '    <li><a href="/' + data.name + '">个人主页</a></li>' +
-                '    <li><a href="/navigation">我的导航</a></li>' +
+                '    <li><a href="/' + data.name + '/navigation">我的导航</a></li>' +
                 '    <li role="separator" class="divider"></li>' +
                 '    <li><a href="/settings/account">设置</a></li>' +
                 '    <li><a href="javascript:void(0)" onclick="quit()">退出</a></li>' +

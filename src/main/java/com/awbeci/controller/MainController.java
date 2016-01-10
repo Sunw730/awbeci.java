@@ -1,5 +1,6 @@
 package com.awbeci.controller;
 
+import com.awbeci.domain.SystemCode;
 import com.awbeci.domain.User;
 import com.awbeci.service.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,16 +39,26 @@ public class MainController {
      * @param session
      * @return
      */
-    @RequestMapping(value = "/navigation", method = RequestMethod.GET)
-    public String usersPage(HttpSession session) {
-        return "navigation/navigation";
+    @RequestMapping(value = "/{username}/navigation")
+    public String usersPage(@PathVariable String username, HttpSession session) {
+        User user = userService.selectUserByName(username);
+        if (user == null) {
+            return "error/404";
+        } else {
+            session.setAttribute("current_navigation_id", user.getId());
+            return "navigation/navigation";
+        }
     }
 
     @RequestMapping("/json/getSession.json")
     @ResponseBody
-    public User loginIn(HttpSession session) {
+    public User getSession(HttpSession session) {
         String uid = (String) session.getAttribute("uid");
-        User user = userService.selectUserById(uid);
-        return user;
+        String cnid = (String) session.getAttribute("current_navigation_id");
+        if (uid != null && cnid != null && uid.equals(cnid)) {
+            User user = userService.selectUserById(uid);
+            return user;
+        }
+        return null;
     }
 }

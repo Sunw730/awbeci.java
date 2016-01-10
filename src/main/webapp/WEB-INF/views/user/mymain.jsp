@@ -7,14 +7,35 @@
 </head>
 <body>
 <div class="container" id="container-main">
-    <div class="row btn-flower-content">
-        <div class="btn-flower-left">
-            <span><img class="myavatar" src="http://static.awbeci.com/img/avatar/20160108211734" alt=""></span>
-
-            <span><a href="#">zhangwei</a>的个人主页</span>
+    <div class="row">
+        <div class="mycol-1">
+            <div class="thumbnail">
+                <img src="http://static.awbeci.com/img/avatar/20160108211734" alt="...">
+                <div class="caption">
+                    <h3>Thumbnail label</h3>
+                    <p>...</p>
+                    <p><a href="#" class="btn btn-primary" role="button">Button</a> <a href="#" class="btn btn-default" role="button">Button</a></p>
+                </div>
+            </div>
         </div>
-        <div class="btn-flower-right"><a class="btn btn-success btn-sm btn-flower">
-            <span class="octicon octicon-person"></span>关注</a></div>
+        <div class="mycol-2">
+            <div class="setting-content">
+                <div class="person-info-content">
+                    <div class="person-info-header2">
+                        正在关注
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="mycol-2">
+            <div class="setting-content">
+                <div class="person-info-content">
+                    <div class="person-info-header2">
+                        关注者
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 </body>

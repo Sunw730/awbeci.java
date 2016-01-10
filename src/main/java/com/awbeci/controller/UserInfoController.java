@@ -26,13 +26,13 @@ public class UserInfoController {
     @Autowired
     IUserService userService;
 
-    @RequestMapping("{username}")
+    @RequestMapping("/{username}")
     public String  mymain(@PathVariable String username, HttpSession session) {
         User data = userService.selectUserByName(username);
         if (data == null) {
             return "error/404";
         } else {
-            session.setAttribute("uid", data.getId());
+            session.setAttribute("current_navigation_id", data.getId());
             return "user/mymain";
         }
     }
@@ -81,7 +81,6 @@ public class UserInfoController {
         try {
             String uid = (String) session.getAttribute("uid");
             user.setId(uid);
-            user.setUrl("http://www.awbeci.com/" + user.getName());
             int result = userService.updateProfile(user);
             return result;
         } catch (Exception e) {

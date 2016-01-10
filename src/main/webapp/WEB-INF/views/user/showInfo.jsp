@@ -74,7 +74,18 @@
                                 <input id="email" name="email" type="text" class="form-control form-control-width">
                             </dd>
                         </dl>
-
+                        <dl class="form-group clearboth">
+                            <dt><label>URL</label></dt>
+                            <dd>
+                                <input id="url" name="url" type="text" class="form-control form-control-width">
+                            </dd>
+                        </dl>
+                        <dl class="form-group clearboth">
+                            <dt><label>地址位置</label></dt>
+                            <dd>
+                                <input id="location" name="location" type="text" class="form-control form-control-width">
+                            </dd>
+                        </dl>
                         <p>
                             <button class="btn btn-success" onclick="updateProfile()">更新资料</button>
                         </p>

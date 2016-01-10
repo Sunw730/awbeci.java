@@ -51,4 +51,24 @@
         <filter-name>encodingFilter</filter-name>
         <url-pattern>/*</url-pattern>
     </filter-mapping>
+    <!--注意：这里是因为springmvc  <mvc:default-servlet-handler/>不起作用，所以才在这里添加的，这个注意下-->
+    <servlet-mapping>
+        <servlet-name>default</servlet-name>
+        <url-pattern>*.css</url-pattern>
+        <url-pattern>*.js</url-pattern>
+        <url-pattern>*.ico</url-pattern>
+        <url-pattern>*.swf</url-pattern>
+        <url-pattern>*.gif</url-pattern>
+        <url-pattern>*.jpeg</url-pattern>
+        <url-pattern>*.bmp</url-pattern>
+        <url-pattern>*.psd</url-pattern>
+        <url-pattern>*.jpg</url-pattern>
+        <url-pattern>*.png</url-pattern>
+        <url-pattern>*.crx</url-pattern>
+        <url-pattern>*.xpi</url-pattern>
+        <url-pattern>*.exe</url-pattern>
+        <url-pattern>*.ipa</url-pattern>
+        <url-pattern>*.apk</url-pattern>
+        <url-pattern>*.htc</url-pattern>
+    </servlet-mapping>
 </web-app>

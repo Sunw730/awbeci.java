@@ -21,8 +21,8 @@ public interface IUserDao {
     @Select("select * from user where name=#{name} and password=#{password} or (emailAble='1' and email=#{name})  ")
     User selectUserByParam(@Param("name") String name, @Param("password") String passwd);
 
-    @Insert("insert into user(id,name,password,avatarUrl,niceName,email,emailAble,url,status,deleted,createDt,updateDt)" +
-            "values(#{id},#{name},#{password},#{avatarUrl},#{niceName},#{email},#{emailAble},#{url},#{status},#{deleted},#{createDt},#{updateDt})")
+    @Insert("insert into user(id,name,password,avatarUrl,niceName,email,emailAble,url,location,status,deleted,createDt,updateDt)" +
+            "values(#{id},#{name},#{password},#{avatarUrl},#{niceName},#{email},#{emailAble},#{url},#{location},#{status},#{deleted},#{createDt},#{updateDt})")
     int insertUser(User user);
 
     @Update("update user set avatarUrl=#{avatarUrl} where id=#{id}")
@@ -37,7 +37,7 @@ public interface IUserDao {
     @Select("select * from user where id=#{id}")
     User selectUserById(@Param("id") String id);
 
-    @Update("update user set name=#{name},niceName=#{niceName},email=#{email} where id=#{id}")
+    @Update("update user set name=#{name},niceName=#{niceName},email=#{email},url=#{url},location=#{location} where id=#{id}")
     int updateProfile(User user);
 
     @Update("update user set password=#{password} where id=#{id}")

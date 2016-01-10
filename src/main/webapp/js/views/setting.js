@@ -54,6 +54,8 @@ function activeProfile() {
             $("#name").val(data.name);
             $("#niceName").val(data.niceName);
             $("#email").val(data.email);
+            $("#url").val(data.url);
+            $("#location").val(data.location);
         }
     }, 'json');
 }
@@ -63,6 +65,8 @@ function updateProfile() {
     var name = $("#name").val();
     var niceName = $("#niceName").val();
     var email = $("#email").val();
+    var url = $("#url").val();
+    var location = $("#location").val();
 
     if ($.trim(name).length == 0) {
         Lobibox.notify('info', {
@@ -89,7 +93,9 @@ function updateProfile() {
     $.post("/json/updateProfile.json", {
         name: name,
         niceName: niceName,
-        email: email
+        email: email,
+        url: url,
+        location: location
     }, function (data) {
         if (data > 0) {
             Lobibox.notify('success', {
@@ -140,21 +146,21 @@ function updatePwd() {
             title: 'awbeci提示',
             msg: '请输入原密码，并且密码为至少使用一个小写字母，一个数字和七个字符。'
         });
-        return ;
+        return;
     }
     if ($.trim(newPwd).length == 0 || $.trim(newPwd).length < 7) {
         Lobibox.notify('info', {
             title: 'awbeci提示',
             msg: '请输入新密码，并且密码为至少使用一个小写字母，一个数字和七个字符。'
         });
-        return ;
+        return;
     }
     if ($.trim(newPwd2).length == 0 || $.trim(newPwd2).length < 7) {
         Lobibox.notify('info', {
             title: 'awbeci提示',
             msg: '请确认新密码，并且密码为至少使用一个小写字母，一个数字和七个字符。'
         });
-        return ;
+        return;
     }
 
     if ($.trim(newPwd).length != $.trim(newPwd2).length || newPwd != newPwd2) {

@@ -1,23 +1,176 @@
-.btn-flower-content{
-    padding:5px 10px 10px 10px;
+.btn-flower-content {
+    padding: 5px 10px 10px 10px;
     margin-bottom: 10px;
 }
-.btn-flower-left{
+
+.btn-flower-left {
     display: inline-block;
 }
-.btn-flower-left h5{
+
+.btn-flower-left h5 {
     font-weight: bold;
 }
-.btn-flower-right{
-    float:right;
+
+.btn-flower-right {
+    float: right;
 }
-.btn-flower >span{
+
+.btn-flower > span {
     margin-right: 5px;
 }
 
-.myavatar{
+.myavatar {
     border-radius: 7px;
     height: 72px;
     width: 72px;
     border: 2px solid #fff;
+}
+
+.avatar-wrapper img {
+    display: block;
+    height: auto;
+    max-width: 100%;
+}
+
+.avatar-wrapper {
+    height: 364px;
+    width: 100%;
+    overflow: hidden;
+}
+
+.row-left {
+    width: 25%;
+    float: left;
+}
+
+.list-group-item:first-child {
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+}
+
+.row-right {
+    width: 73%;
+    margin: 0 0 0 10px;
+    float: left;
+    border-radius: 8px 8px 0 0;
+}
+
+.person-info-header {
+    border: 1px solid #ddd;
+    background: #f9f9f9;
+    font-weight: bold;
+    border-bottom: none;
+    padding: 8px 10px;
+    border-radius: 4px 4px 0 0;
+    font-size: 14px;
+    position: relative;
+}
+
+.person-info-header2 {
+    border: 1px solid #ddd;
+    background: #f9f9f9;
+    font-weight: bold;
+    padding: 8px 10px;
+    border-radius: 4px 4px 0 0;
+    font-size: 14px;
+    position: relative;
+}
+
+.person-info-setlist {
+
+}
+
+a.list-group-item:hover, a.list-group-item:focus {
+    background-color: #fff;
+    color: #0084B4;
+}
+
+.list-group-items {
+    color: #0084B4 !important;
+}
+
+.list-group-item {
+    font-size: 14px;
+    padding: 5px 15px;
+}
+
+.list-group-item span {
+    float: right;
+    display: inline-block;
+    font-size: 20px;
+}
+
+.setting-content {
+
+}
+
+.setting-header {
+    padding: 5px 10px;
+    border: 1px solid #ddd;
+    border-radius: 8px 8px 0 0;
+}
+
+.setting-header h4, .setting-header p {
+    color: #0084B4;
+}
+
+.setting-detail {
+    border: 1px solid #ddd;
+    border-top: none;
+    padding: 10px;
+}
+
+.setting-detail label {
+    font-size: 13px;
+    color: #666;
+}
+
+.user-avatar-info {
+    display: inline-block;
+    float: left;
+    margin-left: 20px;
+}
+
+.user-avatar-info p {
+    font-size: 13px;
+    margin-top: 10px;
+    color: #666;
+}
+
+.clearboth {
+    clear: both;
+}
+
+.left {
+    float: left;
+}
+
+.margintop {
+    margin-top: 80px;
+}
+
+.form-control-width {
+    width: 440px;
+}
+
+.setting-detail-tab {
+    display: none;
+}
+
+.tabActive {
+    display: block;
+}
+
+.mycol-1 {
+    float: left;
+    width: 20%;
+}
+
+.mycol-2 {
+    float: left;
+    width: 40%;
+    position: relative;
+    min-height: 1px;
+    padding-right: 15px;
+    padding-left: 15px;
 }

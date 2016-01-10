@@ -114,6 +114,7 @@ public class LoginController {
         if (user != null) {
             session.setAttribute("user", user.getName());
             session.setAttribute("uid", user.getId());
+            session.setAttribute("current_navigation_id", user.getId());
             //设置session过期时间为一年
             session.setMaxInactiveInterval(60 * 24 * 30);
             map.put("success", true);

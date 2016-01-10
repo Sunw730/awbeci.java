@@ -13,6 +13,7 @@ public class User {
     private String email;
     private String emailAble;
     private String url;
+    private String location;
     private Integer status;
     private Integer deleted;
     private Date createDt;
@@ -72,6 +73,14 @@ public class User {
 
     public void setUrl(String url) {
         this.url = url;
+    }
+
+    public String getLocation() {
+        return location;
+    }
+
+    public void setLocation(String location) {
+        this.location = location;
     }
 
     public String getEmailAble() {
