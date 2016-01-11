@@ -172,5 +172,68 @@ a.list-group-item:hover, a.list-group-item:focus {
     position: relative;
     min-height: 1px;
     padding-right: 15px;
-    padding-left: 15px;
+}
+
+.thumbnail, .img-thumbnail {
+    -webkit-box-shadow: none;
+    box-shadow: none;
+}
+
+.thumbnail {
+    display: block;
+    padding: 4px;
+    margin-bottom: 20px;
+    line-height: 1.42857143;
+    background-color: #fff;
+    border: none;
+    border-radius: 4px;
+    -webkit-transition: border .2s ease-in-out;
+    -o-transition: border .2s ease-in-out;
+    transition: border .2s ease-in-out;
+}
+
+.thumbnail img {
+    width: 200px;
+    height: 200px;
+    border-radius: 6px;
+}
+
+.userinfoname {
+    font-size: 26px;
+    font-weight: bold;
+    padding-left: 10px;
+}
+
+.userinfonicename {
+    font-size: 20px;
+    color: #666;
+    padding-left: 10px;
+}
+.userinfocontent{
+    list-style: none;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    border-top: 1px solid #eee;
+}
+
+.userinfocontent li{
+    width: 100%;
+    padding: 2px 0 2px 14px;
+    overflow-x: hidden;
+    white-space: nowrap;
+    font-size: 14px;
+    text-overflow: ellipsis;
+}
+
+.userinfocontent .octicon{
+    float: left;
+    width: 16px;
+    text-align: center;
+    color: #999;
+    margin-right: 5px;
+}
+.person-info-following{
+    border: 1px solid #ddd;
+    border-top: none;
+    border-radius:0 0 4px 4px;
 }
