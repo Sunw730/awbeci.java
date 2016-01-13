@@ -14,7 +14,8 @@
 						http://www.springframework.org/schema/context/spring-context.xsd
 						http://www.springframework.org/schema/tx
 						http://www.springframework.org/schema/tx/spring-tx-3.0.xsd
-						http://mybatis.org/schema/mybatis-spring http://mybatis.org/schema/mybatis-spring.xsd">
+						http://mybatis.org/schema/mybatis-spring http://mybatis.org/schema/mybatis-spring.xsd
+						">
 
     <!-- 配置数据源 -->
     <bean id="dataSource"

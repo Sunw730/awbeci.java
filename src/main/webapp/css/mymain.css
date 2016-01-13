@@ -168,7 +168,7 @@ a.list-group-item:hover, a.list-group-item:focus {
 
 .mycol-2 {
     float: left;
-    width: 40%;
+    width: 80%;
     position: relative;
     min-height: 1px;
     padding-right: 15px;
@@ -209,14 +209,15 @@ a.list-group-item:hover, a.list-group-item:focus {
     color: #666;
     padding-left: 10px;
 }
-.userinfocontent{
+
+.userinfocontent {
     list-style: none;
     padding-top: 15px;
     padding-bottom: 15px;
     border-top: 1px solid #eee;
 }
 
-.userinfocontent li{
+.userinfocontent li {
     width: 100%;
     padding: 2px 0 2px 14px;
     overflow-x: hidden;
@@ -225,15 +226,59 @@ a.list-group-item:hover, a.list-group-item:focus {
     text-overflow: ellipsis;
 }
 
-.userinfocontent .octicon{
+.userinfocontent .octicon {
     float: left;
     width: 16px;
     text-align: center;
     color: #999;
     margin-right: 5px;
 }
-.person-info-following{
+
+.person-info-following {
     border: 1px solid #ddd;
     border-top: none;
-    border-radius:0 0 4px 4px;
+    border-radius: 0 0 4px 4px;
+}
+
+.follow-list {
+    list-style-type: none;
+}
+
+.follow-list li {
+    float: left;
+    width: 305px;
+    padding-bottom: 20px;
+    margin-bottom: 20px;
+    margin-right: 20px;
+    border-bottom: 1px solid #eee;
+}
+
+#myTab li a {
+    font-size: 14px;
+}
+
+#myTab li a .badge {
+    margin-left: 5px;
+}
+
+.media:first-child {
+    margin-top: 15px;
+}
+
+.media {
+    width: 310px;
+    float: left;
+    margin-bottom: 15px;
+}
+.media-body p span{
+    font-size: 12px;
+    color: #767676;
+}
+
+.media-body-btn a span{
+    margin-right: 5px;
+}
+
+.pull-right a span{
+    margin-right: 5px;
 }

@@ -1,3 +1,5 @@
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -12,32 +14,34 @@
             <div class="thumbnail">
                 <img src="http://static.awbeci.com/img/avatar/20160108211734" alt="...">
                 <div class="caption">
-                    <div class="userinfoname">zhangwei</div>
-                    <div class="userinfonicename">张威</div>
+                    <div class="userinfoname">${user.name}</div>
+                    <div class="userinfonicename">${user.niceName}</div>
                     <ul class="userinfocontent">
                         <li>
                             <span aria-hidden="true" class="octicon octicon-location"></span>
-                            Hefei,China
+                            ${user.location}
                         </li>
                         <li>
                             <span aria-hidden="true" class="octicon octicon-mail"></span>
                             <a class="email"
-                               href="mailto:%7a%68%61%6e%67%77%65%69%39%30%30%38%30%38@%31%32%36.%63%6f%6d">
-                                zhangwei900808@126.com</a>
+                               href="mailto:${user.email}" title="${user.email}">
+                                ${user.email}</a>
                         </li>
                         <li>
                             <span aria-hidden="true"
                                   class="octicon octicon-link"></span>
                             <a
-                                    href="http://www.awbeci.xyz" class="url" rel="nofollow me">
-                                http://www.awbeci.xyz</a>
+                                    href="${user.url}" class="url" rel="nofollow me" title="${user.url}">
+                                ${user.url}</a>
                         </li>
                         <li>
                             <span aria-hidden="true" class="octicon octicon-clock"></span>
                             <span
-                                    class="join-label">Joined on </span>
-                            <time class="join-date" datetime="2013-05-09T08:48:16Z" day="numeric" is="local-time"
-                                  month="short" year="numeric" title="2013年5月9日 GMT+8下午4:48">9 May 2013
+                                    class="join-label">加入于 </span>
+                            <time class="join-date" datetime="<spring:eval expression="user.createDt" />" day="numeric"
+                                  is="local-time"
+                                  month="short" year="numeric" title="<spring:eval expression="user.createDt" />">
+                                <spring:eval expression="user.createDt"/>
                             </time>
                         </li>
                     </ul>
@@ -47,27 +51,70 @@
         <div class="mycol-2">
             <div class="setting-content">
                 <div class="person-info-content">
-                    <div class="person-info-header2">
-                        正在关注
+                    <ul id="myTab" class="nav nav-tabs">
+                        <li class="active">
+                            <a href="#following" data-toggle="tab">
+                                正在关注<span class="badge">${followingsCount}</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#follower" data-toggle="tab">
+                                关注者<span class="badge">4</span>
+                            </a></li>
+                         <span class="pull-right">
+                             <a href="#" class="btn btn-success btn-sm">
+                                 <span aria-hidden="true" class="octicon octicon-person"></span>关注 </a></span>
+                    </ul>
+
+                    <div id="myTabContent" class="tab-content">
+                        <div class="tab-pane fade in active" id="following">
+                            <ul class="media-list">
+                                <c:forEach items="${followings}" var="following">
+                                    <li class="media">
+                                        <div class="media-left">
+                                            <a href="#">
+                                                <img width="75" height="75" class="media-object"
+                                                     src="http://static.awbeci.com/img/avatar/20160108211734" alt="...">
+                                            </a>
+                                        </div>
+                                        <div class="media-body">
+                                            <h4 class="media-heading">zhangwei</h4>
+                                            <p><span aria-hidden="true" class="octicon octicon-clock">2016-1-1</span>
+                                            </p>
+
+                                            <div class="media-body-btn"><a href="#" class="btn btn-default btn-sm">
+                                                <span aria-hidden="true" class="octicon octicon-person"></span>已关注 </a>
+                                            </div>
+
+                                        </div>
+                                    </li>
+                                </c:forEach>
+
+                            </ul>
+                        </div>
+                        <div class="tab-pane fade" id="follower">
+                            <ul class="media-list">
+                                <li class="media">
+                                    <div class="media-left">
+                                        <a href="#">
+                                            <img width="75" height="75" class="media-object"
+                                                 src="http://static.awbeci.com/img/avatar/20160108211734" alt="...">
+                                        </a>
+                                    </div>
+                                    <div class="media-body">
+                                        <h4 class="media-heading">zhangwei</h4>
+                                        <p><span aria-hidden="true" class="octicon octicon-clock">2016-1-1</span></p>
+
+                                        <div class="media-body-btn"><a href="#" class="btn btn-default btn-sm">
+                                            <span aria-hidden="true" class="octicon octicon-person"></span>已关注 </a>
+                                        </div>
+
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
                     </div>
-                    <div class="person-info-following">
-                        <ol class="follow-list clearfix">
-                            <li>
-                                <a href="/barretlee">
-                                    <img alt="@barretlee" class="gravatar" height="70" src="https://avatars1.githubusercontent.com/u/3456749?v=3&amp;s=192" width="70">
-                                </a>
-                            </li>
-                        </ol>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="mycol-2">
-            <div class="setting-content">
-                <div class="person-info-content">
-                    <div class="person-info-header2">
-                        关注者
-                    </div>
+
                 </div>
             </div>
         </div>

@@ -108,6 +108,12 @@
             <artifactId>mybatis-spring</artifactId>
             <version>1.2.3</version>
         </dependency>
+        <dependency>
+            <groupId>tk.mybatis</groupId>
+            <artifactId>mapper</artifactId>
+            <version>3.3.4</version>
+        </dependency>
+
         <!--aspectj-->
         <dependency>
             <groupId>org.aspectj</groupId>

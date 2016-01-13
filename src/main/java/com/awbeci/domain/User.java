@@ -1,8 +1,11 @@
 package com.awbeci.domain;
 
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import java.sql.Timestamp;
 import java.util.Date;
+import java.util.List;
 
 public class User {
     private String id;
@@ -16,8 +19,11 @@ public class User {
     private String location;
     private Integer status;
     private Integer deleted;
+    @DateTimeFormat(pattern = "yyyy年MM月dd日")
     private Date createDt;
     private Date updateDt;
+
+    private List<UserFollow> userFollows;
 
     public String getId() {
         return id;
@@ -121,5 +127,13 @@ public class User {
 
     public void setUpdateDt(Date updateDt) {
         this.updateDt = updateDt;
+    }
+
+    public List<UserFollow> getUserFollows() {
+        return userFollows;
+    }
+
+    public void setUserFollows(List<UserFollow> userFollows) {
+        this.userFollows = userFollows;
     }
 }

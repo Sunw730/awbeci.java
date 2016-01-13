@@ -10,9 +10,10 @@ import org.apache.ibatis.annotations.ResultMap;
 import org.apache.ibatis.annotations.Results;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
-
+@Repository
 public interface IUserDao {
     @Select("select * from user")
     @ResultMap("com.awbeci.mapper.UserMapper.UserResult")
@@ -42,4 +43,6 @@ public interface IUserDao {
 
     @Update("update user set password=#{password} where id=#{id}")
     int updatePassword(User user);
+
+
 }

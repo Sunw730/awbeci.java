@@ -1,11 +1,14 @@
 package com.awbeci.controller;
 
 import com.awbeci.domain.User;
+import com.awbeci.domain.UserFollow;
+import com.awbeci.service.IUserFollowService;
 import com.awbeci.service.IUserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -26,13 +29,20 @@ public class UserInfoController {
     @Autowired
     IUserService userService;
 
+    @Autowired
+    IUserFollowService userFollowService;
+
     @RequestMapping("/{username}")
-    public String  mymain(@PathVariable String username, HttpSession session) {
+    public String mymain(@PathVariable String username, HttpSession session, Model model) {
         User data = userService.selectUserByName(username);
         if (data == null) {
             return "error/404";
         } else {
             session.setAttribute("current_navigation_id", data.getId());
+            List<UserFollow> followingUsers = userFollowService.getFollowingByUid(data.getId());
+            model.addAttribute("user", data);
+            model.addAttribute("followings", followingUsers);
+            model.addAttribute("followingsCount",followingUsers.size());
             return "user/mymain";
         }
     }

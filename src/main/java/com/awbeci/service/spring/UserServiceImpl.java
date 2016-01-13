@@ -93,4 +93,5 @@ public class UserServiceImpl implements IUserService {
     public int updatePassword(User user) {
         return userDao.updatePassword(user);
     }
+
 }

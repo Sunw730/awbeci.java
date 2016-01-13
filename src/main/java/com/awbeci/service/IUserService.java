@@ -23,4 +23,5 @@ public interface IUserService {
     int updateProfile(User user);
 
     int updatePassword(User user);
+
 }

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.awbeci.mapper.UserFollowMapper">
+    <resultMap id="UserFollowResult" type="UserFollow">
+        <id property="id" column="id"/>
+        <result property="uid" column="uid"/>
+        <result property="followId" column="followid"/>
+        <result property="followName" column="followname"/>
+        <result property="followUrl" column="followurl"/>
+        <result property="type" column="type"/>
+        <result property="createDt" column="createdt"/>
+        <result property="updateDt" column="updatedt"/>
+        <collection property="user" resultMap="UserResult"></collection>
+    </resultMap>
+</mapper>

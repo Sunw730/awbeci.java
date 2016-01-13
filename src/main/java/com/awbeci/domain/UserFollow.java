@@ -1,16 +1,18 @@
 package com.awbeci.domain;
-
+import tk.mybatis.mapper.annotation.NameStyle;
+import tk.mybatis.mapper.code.Style;
 import java.util.Date;
-
 public class UserFollow {
     private String id;
     private String uid;
-    private String folllowId;
-    private String folllowName;
-    private String folllowUrl;
+    private String followId;
+    private String followName;
+    private String followUrl;
     private String type;
     private Date createDt;
     private Date updateDt;
+
+    private User user;
 
     public String getId() {
         return id;
@@ -28,28 +30,28 @@ public class UserFollow {
         this.uid = uid;
     }
 
-    public String getFolllowId() {
-        return folllowId;
+    public String getFollowId() {
+        return followId;
     }
 
-    public void setFolllowId(String folllowId) {
-        this.folllowId = folllowId;
+    public void setFollowId(String followId) {
+        this.followId = followId;
     }
 
-    public String getFolllowName() {
-        return folllowName;
+    public String getFollowName() {
+        return followName;
     }
 
-    public void setFolllowName(String folllowName) {
-        this.folllowName = folllowName;
+    public void setFollowName(String followName) {
+        this.followName = followName;
     }
 
-    public String getFolllowUrl() {
-        return folllowUrl;
+    public String getFollowUrl() {
+        return followUrl;
     }
 
-    public void setFolllowUrl(String folllowUrl) {
-        this.folllowUrl = folllowUrl;
+    public void setFollowUrl(String followUrl) {
+        this.followUrl = followUrl;
     }
 
     public String getType() {
@@ -74,5 +76,13 @@ public class UserFollow {
 
     public void setUpdateDt(Date updateDt) {
         this.updateDt = updateDt;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 }
