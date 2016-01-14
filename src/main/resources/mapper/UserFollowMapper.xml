@@ -10,6 +10,13 @@
         <result property="type" column="type"/>
         <result property="createDt" column="createdt"/>
         <result property="updateDt" column="updatedt"/>
-        <collection property="user" resultMap="UserResult"></collection>
+        <association property="user" javaType="User">
+            <id property="id" column="userid"/>
+            <result property="name" column="name"/>
+            <result property="avatarUrl" column="avatarUrl"/>
+            <result property="niceName" column="niceName"/>
+            <result property="location" column="location"/>
+            <result property="createDt" column="usercreatedt"/>
+        </association>
     </resultMap>
 </mapper>

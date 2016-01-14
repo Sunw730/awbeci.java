@@ -15,6 +15,5 @@
         <result property="deleted" column="deleted"/>
         <result property="createDt" column="createDt"/>
         <result property="updateDt" column="updateDt"/>
-        <association property="userFollows" resultMap="UserFollowResult"></association>
     </resultMap>
 </mapper>

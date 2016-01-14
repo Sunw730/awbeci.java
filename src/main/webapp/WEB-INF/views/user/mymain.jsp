@@ -1,5 +1,6 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jstl/fmt_rt"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jstl/core"%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -74,16 +75,18 @@
                                         <div class="media-left">
                                             <a href="#">
                                                 <img width="75" height="75" class="media-object"
-                                                     src="http://static.awbeci.com/img/avatar/20160108211734" alt="...">
+                                                     src="${following.user.avatarUrl}" alt="${following.user.avatarUrl}">
                                             </a>
                                         </div>
                                         <div class="media-body">
-                                            <h4 class="media-heading">zhangwei</h4>
-                                            <p><span aria-hidden="true" class="octicon octicon-clock">2016-1-1</span>
+                                            <h4 class="media-heading">${following.user.name}</h4>
+                                            <p><span aria-hidden="true" class="octicon octicon-clock">
+                                                <fmt:formatDate pattern="yyyy:mm:dd HH:mm:ss" value="${following.user.createDt}"></fmt:formatDate>
+                                            </span>
                                             </p>
 
-                                            <div class="media-body-btn"><a href="#" class="btn btn-default btn-sm">
-                                                <span aria-hidden="true" class="octicon octicon-person"></span>已关注 </a>
+                                            <div class="media-body-btn"><a href="javascript:void(0)" class="btn btn-default btn-sm">
+                                                <span aria-hidden="true" class="octicon octicon-person"></span>取消关注 </a>
                                             </div>
 
                                         </div>
