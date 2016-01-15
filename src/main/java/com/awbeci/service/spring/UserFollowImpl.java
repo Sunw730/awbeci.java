@@ -19,4 +19,8 @@ public class UserFollowImpl implements IUserFollowService{
     public List<UserFollow> getFollowingByUid(String uid) {
         return userFollowDao.getFollowingByUid(uid);
     }
+
+    public List<UserFollow> getFollowerByUid(String uid) {
+        return userFollowDao.getFollowerByUid(uid);
+    }
 }

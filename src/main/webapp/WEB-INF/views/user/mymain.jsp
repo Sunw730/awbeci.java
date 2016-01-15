@@ -1,6 +1,6 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jstl/fmt_rt"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jstl/core"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -13,28 +13,32 @@
     <div class="row">
         <div class="mycol-1">
             <div class="thumbnail">
-                <img src="http://static.awbeci.com/img/avatar/20160108211734" alt="...">
+                <img src="${user.avatarUrl}" alt="${user.avatarUrl}">
                 <div class="caption">
                     <div class="userinfoname">${user.name}</div>
                     <div class="userinfonicename">${user.niceName}</div>
                     <ul class="userinfocontent">
-                        <li>
-                            <span aria-hidden="true" class="octicon octicon-location"></span>
-                            ${user.location}
-                        </li>
+                        <c:if test="${user.location != null}">
+                            <li>
+                                <span aria-hidden="true" class="octicon octicon-location"></span>
+                                    ${user.location}
+                            </li>
+                        </c:if>
+
                         <li>
                             <span aria-hidden="true" class="octicon octicon-mail"></span>
                             <a class="email"
                                href="mailto:${user.email}" title="${user.email}">
                                 ${user.email}</a>
                         </li>
-                        <li>
+                        <c:if test="${user.url != null}">
+                            <li>
                             <span aria-hidden="true"
                                   class="octicon octicon-link"></span>
-                            <a
-                                    href="${user.url}" class="url" rel="nofollow me" title="${user.url}">
-                                ${user.url}</a>
-                        </li>
+                                <a href="${user.url}" class="url" rel="nofollow me" title="${user.url}">${user.url}</a>
+                            </li>
+                        </c:if>
+
                         <li>
                             <span aria-hidden="true" class="octicon octicon-clock"></span>
                             <span
@@ -60,11 +64,15 @@
                         </li>
                         <li>
                             <a href="#follower" data-toggle="tab">
-                                关注者<span class="badge">4</span>
+                                关注者<span class="badge">${followersCount}</span>
                             </a></li>
                          <span class="pull-right">
-                             <a href="#" class="btn btn-success btn-sm">
-                                 <span aria-hidden="true" class="octicon octicon-person"></span>关注 </a></span>
+                             <c:if test="${sessionScope.uid==null}">
+                                 <a href="#" class="btn btn-success btn-sm">
+                                     <span aria-hidden="true" class="octicon octicon-person"></span>
+                                     关注 </a></span>
+                        </c:if>
+
                     </ul>
 
                     <div id="myTabContent" class="tab-content">
@@ -73,19 +81,22 @@
                                 <c:forEach items="${followings}" var="following">
                                     <li class="media">
                                         <div class="media-left">
-                                            <a href="#">
+                                            <a href="${path}/${following.user.name}">
                                                 <img width="75" height="75" class="media-object"
-                                                     src="${following.user.avatarUrl}" alt="${following.user.avatarUrl}">
+                                                     src="${following.user.avatarUrl}"
+                                                     alt="${following.user.avatarUrl}">
                                             </a>
                                         </div>
                                         <div class="media-body">
                                             <h4 class="media-heading">${following.user.name}</h4>
                                             <p><span aria-hidden="true" class="octicon octicon-clock">
-                                                <fmt:formatDate pattern="yyyy:mm:dd HH:mm:ss" value="${following.user.createDt}"></fmt:formatDate>
+                                                <fmt:formatDate pattern="yyyy年mm月dd日"
+                                                                value="${following.user.createDt}"></fmt:formatDate>
                                             </span>
                                             </p>
 
-                                            <div class="media-body-btn"><a href="javascript:void(0)" class="btn btn-default btn-sm">
+                                            <div class="media-body-btn"><a href="javascript:void(0)"
+                                                                           class="btn btn-default btn-sm">
                                                 <span aria-hidden="true" class="octicon octicon-person"></span>取消关注 </a>
                                             </div>
 
@@ -97,23 +108,30 @@
                         </div>
                         <div class="tab-pane fade" id="follower">
                             <ul class="media-list">
-                                <li class="media">
-                                    <div class="media-left">
-                                        <a href="#">
-                                            <img width="75" height="75" class="media-object"
-                                                 src="http://static.awbeci.com/img/avatar/20160108211734" alt="...">
-                                        </a>
-                                    </div>
-                                    <div class="media-body">
-                                        <h4 class="media-heading">zhangwei</h4>
-                                        <p><span aria-hidden="true" class="octicon octicon-clock">2016-1-1</span></p>
-
-                                        <div class="media-body-btn"><a href="#" class="btn btn-default btn-sm">
-                                            <span aria-hidden="true" class="octicon octicon-person"></span>已关注 </a>
+                                <c:forEach items="${followers}" var="follower">
+                                    <li class="media">
+                                        <div class="media-left">
+                                            <a href="${path}/${follower.user.name}">
+                                                <img width="75" height="75" class="media-object"
+                                                     src="${follower.user.avatarUrl}" alt="${follower.user.avatarUrl}">
+                                            </a>
                                         </div>
+                                        <div class="media-body">
+                                            <h4 class="media-heading">${follower.user.name}</h4>
+                                            <p><span aria-hidden="true" class="octicon octicon-clock">
+                                                <fmt:formatDate pattern="yyyy年mm月dd日"
+                                                                value="${follower.user.createDt}"></fmt:formatDate>
+                                            </span>
+                                            </p>
 
-                                    </div>
-                                </li>
+                                            <div class="media-body-btn"><a href="javascript:void(0)"
+                                                                           class="btn btn-default btn-sm">
+                                                <span aria-hidden="true" class="octicon octicon-person"></span>取消关注 </a>
+                                            </div>
+
+                                        </div>
+                                    </li>
+                                </c:forEach>
                             </ul>
                         </div>
                     </div>

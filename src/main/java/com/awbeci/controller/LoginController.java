@@ -70,7 +70,7 @@ public class LoginController {
         boolean data = userService.region(user, properties);
         if (data) {
             //设置session
-            session.setAttribute("user", user.getName());
+            session.setAttribute("userName", user.getName());
             session.setAttribute("uid", user.getId());
             return "1";
         } else {
@@ -88,7 +88,7 @@ public class LoginController {
      */
     @RequestMapping(value = "validate/{id}", method = RequestMethod.GET)
     public String validate(@PathVariable String id, HttpSession session) {
-        Object username = session.getAttribute("user");
+        Object username = session.getAttribute("userName");
         if (id != null && !id.equals("") && username != null && !username.equals("")) {
             //todo:是否验证了多次，要判断下
             userService.validateEmail(id);
@@ -112,7 +112,8 @@ public class LoginController {
         Map<String, Object> map = new HashMap<String, Object>();
         User user = userService.selectUser(name, password);
         if (user != null) {
-            session.setAttribute("user", user.getName());
+            session.setAttribute("user", user);
+            session.setAttribute("userName", user.getName());
             session.setAttribute("uid", user.getId());
             session.setAttribute("current_navigation_id", user.getId());
             //设置session过期时间为一年

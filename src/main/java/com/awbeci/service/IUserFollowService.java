@@ -8,4 +8,6 @@ import java.util.List;
 public interface IUserFollowService {
 
     List<UserFollow> getFollowingByUid(String uid);
+
+    List<UserFollow> getFollowerByUid(String uid);
 }

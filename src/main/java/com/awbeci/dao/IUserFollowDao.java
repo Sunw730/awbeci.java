@@ -22,4 +22,13 @@ public interface IUserFollowDao {
             " where a.uid=#{uid}")
     @ResultMap("com.awbeci.mapper.UserFollowMapper.UserFollowResult")
     List<UserFollow> getFollowingByUid(@Param("uid") String uid);
+
+    @Select("select a.*,b.id userid,b.name,b.avatarUrl,b.nicename,b.createdt usercreatedt" +
+            " from userfollow a " +
+            " left join user b on a.uid=b.id" +
+            " where a.followid=#{uid}")
+    @ResultMap("com.awbeci.mapper.UserFollowMapper.UserFollowResult")
+    List<UserFollow> getFollowerByUid(@Param("uid") String uid);
+
+
 }

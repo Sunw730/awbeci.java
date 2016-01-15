@@ -34,15 +34,19 @@ public class UserInfoController {
 
     @RequestMapping("/{username}")
     public String mymain(@PathVariable String username, HttpSession session, Model model) {
-        User data = userService.selectUserByName(username);
-        if (data == null) {
+        User user = userService.selectUserByName(username);
+        if (user == null) {
             return "error/404";
         } else {
-            session.setAttribute("current_navigation_id", data.getId());
-            List<UserFollow> followingUsers = userFollowService.getFollowingByUid(data.getId());
-            model.addAttribute("user", data);
+            session.setAttribute("current_navigation_id", user.getId());
+            List<UserFollow> followingUsers = userFollowService.getFollowingByUid(user.getId());
+            List<UserFollow> followers = userFollowService.getFollowerByUid(user.getId());
+            model.addAttribute("user", user);
             model.addAttribute("followings", followingUsers);
-            model.addAttribute("followingsCount",followingUsers.size());
+            model.addAttribute("followingsCount", followingUsers.size());
+
+            model.addAttribute("followers", followers);
+            model.addAttribute("followersCount", followers.size());
             return "user/mymain";
         }
     }
