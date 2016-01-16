@@ -14,9 +14,11 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpSession;
+import java.sql.Timestamp;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
 /**
  * Created by zhangwei on 2015/10/8.
@@ -119,5 +121,47 @@ public class UserInfoController {
             log.debug("错误原因:" + e.getMessage());
             return 0;
         }
+    }
+
+
+    //----------------------------------------添加关注----------------------------------------------------------
+    @RequestMapping(value = "/json/addFollow.json", method = RequestMethod.POST)
+    @ResponseBody
+    public int addFollow(UserFollow userFollow, HttpSession session) {
+        try {
+            Object useridObj = session.getAttribute("uid");
+            if (useridObj != null) {
+                userFollow.setId(UUID.randomUUID().toString());
+                userFollow.setUid(useridObj.toString());
+                userFollow.setCreateDt(new Timestamp(System.currentTimeMillis()));
+                userFollow.setUpdateDt(new Timestamp(System.currentTimeMillis()));
+                return userFollowService.insertUserFollow(userFollow);
+            }
+        } catch (Exception e) {
+            log.debug("错误原因:" + e.getMessage());
+        }
+        return 0;
+    }
+
+
+    /**
+     * 取消关注
+     * @param followid
+     * @param session
+     * @return
+     */
+    @RequestMapping(value = "/json/removeFollow.json", method = RequestMethod.POST)
+    @ResponseBody
+    public int removeFollow(String followid, HttpSession session) {
+        try {
+            Object useridObj = session.getAttribute("uid");
+            if (useridObj != null) {
+                String uid = useridObj.toString();
+                return userFollowService.deleteUserFollow(uid, followid);
+            }
+        } catch (Exception e) {
+            log.debug("错误原因:" + e.getMessage());
+        }
+        return 0;
     }
 }

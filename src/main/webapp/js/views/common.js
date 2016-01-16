@@ -1,6 +1,5 @@
 $(function () {
     $("[data-toggle='tooltip']").tooltip();
-    $("#container-main").css({'margin-top': '60px'});
 });
 function region() {
     location.href = '/region';

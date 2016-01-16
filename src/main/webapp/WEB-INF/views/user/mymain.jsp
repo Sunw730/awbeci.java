@@ -90,7 +90,7 @@
                                         <div class="media-body">
                                             <h4 class="media-heading">${following.user.name}</h4>
                                             <p><span aria-hidden="true" class="octicon octicon-clock">
-                                                <fmt:formatDate pattern="yyyy年mm月dd日"
+                                                <fmt:formatDate pattern="yyyy年MM月dd日"
                                                                 value="${following.user.createDt}"></fmt:formatDate>
                                             </span>
                                             </p>
@@ -119,7 +119,7 @@
                                         <div class="media-body">
                                             <h4 class="media-heading">${follower.user.name}</h4>
                                             <p><span aria-hidden="true" class="octicon octicon-clock">
-                                                <fmt:formatDate pattern="yyyy年mm月dd日"
+                                                <fmt:formatDate pattern="yyyy年MM月dd日"
                                                                 value="${follower.user.createDt}"></fmt:formatDate>
                                             </span>
                                             </p>

@@ -4,7 +4,6 @@ var siteflag = '';
 var clickCategoryId = '';
 
 $(function () {
-    showFlowerBtn();
     $("[data-toggle='tooltip']").tooltip({html: true});
     //$("#showlink ul").dragsort({});
     initCategory();
@@ -20,21 +19,6 @@ $(function () {
     });
     querySite();
 });
-
-//显示操作按钮
-function showFlowerBtn() {
-    //todo:这里，如果sessin为空，那么关注的时候直接跳到登录页面，如果session不为空，那么
-    $.post('/json/getSession.json', function (data) {
-        if (data) {
-            $('.treeview-head-icon-right').show();
-            $('.btn-flower-content').hide();
-        }
-        else {
-            $('.treeview-head-icon-right').hide();
-            $('.btn-flower-content').show();
-        }
-    });
-}
 
 //按回车查询网址
 function querySite() {
@@ -399,4 +383,23 @@ function isURL(str_url) {
     } else {
         return false;
     }
+}
+
+
+//-------------------------------添加关注-----------------------------------
+function addFollow(id, name) {
+    $.post('/json/addFollow.json', {
+        followId: id,
+        followName: name
+    }, function (data) {
+
+    });
+}
+
+function removeFollow(id){
+    $.post('/json/removeFollow.json', {
+        followid: id,
+    }, function (data) {
+
+    });
 }

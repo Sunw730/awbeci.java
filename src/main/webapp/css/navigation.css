@@ -354,3 +354,10 @@ a.list-group-item:hover {
 .bootstrap-select:not([class*=col-]):not([class*=form-control]):not(.input-group-btn) {
     width: 100%;
 }
+.currUserInfo ul{
+    float: right;
+}
+.currUserInfo-detail{
+    margin-bottom: 15px;
+    padding-left: 3px;
+}

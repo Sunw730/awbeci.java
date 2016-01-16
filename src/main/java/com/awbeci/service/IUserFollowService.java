@@ -10,4 +10,10 @@ public interface IUserFollowService {
     List<UserFollow> getFollowingByUid(String uid);
 
     List<UserFollow> getFollowerByUid(String uid);
+
+    List<UserFollow> getMyFollower(String uid, String followid);
+
+    int insertUserFollow(UserFollow userFollow);
+
+    int deleteUserFollow(String uid, String followid);
 }

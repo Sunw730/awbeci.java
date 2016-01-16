@@ -37,7 +37,7 @@
     </c:if>
 </head>
 <body>
-<nav class="navbar navbar-fixed-top" role="navigation">
+<nav class="navbar navbar-static-top" role="navigation">
     <div class="container">
         <div class="navbar-header">
             <a class="navbar-brand nav-logo" href="/">Awbeci</a>

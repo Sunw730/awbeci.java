@@ -11,7 +11,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class UserFollowImpl implements IUserFollowService{
+public class UserFollowImpl implements IUserFollowService {
 
     @Autowired
     private IUserFollowDao userFollowDao;
@@ -22,5 +22,17 @@ public class UserFollowImpl implements IUserFollowService{
 
     public List<UserFollow> getFollowerByUid(String uid) {
         return userFollowDao.getFollowerByUid(uid);
+    }
+
+    public List<UserFollow> getMyFollower(String uid, String followid) {
+        return userFollowDao.getMyFollower(uid, followid);
+    }
+
+    public int insertUserFollow(UserFollow userFollow) {
+        return userFollowDao.insertUserFollow(userFollow);
+    }
+
+    public int deleteUserFollow(String uid, String followid) {
+        return userFollowDao.deleteUserFollow(uid, followid);
     }
 }

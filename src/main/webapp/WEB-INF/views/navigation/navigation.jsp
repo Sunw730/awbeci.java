@@ -16,19 +16,58 @@
 </head>
 <body>
 <div class="container" id="container-main">
+    <c:if test="${sessionScope.user == null || !isme}">
+        <div class="currUserInfo">
+
+            <c:choose>
+                <c:when test="${hadFollow}">
+                    <ul>
+                        <li><a href="javascript:void(0)" class="btn btn-default btn-sm" onclick="removeFollow('${sessionScope.current_user.id}')">
+                            <span aria-hidden="true" class="octicon octicon-person commonOction"></span>
+                            取消关注</a>
+                        </li>
+                    </ul>
+                </c:when>
+                <c:otherwise>
+                    <ul>
+                        <li><a href="javascript:void(0)" class="btn btn-success btn-sm" onclick="addFollow('${sessionScope.current_user.id}','${sessionScope.current_user.name}')">
+                            <span aria-hidden="true" class="octicon octicon-person commonOction"></span>
+                            关注</a>
+                        </li>
+                    </ul>
+                </c:otherwise>
+            </c:choose>
+
+            <div class="currUserInfo-detail">
+                <a href="/${sessionScope.current_user.name}">
+                    <img src="${sessionScope.current_user.avatarUrl}" alt="" width="30" height="30">
+                </a>
+                <a href="/${sessionScope.current_user.name}">
+                        ${sessionScope.current_user.name}
+                </a>
+                <c:if test="${sessionScope.current_user.niceName != null}">
+                    ( ${sessionScope.current_user.niceName} )
+                </c:if>
+            </div>
+        </div>
+    </c:if>
+
     <div class="row">
         <div class="col-lg-3 rowcol-left">
             <div class="treeview-head">分类列表
                 <div class="treeview-head-right">
-                    <a href="#" class="treeview-head-icon-right">
+                    <c:if test="${sessionScope.user != null && isme}">
+                        <a href="#" class="treeview-head-icon-right">
                         <span id="addcategory" class="octicon octicon-plus" data-toggle="tooltip" data-placement="top"
                               title="添加"></span>
-                    </a>
+                        </a>
 
-                    <a href="#" class="treeview-head-icon-right">
+                        <a href="#" class="treeview-head-icon-right">
                          <span id="editcategory" class=" octicon octicon-pencil" data-toggle="tooltip"
                                data-placement="top" title="编辑"></span>
-                    </a>
+                        </a>
+                    </c:if>
+
                 </div>
             </div>
             <div class="sidebar-module">
@@ -60,15 +99,17 @@
         <div class="col-lg-9 rowcol-right">
             <div class="treeview-head">网址列表
                 <div class="treeview-head-right">
-                    <a href="#" class="treeview-head-icon-right">
+                    <c:if test="${sessionScope.user != null && isme}">
+                        <a href="#" class="treeview-head-icon-right">
                         <span id="addsite" class="octicon octicon-plus" data-toggle="tooltip" data-placement="top"
                               title="" data-original-title="添加"></span>
-                    </a>
+                        </a>
 
-                    <a href="#" class="treeview-head-icon-right">
+                        <a href="#" class="treeview-head-icon-right">
                         <span id="editsite" class=" octicon octicon-pencil" data-toggle="tooltip" data-placement="top"
                               title="" data-original-title="编辑"></span>
-                    </a>
+                        </a>
+                    </c:if>
                 </div>
             </div>
             <div id="showlink">

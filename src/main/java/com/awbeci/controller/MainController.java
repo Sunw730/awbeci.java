@@ -2,6 +2,10 @@ package com.awbeci.controller;
 
 import com.awbeci.domain.SystemCode;
 import com.awbeci.domain.User;
+import com.awbeci.domain.UserCategory;
+import com.awbeci.domain.UserFollow;
+import com.awbeci.service.IUserCategoryService;
+import com.awbeci.service.IUserFollowService;
 import com.awbeci.service.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -25,6 +29,12 @@ public class MainController {
     @Autowired
     private IUserService userService;
 
+    @Autowired
+    private IUserCategoryService userCategoryService;
+
+    @Autowired
+    IUserFollowService userFollowService;
+
     /**
      * 网站主页
      */
@@ -40,12 +50,25 @@ public class MainController {
      * @return
      */
     @RequestMapping(value = "/{username}/navigation")
-    public String usersPage(@PathVariable String username, HttpSession session) {
+    public String usersPage(@PathVariable String username, HttpSession session, Model model) {
         User user = userService.selectUserByName(username);
         if (user == null) {
             return "error/404";
         } else {
+            Object uidObj = session.getAttribute("uid");
+            if (uidObj != null) {
+                String uid = uidObj.toString();
+                //判断是否等于当前用户
+                model.addAttribute("isme", user.getId().equals(uid));
+                List<UserFollow> userFollows = userFollowService.getMyFollower(uid, user.getId());
+                model.addAttribute("hadFollow", userFollows.size() > 0);
+            }
             session.setAttribute("current_navigation_id", user.getId());
+            session.setAttribute("current_user", user);
+
+
+//            List<UserCategory> userCategories = userCategoryService.selectCategoryByUid(user.getId());
+//            model.addAttribute("userCategories", userCategories);
             return "navigation/navigation";
         }
     }

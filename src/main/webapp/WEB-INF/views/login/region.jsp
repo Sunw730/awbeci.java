@@ -5,7 +5,7 @@
     <script type="application/javascript" src="/js/views/login.js"></script>
     <style>
         .content {
-            margin: 80px auto 0 auto;
+            margin: 0px auto;
             width: 800px;
             min-height: 600px;
         }
