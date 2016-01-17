@@ -22,7 +22,7 @@
             <c:choose>
                 <c:when test="${hadFollow}">
                     <ul>
-                        <li><a href="javascript:void(0)" class="btn btn-default btn-sm" onclick="removeFollow('${sessionScope.current_user.id}')">
+                        <li><a href="javascript:void(0)" class="btn btn-default btn-sm" onclick="follow(this,'${sessionScope.current_user.id}','${sessionScope.current_user.name}')">
                             <span aria-hidden="true" class="octicon octicon-person commonOction"></span>
                             取消关注</a>
                         </li>
@@ -30,7 +30,7 @@
                 </c:when>
                 <c:otherwise>
                     <ul>
-                        <li><a href="javascript:void(0)" class="btn btn-success btn-sm" onclick="addFollow('${sessionScope.current_user.id}','${sessionScope.current_user.name}')">
+                        <li><a href="javascript:void(0)" class="btn btn-default btn-sm" onclick="follow(this,'${sessionScope.current_user.id}','${sessionScope.current_user.name}')">
                             <span aria-hidden="true" class="octicon octicon-person commonOction"></span>
                             关注</a>
                         </li>
@@ -67,7 +67,6 @@
                                data-placement="top" title="编辑"></span>
                         </a>
                     </c:if>
-
                 </div>
             </div>
             <div class="sidebar-module">
