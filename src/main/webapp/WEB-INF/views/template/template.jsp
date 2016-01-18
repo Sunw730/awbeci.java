@@ -61,7 +61,7 @@
                                     <img src="${sessionScope.user.avatarUrl}" width="20" height="20"> <span
                                         class="caret"></span></span></a>
                             <ul class="dropdown-menu">
-                                <li><a href="#">当前登入账号：
+                                <li><a href="javascript:void(0)">当前登入账号：
                                     <br>${sessionScope.userName}</a></li>
                                 <li role="separator" class="divider"></li>
                                 <li><a href="/${sessionScope.userName}">个人主页</a></li>

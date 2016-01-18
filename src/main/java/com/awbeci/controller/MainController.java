@@ -40,7 +40,11 @@ public class MainController {
      */
     @RequestMapping("/")
     public String index(Model model, HttpSession session) {
-        return "/main/main";
+        if (session.getAttribute("user") == null) {
+            return "main/index";
+        } else {
+            return "/main/main";
+        }
     }
 
     /**

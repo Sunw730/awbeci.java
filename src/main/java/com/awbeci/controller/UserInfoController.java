@@ -41,6 +41,7 @@ public class UserInfoController {
             return "error/404";
         } else {
             session.setAttribute("current_navigation_id", user.getId());
+            session.setAttribute("current_user", user);
             List<UserFollow> followingUsers = userFollowService.getFollowingByUid(user.getId());
             List<UserFollow> followers = userFollowService.getFollowerByUid(user.getId());
             model.addAttribute("user", user);
@@ -49,6 +50,13 @@ public class UserInfoController {
 
             model.addAttribute("followers", followers);
             model.addAttribute("followersCount", followers.size());
+            Object uidObj = session.getAttribute("uid");
+            if (uidObj != null) {
+                String uid = uidObj.toString();
+                model.addAttribute("isme", user.getId().equals(uid));
+                List<UserFollow> userFollows = userFollowService.getMyFollower(uid, user.getId());
+                model.addAttribute("hadFollow", userFollows.size() > 0);
+            }
             return "user/mymain";
         }
     }

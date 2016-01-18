@@ -67,12 +67,20 @@
                                 关注者<span class="badge">${followersCount}</span>
                             </a></li>
                          <span class="pull-right">
-                             <c:if test="${sessionScope.uid==null}">
-                                 <a href="#" class="btn btn-success btn-sm">
-                                     <span aria-hidden="true" class="octicon octicon-person"></span>
-                                     关注 </a></span>
+                             <c:if test="${sessionScope.uid==null  || !isme}">
+                                 <c:choose>
+                                    <c:when test="${hadFollow}">
+                                         <a href="javascript:void(0)" class="btn btn-default btn-sm"  onclick="follow(this,'${sessionScope.current_user.id}','${sessionScope.current_user.name}')">
+                                             <span aria-hidden="javascript:void(0)true" class="octicon octicon-person"></span>
+                                             取消关注 </a></span>
+                                    </c:when>
+                                    <c:otherwise>
+                                        <a href="javascript:void(0)" class="btn btn-default btn-sm"  onclick="follow(this,'${sessionScope.current_user.id}','${sessionScope.current_user.name}')">
+                                            <span aria-hidden="true" class="octicon octicon-person"></span>
+                                            关注 </a></span>
+                                    </c:otherwise>
+                                 </c:choose>
                         </c:if>
-
                     </ul>
 
                     <div id="myTabContent" class="tab-content">
@@ -95,9 +103,10 @@
                                             </span>
                                             </p>
 
-                                            <div class="media-body-btn"><a href="javascript:void(0)"
-                                                                           class="btn btn-default btn-sm">
-                                                <span aria-hidden="true" class="octicon octicon-person"></span>取消关注 </a>
+                                            <div class="media-body-btn">
+                                                <a href="javascript:void(0)" class="btn btn-default btn-sm" onclick="follow(this,'${following.user.id}','${following.user.name}')">
+                                                    <span aria-hidden="true" class="octicon octicon-person"></span>
+                                                    取消关注 </a>
                                             </div>
 
                                         </div>
@@ -124,8 +133,8 @@
                                             </span>
                                             </p>
 
-                                            <div class="media-body-btn"><a href="javascript:void(0)"
-                                                                           class="btn btn-default btn-sm">
+                                            <div class="media-body-btn">
+                                                <a href="javascript:void(0)" class="btn btn-default btn-sm" onclick="follow(this,'${follower.user.id}','${follower.user.name}')">
                                                 <span aria-hidden="true" class="octicon octicon-person"></span>取消关注 </a>
                                             </div>
 

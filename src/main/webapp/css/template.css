@@ -4,11 +4,13 @@
 }
 
 #container-main {
-    /*margin-top: 50px;*/
+    margin-top: 10px;
 }
-.navbar {
 
+.navbar {
+    margin-bottom: 0;
 }
+
 .row {
     margin: 0;
 }

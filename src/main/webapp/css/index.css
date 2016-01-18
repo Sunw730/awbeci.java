@@ -3,7 +3,7 @@
     /*background: #071237 url(/images/octicons-bg.png) center repeat;*/
     background-image: linear-gradient(to left,#0E8666,#071237);
     /*background-image: linear-gradient(to right,#071237,#6F1919);*/
-    padding-top: 130px;
+    padding-top: 80px;
     padding-bottom: 80px;
     position: relative;
 }
@@ -31,6 +31,7 @@ main::before {
 #content-c h1{
     color:#fff;
     font-size: 70px;
+    margin: 0;
     box-sizing: border-box;
 }
 #content-c form{
