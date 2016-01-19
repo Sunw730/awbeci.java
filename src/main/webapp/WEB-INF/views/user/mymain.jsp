@@ -50,6 +50,12 @@
                             </time>
                         </li>
                     </ul>
+                    <div class="websiteinfo">
+                        <a href="${user.name}/navigation" class="btn btn-success btn-sm  btn-block">
+                            <span class="octicon octicon-rocket"></span>
+                            我的导航
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>

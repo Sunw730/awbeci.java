@@ -215,6 +215,7 @@ a.list-group-item:hover, a.list-group-item:focus {
     padding-top: 15px;
     padding-bottom: 15px;
     border-top: 1px solid #eee;
+    border-bottom: 1px solid #eee;
 }
 
 .userinfocontent li {
@@ -270,15 +271,26 @@ a.list-group-item:hover, a.list-group-item:focus {
     float: left;
     margin-bottom: 15px;
 }
-.media-body p span{
+
+.media-body p span {
     font-size: 12px;
     color: #767676;
 }
 
-.media-body-btn a span{
+.media-body-btn a span {
     margin-right: 5px;
 }
 
-.pull-right a span{
+.pull-right a span {
     margin-right: 5px;
+}
+.websiteinfo{
+    padding: 0 15px;
+}
+.websiteinfo a {
+    float: left;
+}
+
+.media-left a img {
+    border-radius: 6px;
 }
