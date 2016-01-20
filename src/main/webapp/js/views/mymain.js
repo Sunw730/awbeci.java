@@ -11,6 +11,9 @@ function follow(that, id, name) {
             if (data != 0) {
                 $that.empty().append('<span aria-hidden="true" class="octicon octicon-person"></span>取消关注')
             }
+            else {
+                location.href = "/login";
+            }
         });
 
     }
@@ -20,6 +23,8 @@ function follow(that, id, name) {
         }, function (data) {
             if (data != 0) {
                 $that.empty().append('<span aria-hidden="true" class="octicon octicon-person"></span>关注')
+            } else {
+                location.href = "/login";
             }
         });
 

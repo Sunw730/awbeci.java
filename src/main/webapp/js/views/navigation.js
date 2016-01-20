@@ -396,6 +396,8 @@ function follow(that, id, name) {
         }, function (data) {
             if (data != 0) {
                 $that.empty().append('<span aria-hidden="true" class="octicon octicon-person commonOction"></span>取消关注')
+            }else {
+                location.href = "/login";
             }
         });
 

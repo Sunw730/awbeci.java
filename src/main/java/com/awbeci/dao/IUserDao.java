@@ -35,6 +35,9 @@ public interface IUserDao {
     @Select("select * from user where name=#{name}")
     User selectUserByName(@Param("name") String name);
 
+    @Select("select * from user where email=#{email}")
+    User selectUserByEmail(@Param("email") String email);
+
     @Select("select * from user where id=#{id}")
     User selectUserById(@Param("id") String id);
 

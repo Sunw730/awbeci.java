@@ -75,7 +75,7 @@ function quickRegion() {
     if (password.length < 7) {
         Lobibox.notify('info', {
             title: 'awbeci提示',
-            msg: '请输入密码.'
+            msg: '请输入密码，至少使用一个小写字母，一个数字和七个字符。.'
         });
         return;
     }
@@ -84,13 +84,13 @@ function quickRegion() {
         password: password,
         email: email
     }, function (data) {
-        if (data == "1") {
+        if (data == "注册成功") {
             location.href = "/";
         }
         else {
             Lobibox.notify('info', {
                 title: 'awbeci提示',
-                msg: '注册失败.'
+                msg: data
             });
         }
     });

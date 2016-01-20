@@ -3,7 +3,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-    <title>新感觉,新体验(注意：这个页面现在不用了，不过我还是保留在这)</title>
+    <title>新感觉,新体验</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <link rel="stylesheet" href="css/index.css">
     <script type="application/javascript" src="/js/views/login.js"></script>

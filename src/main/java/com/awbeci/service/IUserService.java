@@ -24,4 +24,6 @@ public interface IUserService {
 
     int updatePassword(User user);
 
+    User selectUserByEmail(String email);
+
 }

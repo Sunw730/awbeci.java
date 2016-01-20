@@ -94,4 +94,8 @@ public class UserServiceImpl implements IUserService {
         return userDao.updatePassword(user);
     }
 
+    public User selectUserByEmail(String email) {
+        return userDao.selectUserByEmail(email);
+    }
+
 }

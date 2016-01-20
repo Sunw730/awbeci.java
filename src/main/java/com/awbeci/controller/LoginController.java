@@ -66,16 +66,28 @@ public class LoginController {
         Properties prop = myProperties.getPropertiesByName(properties);
         String avatarDeaultImg = prop.getProperty("avatarDeaultImg");
         user.setAvatarUrl(avatarDeaultImg + (++result) + ".png");
-        //todo:确保名称是唯一的
+
+        User haveUserByName = userService.selectUserByName(user.getName());
+        User haveUserByEmail = userService.selectUserByEmail(user.getEmail());
+        if (haveUserByName != null) {
+            return "该用户名已经被注册";
+        }
+        if (haveUserByEmail != null){
+            return "该邮箱已经被注册";
+        }
         boolean data = userService.region(user, properties);
         if (data) {
             //设置session
+            session.setAttribute("user", user);
             session.setAttribute("userName", user.getName());
             session.setAttribute("uid", user.getId());
-            return "1";
+            session.setAttribute("current_navigation_id", user.getId());
+            //设置session过期时间为一年
+            session.setMaxInactiveInterval(60 * 24 * 30);
+            return "注册成功";
         } else {
             //邮件发送失败
-            return "0";
+            return "注册失败";
         }
     }
 
