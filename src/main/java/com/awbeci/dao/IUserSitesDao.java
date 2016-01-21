@@ -22,7 +22,6 @@ public interface IUserSitesDao {
             "where id=#{id}")
     int updateSite(UserSites userSites);
 
-    //todo:根据点击次数>100查询数据，暂时先查询所有
     @Select("select * from usersites where uId=#{uId} limit 0,100")
     List<UserSites> getSitesByMostClick(String uId);
 

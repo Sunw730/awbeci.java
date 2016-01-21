@@ -20,9 +20,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
-/**
- * Created by zhangwei on 2015/10/8.
- */
 @Controller
 public class UserInfoController {
 

@@ -41,12 +41,10 @@ public class UserServiceImpl implements IUserService {
         newUser.setId(id.toString());
         newUser.setStatus(1);
         newUser.setEmailAble("0");
-        //todo:这个url如何设计，如：www.awbeci.com/u/1234456
-        newUser.setUrl(volidateEmailUrl + newUser.getName());
+        //newUser.setUrl(volidateEmailUrl + newUser.getName());
         newUser.setCreateDt(new Timestamp(System.currentTimeMillis()));
         newUser.setUpdateDt(new Timestamp(System.currentTimeMillis()));
 
-        //todo:这个要判断这个eamil是否已经被注册！！！
         boolean data = emailUtil.sendEmail(newUser.getEmail(), "来自Awbeci的注册邮件",
                 "<html><head></head><body><p>您好,<br>" +
                         "感谢您通过Awbeci注册.<br>" +

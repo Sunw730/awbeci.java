@@ -98,7 +98,7 @@ public class LoginController {
      * @param session
      * @return
      */
-    @RequestMapping(value = "validate/{id}", method = RequestMethod.GET)
+    @RequestMapping(value = "/validate/{id}", method = RequestMethod.GET)
     public String validate(@PathVariable String id, HttpSession session) {
         Object username = session.getAttribute("userName");
         if (id != null && !id.equals("") && username != null && !username.equals("")) {
@@ -106,8 +106,7 @@ public class LoginController {
             userService.validateEmail(id);
             return "validate/validateEmail";
         }
-        //todo:这里可以导向一个新页面：提示用户：请先登录！
-        return "redirect:/";
+        return "redirect:/login";
     }
 
     /**

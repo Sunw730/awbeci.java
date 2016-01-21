@@ -1,5 +1,6 @@
 package com.awbeci.controller;
 
+import com.awbeci.domain.User;
 import com.awbeci.domain.UserCategory;
 import com.awbeci.domain.UserSites;
 import com.awbeci.service.IUserCategoryService;
@@ -143,6 +144,9 @@ public class NavigationController {
             InputStream content = file.getInputStream();
             String properties = "aliyun-oss.properties";
             String filepath = userSitesService.uploadAvatar(properties, content, uid, avatarImg);
+            User user = (User) session.getAttribute("user");
+            user.setAvatarUrl(filepath);
+            session.setAttribute("user", user);
             return filepath;
         } catch (Exception ex) {
             log.error("上传头像失败：" + ex.getMessage());
@@ -202,7 +206,7 @@ public class NavigationController {
     public List<UserSites> querySiteByParam(String param, HttpSession session) {
         try {
             String uid = (String) session.getAttribute("current_navigation_id");
-            return userSitesService.querySiteByParam(param,uid);
+            return userSitesService.querySiteByParam(param, uid);
         } catch (Exception e) {
             log.debug("错误原因:" + e.getMessage());
             return null;

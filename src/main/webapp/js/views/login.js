@@ -4,6 +4,7 @@ $(function () {
         var password = $("#password").val();
         if (username.length <= 0) {
             Lobibox.notify('info', {
+                size:'mini',
                 title: 'awbeci提示',
                 msg: '请输入用户名.'
             });
@@ -11,6 +12,7 @@ $(function () {
         }
         if (password.length < 7) {
             Lobibox.notify('info', {
+                size:'mini',
                 title: 'awbeci提示',
                 msg: '请输入密码.'
             });
@@ -25,6 +27,7 @@ $(function () {
             }
             else {
                 Lobibox.notify('info', {
+                    size:'mini',
                     title: 'awbeci提示',
                     msg: '登录失败.'
                 });
@@ -60,6 +63,7 @@ function quickRegion() {
     var password = $("#password").val();
     if (username.length <= 0) {
         Lobibox.notify('info', {
+            size:'mini',
             title: 'awbeci提示',
             msg: '请输入用户名.'
         });
@@ -67,6 +71,7 @@ function quickRegion() {
     }
     if (email.length <= 0) {
         Lobibox.notify('info', {
+            size:'mini',
             title: 'awbeci提示',
             msg: '请输入邮箱.'
         });
@@ -74,6 +79,7 @@ function quickRegion() {
     }
     if (password.length < 7) {
         Lobibox.notify('info', {
+            size:'mini',
             title: 'awbeci提示',
             msg: '请输入密码，至少使用一个小写字母，一个数字和七个字符。.'
         });
@@ -89,6 +95,7 @@ function quickRegion() {
         }
         else {
             Lobibox.notify('info', {
+                size:'mini',
                 title: 'awbeci提示',
                 msg: data
             });
