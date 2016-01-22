@@ -13,29 +13,29 @@
     <div class="row">
         <div class="mycol-1">
             <div class="thumbnail">
-                <img src="${user.avatarUrl}" alt="${user.avatarUrl}">
+                <img src="${current_user.avatarUrl}" alt="${current_user.avatarUrl}">
                 <div class="caption">
-                    <div class="userinfoname">${user.name}</div>
-                    <div class="userinfonicename">${user.niceName}</div>
+                    <div class="userinfoname">${current_user.name}</div>
+                    <div class="userinfonicename">${current_user.niceName}</div>
                     <ul class="userinfocontent">
-                        <c:if test="${user.location != null}">
+                        <c:if test="${current_user.location != null}">
                             <li>
                                 <span aria-hidden="true" class="octicon octicon-location"></span>
-                                    ${user.location}
+                                    ${current_user.location}
                             </li>
                         </c:if>
 
                         <li>
                             <span aria-hidden="true" class="octicon octicon-mail"></span>
                             <a class="email"
-                               href="mailto:${user.email}" title="${user.email}">
-                                ${user.email}</a>
+                               href="mailto:${current_user.email}" title="${current_user.email}">
+                                ${current_user.email}</a>
                         </li>
-                        <c:if test="${user.url != null}">
+                        <c:if test="${current_user.url != null}">
                             <li>
                             <span aria-hidden="true"
                                   class="octicon octicon-link"></span>
-                                <a href="${user.url}" class="url" rel="nofollow me" title="${user.url}">${user.url}</a>
+                                <a href="${current_user.url}" class="url" rel="nofollow me" title="${current_user.url}">${current_user.url}</a>
                             </li>
                         </c:if>
 
@@ -43,15 +43,15 @@
                             <span aria-hidden="true" class="octicon octicon-clock"></span>
                             <span
                                     class="join-label">加入于 </span>
-                            <time class="join-date" datetime="<spring:eval expression="user.createDt" />" day="numeric"
+                            <time class="join-date" datetime="<spring:eval expression="current_user.createDt" />" day="numeric"
                                   is="local-time"
-                                  month="short" year="numeric" title="<spring:eval expression="user.createDt" />">
-                                <spring:eval expression="user.createDt"/>
+                                  month="short" year="numeric" title="<spring:eval expression="current_user.createDt" />">
+                                <spring:eval expression="current_user.createDt"/>
                             </time>
                         </li>
                     </ul>
                     <div class="websiteinfo">
-                        <a href="${user.name}/navigation" class="btn btn-success btn-sm  btn-block">
+                        <a href="${current_user.name}/navigation" class="btn btn-success btn-sm  btn-block">
                             <span class="octicon octicon-rocket"></span>
                             进入我的导航
                         </a>
@@ -118,7 +118,6 @@
                                         </div>
                                     </li>
                                 </c:forEach>
-
                             </ul>
                         </div>
                         <div class="tab-pane fade" id="follower">
@@ -138,12 +137,10 @@
                                                                 value="${follower.user.createDt}"></fmt:formatDate>
                                             </span>
                                             </p>
-
                                             <div class="media-body-btn">
                                                 <a href="javascript:void(0)" class="btn btn-default btn-sm" onclick="follow(this,'${follower.user.id}','${follower.user.name}')">
                                                 <span aria-hidden="true" class="octicon octicon-person"></span>取消关注 </a>
                                             </div>
-
                                         </div>
                                     </li>
                                 </c:forEach>

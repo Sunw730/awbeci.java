@@ -77,14 +77,14 @@ function updateProfile() {
         });
         return;
     }
-    if ($.trim(niceName).length == 0) {
-        Lobibox.notify('info', {
-            size: 'mini',
-            title: 'awbeci提示',
-            msg: '请输入昵称.'
-        });
-        return;
-    }
+    //if ($.trim(niceName).length == 0) {
+    //    Lobibox.notify('info', {
+    //        size: 'mini',
+    //        title: 'awbeci提示',
+    //        msg: '请输入昵称.'
+    //    });
+    //    return;
+    //}
     if ($.trim(email).length == 0) {
         Lobibox.notify('info', {
             size: 'mini',
@@ -220,6 +220,11 @@ function uploadAvator() {
                 if (data) {
                     $modal.modal('hide');
                     $avatar.attr('src', data);
+                    Lobibox.notify('info', {
+                        size: 'mini',
+                        title: 'awbeci提示',
+                        msg: '更新头像成功.'
+                    });
                 }
             },
             error: function () {

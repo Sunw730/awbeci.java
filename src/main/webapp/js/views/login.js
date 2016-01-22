@@ -4,7 +4,7 @@ $(function () {
         var password = $("#password").val();
         if (username.length <= 0) {
             Lobibox.notify('info', {
-                size:'mini',
+                size: 'mini',
                 title: 'awbeci提示',
                 msg: '请输入用户名.'
             });
@@ -12,7 +12,7 @@ $(function () {
         }
         if (password.length < 7) {
             Lobibox.notify('info', {
-                size:'mini',
+                size: 'mini',
                 title: 'awbeci提示',
                 msg: '请输入密码.'
             });
@@ -27,7 +27,7 @@ $(function () {
             }
             else {
                 Lobibox.notify('info', {
-                    size:'mini',
+                    size: 'mini',
                     title: 'awbeci提示',
                     msg: '登录失败.'
                 });
@@ -63,25 +63,43 @@ function quickRegion() {
     var password = $("#password").val();
     if (username.length <= 0) {
         Lobibox.notify('info', {
-            size:'mini',
+            size: 'mini',
             title: 'awbeci提示',
-            msg: '请输入用户名.'
+            msg: '请输入用户名'
+        });
+        return;
+    }
+    var reg = /^[a-zA-Z0-9_]+$/;
+    if (!reg.test(username)) {
+        Lobibox.notify('info', {
+            size: 'mini',
+            title: 'awbeci提示',
+            msg: '用户名只能由字母或者数字组成'
         });
         return;
     }
     if (email.length <= 0) {
         Lobibox.notify('info', {
-            size:'mini',
+            size: 'mini',
             title: 'awbeci提示',
             msg: '请输入邮箱.'
         });
         return;
     }
-    if (password.length < 7) {
+    reg=/^\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/;
+    if(!reg.test(email)){
         Lobibox.notify('info', {
-            size:'mini',
+            size: 'mini',
             title: 'awbeci提示',
-            msg: '请输入密码，至少使用一个小写字母，一个数字和七个字符。.'
+            msg: '您输入的邮箱有误，请重新输入.'
+        });
+        return;
+    }
+    if ($.trim(password).length < 7) {
+        Lobibox.notify('info', {
+            size: 'mini',
+            title: 'awbeci提示',
+            msg: '请输入密码，至少使用一个小写字母，一个数字和七个字符。'
         });
         return;
     }
@@ -95,7 +113,7 @@ function quickRegion() {
         }
         else {
             Lobibox.notify('info', {
-                size:'mini',
+                size: 'mini',
                 title: 'awbeci提示',
                 msg: data
             });

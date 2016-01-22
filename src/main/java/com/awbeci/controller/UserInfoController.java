@@ -41,7 +41,7 @@ public class UserInfoController {
             session.setAttribute("current_user", user);
             List<UserFollow> followingUsers = userFollowService.getFollowingByUid(user.getId());
             List<UserFollow> followers = userFollowService.getFollowerByUid(user.getId());
-            model.addAttribute("user", user);
+            model.addAttribute("current_user", user);
             model.addAttribute("followings", followingUsers);
             model.addAttribute("followingsCount", followingUsers.size());
 
