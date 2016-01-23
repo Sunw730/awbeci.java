@@ -108,13 +108,22 @@
                                                                 value="${following.user.createDt}"></fmt:formatDate>
                                             </span>
                                             </p>
-
-                                            <div class="media-body-btn">
-                                                <a href="javascript:void(0)" class="btn btn-default btn-sm" onclick="follow(this,'${following.user.id}','${following.user.name}')">
-                                                    <span aria-hidden="true" class="octicon octicon-person"></span>
-                                                    取消关注 </a>
-                                            </div>
-
+                                            <c:choose>
+                                                <c:when test="${sessionScope.user.id == following.uid}">
+                                                    <div class="media-body-btn">
+                                                        <a href="javascript:void(0)" class="btn btn-default btn-sm" onclick="follow(this,'${following.user.id}','${following.user.name}')">
+                                                            <span aria-hidden="true" class="octicon octicon-person"></span>
+                                                            取消关注 </a>
+                                                    </div>
+                                                </c:when>
+                                                <c:otherwise>
+                                                    <div class="media-body-btn">
+                                                        <a href="javascript:void(0)" class="btn btn-default btn-sm" onclick="follow(this,'${following.user.id}','${following.user.name}')">
+                                                            <span aria-hidden="true" class="octicon octicon-person"></span>
+                                                            关注 </a>
+                                                    </div>
+                                                </c:otherwise>
+                                            </c:choose>
                                         </div>
                                     </li>
                                 </c:forEach>
@@ -137,10 +146,23 @@
                                                                 value="${follower.user.createDt}"></fmt:formatDate>
                                             </span>
                                             </p>
-                                            <div class="media-body-btn">
-                                                <a href="javascript:void(0)" class="btn btn-default btn-sm" onclick="follow(this,'${follower.user.id}','${follower.user.name}')">
-                                                <span aria-hidden="true" class="octicon octicon-person"></span>取消关注 </a>
-                                            </div>
+                                            <c:choose>
+                                            <c:when test="${sessionScope.user.id == follower.followId}">
+                                                <div class="media-body-btn">
+                                                    <a href="javascript:void(0)" class="btn btn-default btn-sm" onclick="follow(this,'${follower.user.id}','${follower.user.name}')">
+                                                        <span aria-hidden="true" class="octicon octicon-person"></span>
+                                                        取消关注 </a>
+                                                </div>
+                                            </c:when>
+                                            <c:otherwise>
+                                                <div class="media-body-btn">
+                                                    <a href="javascript:void(0)" class="btn btn-default btn-sm" onclick="follow(this,'${follower.user.id}','${follower.user.name}')">
+                                                        <span aria-hidden="true" class="octicon octicon-person"></span>
+                                                        关注 </a>
+                                                </div>
+                                            </c:otherwise>
+                                            </c:choose>
+
                                         </div>
                                     </li>
                                 </c:forEach>
