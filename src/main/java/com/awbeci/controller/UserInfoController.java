@@ -51,8 +51,10 @@ public class UserInfoController {
             if (uidObj != null) {
                 String uid = uidObj.toString();
                 model.addAttribute("isme", user.getId().equals(uid));
-                List<UserFollow> userFollows = userFollowService.getMyFollower(uid, user.getId());
-                model.addAttribute("hadFollow", userFollows.size() > 0);
+                //List<UserFollow> userFollows = userFollowService.getMyFollower(uid, user.getId());
+                List<UserFollow> myFollowingUsers = userFollowService.getFollowingByUid(uid);
+                //model.addAttribute("hadFollow", userFollows.size() > 0);
+                model.addAttribute("myFollowings", myFollowingUsers);
             }
             return "user/mymain";
         }
@@ -151,6 +153,7 @@ public class UserInfoController {
 
     /**
      * 取消关注
+     *
      * @param followid
      * @param session
      * @return

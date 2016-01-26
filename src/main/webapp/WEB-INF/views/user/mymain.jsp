@@ -1,6 +1,7 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -35,7 +36,8 @@
                             <li>
                             <span aria-hidden="true"
                                   class="octicon octicon-link"></span>
-                                <a href="${current_user.url}" class="url" rel="nofollow me" title="${current_user.url}">${current_user.url}</a>
+                                <a href="${current_user.url}" class="url" rel="nofollow me"
+                                   title="${current_user.url}">${current_user.url}</a>
                             </li>
                         </c:if>
 
@@ -43,9 +45,11 @@
                             <span aria-hidden="true" class="octicon octicon-clock"></span>
                             <span
                                     class="join-label">加入于 </span>
-                            <time class="join-date" datetime="<spring:eval expression="current_user.createDt" />" day="numeric"
+                            <time class="join-date" datetime="<spring:eval expression="current_user.createDt" />"
+                                  day="numeric"
                                   is="local-time"
-                                  month="short" year="numeric" title="<spring:eval expression="current_user.createDt" />">
+                                  month="short" year="numeric"
+                                  title="<spring:eval expression="current_user.createDt" />">
                                 <spring:eval expression="current_user.createDt"/>
                             </time>
                         </li>
@@ -73,20 +77,33 @@
                                 关注者<span class="badge">${followersCount}</span>
                             </a></li>
                          <span class="pull-right">
-                             <c:if test="${sessionScope.uid==null  || !isme}">
+                             <c:if test="${sessionScope.uid == null  || !isme}">
+                                 <!-- 设置判断标签，下同 -->
+                                 <c:set value="no" var="followFlag"></c:set>
+                                 <c:forEach items="${myFollowings}" var="myFollowing">
+                                     <c:if test="${current_user.id == myFollowing.followId}">
+                                         <!-- 如果当前用户id等于我所关注的用户id，那么设置变量yes，下同 -->
+                                         <c:set value="yes" var="followFlag"></c:set>
+                                     </c:if>
+                                 </c:forEach>
+                                 <!-- 如果=yes说明已经关注了，下同 -->
                                  <c:choose>
-                                    <c:when test="${hadFollow}">
-                                         <a href="javascript:void(0)" class="btn btn-default btn-sm"  onclick="follow(this,'${sessionScope.current_user.id}','${sessionScope.current_user.name}')">
-                                             <span aria-hidden="javascript:void(0)true" class="octicon octicon-person"></span>
-                                             取消关注 </a></span>
-                                    </c:when>
-                                    <c:otherwise>
-                                        <a href="javascript:void(0)" class="btn btn-default btn-sm"  onclick="follow(this,'${sessionScope.current_user.id}','${sessionScope.current_user.name}')">
-                                            <span aria-hidden="true" class="octicon octicon-person"></span>
-                                            关注 </a></span>
-                                    </c:otherwise>
+                                     <c:when test="${fn:contains(followFlag, 'yes')}">
+                                         <a href="javascript:void(0)" class="btn btn-default btn-sm"
+                                            onclick="follow(this,'${sessionScope.current_user.id}','${sessionScope.current_user.name}')">
+                                             <span aria-hidden="javascript:void(0)true"
+                                                   class="octicon octicon-person"></span>
+                                             取消关注 </a>
+                                     </c:when>
+                                     <c:otherwise>
+                                         <a href="javascript:void(0)" class="btn btn-default btn-sm"
+                                            onclick="follow(this,'${sessionScope.current_user.id}','${sessionScope.current_user.name}')">
+                                             <span aria-hidden="true" class="octicon octicon-person"></span>
+                                             关注 </a>
+                                     </c:otherwise>
                                  </c:choose>
-                        </c:if>
+                             </c:if>
+                        </span>
                     </ul>
 
                     <div id="myTabContent" class="tab-content">
@@ -108,22 +125,32 @@
                                                                 value="${following.user.createDt}"></fmt:formatDate>
                                             </span>
                                             </p>
-                                            <c:choose>
-                                                <c:when test="${sessionScope.user.id == following.uid}">
-                                                    <div class="media-body-btn">
-                                                        <a href="javascript:void(0)" class="btn btn-default btn-sm" onclick="follow(this,'${following.user.id}','${following.user.name}')">
-                                                            <span aria-hidden="true" class="octicon octicon-person"></span>
+                                            <div class="media-body-btn">
+                                                <c:set value="no" var="followFlag"></c:set>
+                                                <c:forEach items="${myFollowings}" var="myFollowing">
+                                                    <c:if test="${following.followId == myFollowing.followId}">
+                                                        <c:set value="yes" var="followFlag"></c:set>
+                                                    </c:if>
+                                                </c:forEach>
+                                                <c:choose>
+                                                    <c:when test="${fn:contains(followFlag, 'yes')}">
+                                                        <a href="javascript:void(0)" class="btn btn-default btn-sm"
+                                                           onclick="follow(this,'${following.user.id}','${following.user.name}')">
+                                                            <span aria-hidden="true"
+                                                                  class="octicon octicon-person"></span>
                                                             取消关注 </a>
-                                                    </div>
-                                                </c:when>
-                                                <c:otherwise>
-                                                    <div class="media-body-btn">
-                                                        <a href="javascript:void(0)" class="btn btn-default btn-sm" onclick="follow(this,'${following.user.id}','${following.user.name}')">
-                                                            <span aria-hidden="true" class="octicon octicon-person"></span>
+                                                    </c:when>
+                                                    <c:when test="${following.followId == sessionScope.uid}">
+                                                    </c:when>
+                                                    <c:otherwise>
+                                                        <a href="javascript:void(0)" class="btn btn-default btn-sm"
+                                                           onclick="follow(this,'${following.user.id}','${following.user.name}')">
+                                                            <span aria-hidden="true"
+                                                                  class="octicon octicon-person"></span>
                                                             关注 </a>
-                                                    </div>
-                                                </c:otherwise>
-                                            </c:choose>
+                                                    </c:otherwise>
+                                                </c:choose>
+                                            </div>
                                         </div>
                                     </li>
                                 </c:forEach>
@@ -146,23 +173,34 @@
                                                                 value="${follower.user.createDt}"></fmt:formatDate>
                                             </span>
                                             </p>
-                                            <c:choose>
-                                            <c:when test="${sessionScope.user.id == follower.followId}">
-                                                <div class="media-body-btn">
-                                                    <a href="javascript:void(0)" class="btn btn-default btn-sm" onclick="follow(this,'${follower.user.id}','${follower.user.name}')">
-                                                        <span aria-hidden="true" class="octicon octicon-person"></span>
-                                                        取消关注 </a>
-                                                </div>
-                                            </c:when>
-                                            <c:otherwise>
-                                                <div class="media-body-btn">
-                                                    <a href="javascript:void(0)" class="btn btn-default btn-sm" onclick="follow(this,'${follower.user.id}','${follower.user.name}')">
-                                                        <span aria-hidden="true" class="octicon octicon-person"></span>
-                                                        关注 </a>
-                                                </div>
-                                            </c:otherwise>
-                                            </c:choose>
 
+                                            <div class="media-body-btn">
+                                                <c:set value="no" var="followFlag"></c:set>
+                                                <c:forEach items="${myFollowings}" var="myFollowing">
+                                                    <c:if test="${follower.uid == myFollowing.followId}">
+                                                        <c:set value="yes" var="followFlag"></c:set>
+                                                    </c:if>
+                                                </c:forEach>
+                                                <c:choose>
+                                                    <c:when test="${fn:contains(followFlag, 'yes')}">
+                                                        <a href="javascript:void(0)" class="btn btn-default btn-sm"
+                                                           onclick="follow(this,'${follower.user.id}','${follower.user.name}')">
+                                                            <span aria-hidden="true"
+                                                                  class="octicon octicon-person"></span>
+                                                            取消关注 </a>
+                                                    </c:when>
+                                                    <c:when test="${follower.uid == sessionScope.uid}">
+                                                    </c:when>
+                                                    <c:otherwise>
+                                                        <a href="javascript:void(0)" class="btn btn-default btn-sm"
+                                                           onclick="follow(this,'${follower.user.id}','${follower.user.name}')">
+                                                            <span aria-hidden="true"
+                                                                  class="octicon octicon-person"></span>
+                                                            关注 </a>
+                                                    </c:otherwise>
+                                                </c:choose>
+
+                                            </div>
                                         </div>
                                     </li>
                                 </c:forEach>
