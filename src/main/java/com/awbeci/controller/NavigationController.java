@@ -31,10 +31,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.Iterator;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
 
 @Controller
 public class NavigationController {
@@ -169,14 +166,24 @@ public class NavigationController {
 
     @RequestMapping(value = "/json/deleteCategory.json", method = RequestMethod.POST)
     @ResponseBody
-    public int deleteCategory(String id, HttpSession session) {
+    public Map<String, Object> deleteCategory(String id, HttpSession session) {
         String uid = (String) session.getAttribute("uid");
+        Map<String, Object> map = new HashMap<String, Object>();
         if (uid != null) {
-            int val = userCategoryService.deleteCategory(id);
-            return val;
+            List userSites = userSitesService.getUserSitesByCategoryId(id);
+            if (userSites.size() > 0) {
+                map.put("success", true);
+                map.put("msg","该分类下存在网址，请先删除网址再删除该分类");
+            } else {
+                int val = userCategoryService.deleteCategory(id);
+                map.put("success", true);
+                map.put("msg","删除成功");
+            }
         } else {
-            return 0;
+            map.put("success", false);
+            map.put("msg","请先登录");
         }
+        return map;
     }
 
     @RequestMapping(value = "/json/getSiteByCategoryId.json", method = RequestMethod.POST)

@@ -55,8 +55,7 @@
                         </li>
                     </ul>
                     <div class="websiteinfo">
-                        <a href="${current_user.name}/navigation" class="btn btn-success btn-sm  btn-block">
-                            <span class="octicon octicon-rocket"></span>
+                        <a href="${current_user.name}/navigation" class="btn btn-success  btn-block">
                             进入我的导航
                         </a>
                     </div>

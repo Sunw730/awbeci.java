@@ -19,4 +19,6 @@ public interface IUserSitesService {
     List<UserSites> querySiteByParam(String param,String uid);
 
     String uploadAvatar(String properties,InputStream content,String uid,String avatarImgUrl);
+
+    List<UserSites> getUserSitesByCategoryId(String categoryId);
 }

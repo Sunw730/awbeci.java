@@ -88,8 +88,8 @@
                         </select>
                     </div>
                     <div class="categorytoolbar">
-                        <button type="button" class="btn btn-success btn-sm" onclick="saveCategory()">确定</button>
-                        <button type="button" class="btn btn-danger btn-sm" onclick="canceleditNav()">取消</button>
+                        <button type="button" class="btn btn-success" onclick="saveCategory()"><span class="octicon octicon-check myoction"></span>确定</button>
+                        <button type="button" class="btn btn-danger" onclick="canceleditNav()"><span class="octicon octicon-x myoction"></span>取消</button>
                     </div>
                 </div>
 
@@ -138,8 +138,8 @@
                             </select>
                         </div>
                         <div class="sitetoolbar  form-group-sm">
-                            <button type="button" class="btn btn-success btn-sm" onclick="saveSite()">确定</button>
-                            <button type="button" class="btn btn-danger btn-sm" onclick="canceleditLink()">取消</button>
+                            <button type="button" class="btn btn-success" onclick="saveSite()"><span class="octicon octicon-check myoction"></span>确定</button>
+                            <button type="button" class="btn btn-danger" onclick="canceleditLink()"><span class="octicon octicon-x myoction"></span>取消</button>
                         </div>
 
                     </div>

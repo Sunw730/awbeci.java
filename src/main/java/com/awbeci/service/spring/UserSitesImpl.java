@@ -158,4 +158,8 @@ public class UserSitesImpl implements IUserSitesService {
         }
         return null;
     }
+
+    public List<UserSites> getUserSitesByCategoryId(String categoryId) {
+        return userSitesDao.getUserSitesByCategoryId(categoryId);
+    }
 }

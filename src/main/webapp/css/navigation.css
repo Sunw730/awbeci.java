@@ -364,5 +364,8 @@ a.list-group-item:hover {
 
 .typeoction{
     color: #000;
+    margin-right: 10px;
+}
+.myoction{
     margin-right: 5px;
 }

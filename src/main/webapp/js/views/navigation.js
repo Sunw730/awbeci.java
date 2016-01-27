@@ -82,7 +82,7 @@ function initCategory() {
                 for (var j = 0; j < data.length; j++) {
                     if (data[j].pid == data[i].id) {
                         html += '<li class="list-item">';
-                        html += '<a class="categoryChild" href="javascript:void(0)" id="' + data[j].id + '" pid="' + data[j].pid + '">' + data[j].name + '</a>';
+                        html += '<a class="categoryChild" href="javascript:void(0)" id="' + data[j].id + '" pid="' + data[j].pid + '"><span class="octicon octicon-repo typeoction"></span>' + data[j].name + '</a>';
                         html += '<span class="navedit navediticon octicon octicon-pencil"></span>';
                         html += '<span class="navedit navdelicon octicon octicon-x"></span>';
                         html += '</li>';
@@ -180,7 +180,12 @@ function saveCategory() {
     var categoryname = $('#categoryName').val();
     var category = $('#categoryType').val();
     if ($.trim(categoryname).length == 0) {
-        return alert('请输入完整');
+        Lobibox.notify('info', {
+            size: 'mini',
+            title: 'awbeci提示',
+            msg: '请输入完整.'
+        });
+        return;
     }
     //todo:注意：添加的时候不能允许名称重复
     $.post('/json/saveCategory.json', {
@@ -194,7 +199,12 @@ function saveCategory() {
             initCategory();
         }
         else {
-            alert('添加失败');
+            Lobibox.notify('info', {
+                size: 'mini',
+                title: 'awbeci提示',
+                msg: '添加失败.'
+            });
+            return;
         }
     }, 'json');
 }
@@ -224,10 +234,19 @@ function saveSite() {
     var siteicon = $('#siteid').attr('icon');
     if ($.trim(sitename).length == 0 ||
         $.trim(siteurl).length == 0) {
-        return alert('请输入完整');
+        Lobibox.notify('info', {
+            size: 'mini',
+            title: 'awbeci提示',
+            msg: '请输入完整.'
+        });
+        return;
     }
     if (!isURL(siteurl)) {
-        alert('您输入的URL不合法，请重新输入');
+        Lobibox.notify('info', {
+            size: 'mini',
+            title: 'awbeci提示',
+            msg: '您输入的URL不合法，请重新输入.'
+        });
         return;
     }
     if (siteurl.search("http") == -1) {
@@ -253,7 +272,12 @@ function saveSite() {
             }
         }
         else {
-            alert('添加失败');
+            Lobibox.notify('info', {
+                size: 'mini',
+                title: 'awbeci提示',
+                msg: '添加失败.'
+            });
+            return;
         }
     }, 'json');
 }
@@ -303,21 +327,41 @@ function editDelCategory() {
         var parents = $(this).parent().parent().find('.list-item');
         var parent = $(this).parent();
         if (parents.length > 0 && !parent.hasClass('list-item')) {
-            return alert('该分类下存在子分类，请先删除子分类，再删除此分类');
+            Lobibox.notify('info', {
+                size: 'mini',
+                title: 'awbeci提示',
+                msg: '该分类下存在子分类，请先删除子分类，再删除此分类.'
+            });
+            return;
         }
-        var val = confirm("您确定删除此分类？");
-        if (val) {
-            $.post('/json/deleteCategory.json', {
-                id: $(this).parent().children('a').attr('id')
-            }, function (data) {
-                if (data != 0) {
-                    initCategory();
+        Lobibox.confirm({
+            title: 'awbeci提示',
+            msg: "您确定删除此分类？",
+            callback: function ($this, type, ev) {
+                if (type === 'yes') {
+                    $.post('/json/deleteCategory.json', {
+                        id: $(this).parent().children('a').attr('id')
+                    }, function (data) {
+                        if (data.success) {
+                            initCategory();
+                            Lobibox.notify('info', {
+                                size: 'mini',
+                                title: 'awbeci提示',
+                                msg: data.msg
+                            });
+                        }
+                        else {
+                            Lobibox.notify('info', {
+                                size: 'mini',
+                                title: 'awbeci提示',
+                                msg: data.msg
+                            });
+                        }
+                    }, 'json');
                 }
-                else {
-                    alert('删除失败');
-                }
-            }, 'json');
-        }
+            }
+        });
+
     });
 }
 
@@ -340,29 +384,40 @@ function editDelSite() {
     });
 
     $('.linkdelicon').on('click', function (event, data) {
-        var val = confirm("您确定删除此网址？");
         var iconurl = $(this).parent().children('a').children('img').attr('src');
         if (iconurl.search('6000.png') != -1) {
             iconurl = '';
         }
-        if (val) {
-            $.post('/json/deleteSite.json', {
-                id: $(this).parent().children('a').attr('id'),
-                iconurl: iconurl
-            }, function (data) {
-                if (data != 0) {
-                    if (clickCategoryId == null || clickCategoryId == '') {
-                        initSite();
-                    }
-                    else {
-                        clickCategoryShowSite();
-                    }
+
+        Lobibox.confirm({
+            title: 'awbeci提示',
+            msg: "您确定删除此网址？",
+            callback: function ($this, type, ev) {
+                if (type === 'yes') {
+                    $.post('/json/deleteSite.json', {
+                        id: $(this).parent().children('a').attr('id'),
+                        iconurl: iconurl
+                    }, function (data) {
+                        if (data != 0) {
+                            if (clickCategoryId == null || clickCategoryId == '') {
+                                initSite();
+                            }
+                            else {
+                                clickCategoryShowSite();
+                            }
+                        }
+                        else {
+                            Lobibox.notify('info', {
+                                size: 'mini',
+                                title: 'awbeci提示',
+                                msg: '删除失败.'
+                            });
+                            return;
+                        }
+                    }, 'json');
                 }
-                else {
-                    alert('删除失败');
-                }
-            }, 'json');
-        }
+            }
+        });
     });
 }
 
@@ -396,7 +451,7 @@ function follow(that, id, name) {
         }, function (data) {
             if (data != 0) {
                 $that.empty().append('<span aria-hidden="true" class="octicon octicon-person commonOction"></span>取消关注')
-            }else {
+            } else {
                 location.href = "/login";
             }
         });

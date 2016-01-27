@@ -30,4 +30,8 @@ public interface IUserSitesDao {
 
     @Select("select * from usersites where name like '%${param}%' and uId=#{uid}")
     List<UserSites> querySiteByParam(@Param("param") String param, @Param("uid") String uid);
+
+
+    @Select("select * from usersites where categoryId=#{categoryId}")
+    List<UserSites> getUserSitesByCategoryId(@Param("categoryId") String categoryId);
 }
