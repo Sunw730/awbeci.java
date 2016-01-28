@@ -50,8 +50,9 @@
                     <ul class="nav navbar-nav navbar-left">
                         <li><a href="/" class="header-nav-link">首页</a></li>
                         <li><a href="/${sessionScope.userName}" class="header-nav-link">个人主页</a></li>
-                        <li><a href="/${sessionScope.userName}/navigation" class="header-nav-link">我的导航</a></li>
+                        <li><a href="/search" class="header-nav-link">搜索</a></li>
                         <li><a href="/aboutme" class="header-nav-link">关于</a></li>
+                        <li><a href="/status" class="header-nav-link">功能更新</a></li>
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
                         <li class="dropdown">
@@ -62,7 +63,7 @@
                                         class="caret"></span></span></a>
                             <ul class="dropdown-menu">
                                 <li><a href="javascript:void(0)">当前登入账号：
-                                    <br>${sessionScope.userName}</a></li>
+                                    <br><strong>${sessionScope.userName}</strong></a></li>
                                 <li role="separator" class="divider"></li>
                                 <li><a href="/${sessionScope.userName}">个人主页</a></li>
                                 <li><a href="/${sessionScope.userName}/navigation">我的导航</a></li>

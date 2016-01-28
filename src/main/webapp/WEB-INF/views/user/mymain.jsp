@@ -36,7 +36,7 @@
                             <li>
                             <span aria-hidden="true"
                                   class="octicon octicon-link"></span>
-                                <a href="${current_user.url}" class="url" rel="nofollow me"
+                                <a href="${current_user.url}" class="url" target="_blank" rel="nofollow me"
                                    title="${current_user.url}">${current_user.url}</a>
                             </li>
                         </c:if>
@@ -55,7 +55,8 @@
                         </li>
                     </ul>
                     <div class="websiteinfo">
-                        <a href="${current_user.name}/navigation" class="btn btn-success  btn-block">
+                        <a href="${current_user.name}/navigation" class="btn btn-primary  btn-block abc-btn">
+                            <span class="octicon octicon-repo"></span>
                             进入我的导航
                         </a>
                     </div>
@@ -88,14 +89,14 @@
                                  <!-- 如果=yes说明已经关注了，下同 -->
                                  <c:choose>
                                      <c:when test="${fn:contains(followFlag, 'yes')}">
-                                         <a href="javascript:void(0)" class="btn btn-default btn-sm"
+                                         <a href="javascript:void(0)" class="btn btn-default abc-btn"
                                             onclick="follow(this,'${sessionScope.current_user.id}','${sessionScope.current_user.name}')">
                                              <span aria-hidden="javascript:void(0)true"
                                                    class="octicon octicon-person"></span>
                                              取消关注 </a>
                                      </c:when>
                                      <c:otherwise>
-                                         <a href="javascript:void(0)" class="btn btn-default btn-sm"
+                                         <a href="javascript:void(0)" class="btn btn-default abc-btn"
                                             onclick="follow(this,'${sessionScope.current_user.id}','${sessionScope.current_user.name}')">
                                              <span aria-hidden="true" class="octicon octicon-person"></span>
                                              关注 </a>

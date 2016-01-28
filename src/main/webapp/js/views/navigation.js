@@ -138,6 +138,7 @@ function bindCategories(id) {
 }
 
 //绑定网址
+//todo:
 function bindSite() {
     $('#siteType').empty();
     $.ajaxSettings.async = false;
@@ -323,6 +324,7 @@ function editDelCategory() {
     });
 
     $('.navdelicon').on('click', function (event) {
+        var $that = $(this);
         event.stopPropagation();
         var parents = $(this).parent().parent().find('.list-item');
         var parent = $(this).parent();
@@ -337,10 +339,19 @@ function editDelCategory() {
         Lobibox.confirm({
             title: 'awbeci提示',
             msg: "您确定删除此分类？",
+            buttons: {
+                yes: {
+                    text: '确定'
+                },
+                no: {
+                    text: '取消'
+                }
+            },
             callback: function ($this, type, ev) {
                 if (type === 'yes') {
+                    var id = $that.parent().children('a').attr('id');
                     $.post('/json/deleteCategory.json', {
-                        id: $(this).parent().children('a').attr('id')
+                        id: id
                     }, function (data) {
                         if (data.success) {
                             initCategory();
@@ -361,7 +372,6 @@ function editDelCategory() {
                 }
             }
         });
-
     });
 }
 
@@ -384,6 +394,7 @@ function editDelSite() {
     });
 
     $('.linkdelicon').on('click', function (event, data) {
+        var $that = $(this);
         var iconurl = $(this).parent().children('a').children('img').attr('src');
         if (iconurl.search('6000.png') != -1) {
             iconurl = '';
@@ -392,10 +403,18 @@ function editDelSite() {
         Lobibox.confirm({
             title: 'awbeci提示',
             msg: "您确定删除此网址？",
+            buttons: {
+                yes: {
+                    text: '确定'
+                },
+                no: {
+                    text: '取消'
+                }
+            },
             callback: function ($this, type, ev) {
                 if (type === 'yes') {
                     $.post('/json/deleteSite.json', {
-                        id: $(this).parent().children('a').attr('id'),
+                        id: $that.parent().children('a').attr('id'),
                         iconurl: iconurl
                     }, function (data) {
                         if (data != 0) {

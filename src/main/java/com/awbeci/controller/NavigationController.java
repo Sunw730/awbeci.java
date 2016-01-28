@@ -172,7 +172,7 @@ public class NavigationController {
         if (uid != null) {
             List userSites = userSitesService.getUserSitesByCategoryId(id);
             if (userSites.size() > 0) {
-                map.put("success", true);
+                map.put("success", false);
                 map.put("msg","该分类下存在网址，请先删除网址再删除该分类");
             } else {
                 int val = userCategoryService.deleteCategory(id);
