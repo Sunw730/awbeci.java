@@ -124,7 +124,7 @@ function clickCategoryShowSite() {
 //绑定类型
 function bindCategories(id) {
     $('#categoryType').empty();
-    $.ajaxSettings.async = false;
+    //$.ajaxSettings.async = false;
     $.post('/json/getCategoryParent.json', function (data) {
         var html = '<option value="">主分类</option>';
         for (var i = 0; i < data.length; i++) {
@@ -134,6 +134,7 @@ function bindCategories(id) {
         }
         $('#categoryType').append(html);
         $('#categoryType').selectpicker('refresh');
+        $('.editnavdlg').addClass('show')
     }, 'json');
 }
 
@@ -141,22 +142,35 @@ function bindCategories(id) {
 //todo:
 function bindSite() {
     $('#siteType').empty();
-    $.ajaxSettings.async = false;
+    //$.ajaxSettings.async = false;
     $.post('/json/getCategoryChild.json', function (data) {
         var html = '';
+        var flag = false;
         for (var i = 0; i < data.length; i++) {
             if (data[i].pid == '' || data[i].pid == null) {
                 html += '<optgroup label="' + data[i].name + '">'
                 for (var j = 0; j < data.length; j++) {
                     if (data[j].pid == data[i].id) {
+                        flag = true;
                         html += '<option value="' + data[j].id + '">' + data[j].name + '</option>'
                     }
                 }
                 html += '</optgroup>'
             }
         }
-        $('#siteType').append(html);
-        $('#siteType').selectpicker('refresh');
+        if (!flag) {
+            Lobibox.notify('info', {
+                size: 'mini',
+                title: 'awbeci提示',
+                msg: '请先在主分类下面添加子分类再添加网址.'
+            });
+            return;
+        }
+        else {
+            $('#siteType').append(html);
+            $('#siteType').selectpicker('refresh');
+            $('.editlinkdlg').addClass('show');
+        }
     }, 'json');
 }
 
@@ -171,7 +185,7 @@ function addcategory() {
         $('.editnavdlg').css({
             left: '1px',
             top: positon.top + 29
-        }).addClass('show');
+        });
         bindCategories();
     });
 }
@@ -223,7 +237,7 @@ function addSite() {
         $('.editlinkdlg').css({
             left: $positon.left - 221,
             top: $positon.top + 25
-        }).addClass('show');
+        });
         bindSite('');
     })
 }
@@ -319,7 +333,7 @@ function editDelCategory() {
         $('.editnavdlg').css({
             left: positon.left,
             top: positon.top + 35
-        }).addClass('show');
+        });
         event.stopPropagation();
     });
 
@@ -386,7 +400,7 @@ function editDelSite() {
         $('.editlinkdlg').css({
             left: $positon.left + 6,
             top: $positon.top + 39
-        }).addClass('show');
+        });
         bindSite('');
         $('#siteid').val($(this).parent().children('a').attr('id'));
         $('#siteid').attr('icon', $(this).parent().children('a').children('img').attr('src'))
