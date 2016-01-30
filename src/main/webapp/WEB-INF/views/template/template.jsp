@@ -102,7 +102,7 @@
 <sitemesh:write property="body"/>
 <footer>
     <div class="myclearfix">
-        <span>©2014-2015 awbeci <a href="http://www.miitbeian.gov.cn/">皖ICP备14011269号-2</a></span>
+        <span>©2014-2016 awbeci <a href="http://www.miitbeian.gov.cn/">皖ICP备14011269号-2</a></span>
     </div>
 </footer>
 <!-- /menu -->

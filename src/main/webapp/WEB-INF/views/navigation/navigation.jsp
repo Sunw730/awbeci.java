@@ -4,12 +4,10 @@
 <html>
 <head>
     <title>我的导航</title>
-    <link href="/js/bootstrap-treeview/src/css/bootstrap-treeview.css" rel="stylesheet">
     <link href="/js/bootstrap-select/css/bootstrap-select.min.css" rel="stylesheet">
     <link href="/js/github/github.css" rel="stylesheet">
     <link href="/css/navigation.css" rel="stylesheet">
     <script type="text/javascript" src="/js/dragsort-0.5.2/jquery.dragsort-0.5.2.min.js"></script>
-    <script type="text/javascript" src="/js/bootstrap-treeview/src/js/bootstrap-treeview.js"></script>
     <script type="text/javascript" src="/js/bootstrap-select/js/bootstrap-select.min.js"></script>
     <script type="text/javascript" src="/js/github/github.js"></script>
     <script type="text/javascript" src="/js/views/navigation.js"></script>

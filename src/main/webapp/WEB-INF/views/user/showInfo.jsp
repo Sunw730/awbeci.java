@@ -51,7 +51,7 @@
 
                                         上传新头像
                                     </label>
-                                    <p>上传后你可以通过拖动新头像来设置</p>
+                                    <p>上传后可通过拖动新头像设置</p>
                                 </div>
                             </dd>
                         </dl>
@@ -81,7 +81,7 @@
                             </dd>
                         </dl>
                         <dl class="form-group clearboth">
-                            <dt><label>地址位置</label></dt>
+                            <dt><label>地理位置</label></dt>
                             <dd>
                                 <input id="location" name="location" type="text" class="form-control form-control-width">
                             </dd>
