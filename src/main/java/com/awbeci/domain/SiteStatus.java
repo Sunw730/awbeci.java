@@ -1,5 +1,8 @@
 package com.awbeci.domain;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import org.springframework.format.annotation.DateTimeFormat;
+
 import java.util.Date;
 
 public class SiteStatus {
@@ -9,8 +12,12 @@ public class SiteStatus {
 
     private String content;
 
+    @DateTimeFormat(pattern="yyyy年MM月dd日")
+    @JsonFormat(pattern="yyyy年MM月dd日",timezone = "GMT+8")
     private Date createDt;
 
+    @DateTimeFormat(pattern="yyyy年MM月dd日")
+    @JsonFormat(pattern="yyyy年MM月dd日",timezone = "GMT+8")
     private Date updateDt;
 
     public String getId() {

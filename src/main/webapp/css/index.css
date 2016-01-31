@@ -63,3 +63,7 @@ main::before {
     display: block;
     font-weight: 500;
 }
+.qq{
+    font-weight: 500;
+    color: cornflowerblue;
+}

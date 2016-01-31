@@ -43,7 +43,8 @@
                         <dl>
                             <dt><label>头像图片</label></dt>
                             <dd>
-                                <img id="userAvatar" class="left" src="" alt="" width="70" height="70">
+                                <img id="userAvatar" class="left" src="" alt="" width="70" height="70"
+                                     style="border-radius: 4px;">
                                 <div class="user-avatar-info">
                                     <label class="btn btn-default">
 
@@ -83,7 +84,8 @@
                         <dl class="form-group clearboth">
                             <dt><label>地理位置</label></dt>
                             <dd>
-                                <input id="location" name="location" type="text" class="form-control form-control-width">
+                                <input id="location" name="location" type="text"
+                                       class="form-control form-control-width">
                             </dd>
                         </dl>
                         <p>

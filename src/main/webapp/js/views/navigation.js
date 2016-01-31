@@ -498,6 +498,5 @@ function follow(that, id, name) {
                 $that.empty().append('<span aria-hidden="true" class="octicon octicon-person commonOction"></span>关注')
             }
         });
-
     }
 }
