@@ -20,3 +20,32 @@
     text-align: center;
     font-size: 13px;
 }
+/* main-header */
+.main-header{
+    width: 960px;
+    margin: 0 auto;
+}
+
+.content-info{
+    padding: 20px 0;
+    border-bottom: 1px solid #eee;
+}
+.content-info > span{
+    display: inline-flex;
+}
+
+.content-info img{
+    -webkit-border-radius:4px;
+    -moz-border-radius:4px;
+    border-radius:4px;
+}
+
+.content-info ul{
+    display: inline-block;
+    margin-left: 15px;
+}
+
+.content-info ul li:first-child{
+}
+
+

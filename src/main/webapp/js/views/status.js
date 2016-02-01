@@ -146,5 +146,21 @@ function deleteStatus() {
     }
     $.post('/json/deleteStatus.json', {
         id: bugid
+    },function(data){
+        if (data == "success") {
+            Lobibox.notify('info', {
+                size: 'mini',
+                title: 'awbeci提示',
+                msg: '删除成功.'
+            });
+            initInfo();
+        }
+        else {
+            Lobibox.notify('error', {
+                size: 'mini',
+                title: 'awbeci提示',
+                msg: '删除失败.'
+            });
+        }
     }, 'json')
 }

@@ -89,14 +89,14 @@
                                  <!-- 如果=yes说明已经关注了，下同 -->
                                  <c:choose>
                                      <c:when test="${fn:contains(followFlag, 'yes')}">
-                                         <a href="javascript:void(0)" class="btn btn-default abc-btn"
+                                         <a href="javascript:void(0)" class="btn btn-default btn-sm"
                                             onclick="follow(this,'${sessionScope.current_user.id}','${sessionScope.current_user.name}')">
                                              <span aria-hidden="javascript:void(0)true"
                                                    class="octicon octicon-person"></span>
                                              取消关注 </a>
                                      </c:when>
                                      <c:otherwise>
-                                         <a href="javascript:void(0)" class="btn btn-default abc-btn"
+                                         <a href="javascript:void(0)" class="btn btn-default btn-sm"
                                             onclick="follow(this,'${sessionScope.current_user.id}','${sessionScope.current_user.name}')">
                                              <span aria-hidden="true" class="octicon octicon-person"></span>
                                              关注 </a>
