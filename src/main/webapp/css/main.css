@@ -1,3 +1,7 @@
+#main-container{
+    padding: 0 15px;
+    margin-top: 10px;
+}
 .melogo p {
     text-align: center;
     font-size: 100px;
@@ -12,40 +16,78 @@
 .mesearch .input-group {
     width: 585px;
 }
-.metip{
+
+.metip {
     padding-top: 20px;
     margin-bottom: 50px;
 }
-.metip p{
+
+.metip p {
     text-align: center;
     font-size: 13px;
 }
+
 /* main-header */
-.main-header{
+.container-left{
+    width: 49%;
+    float: left;
+}
+
+.container-right{
+    float: left;
+    width: 49%;
+    margin-left: 20px;
+}
+.main-header {
     width: 960px;
     margin: 0 auto;
 }
 
-.content-info{
-    padding: 20px 0;
-    border-bottom: 1px solid #eee;
-}
-.content-info > span{
-    display: inline-flex;
+.header-content{
+    border: 1px solid #eee;
+    padding: 10px 20px;
+    margin-top:-1px;
 }
 
-.content-info img{
-    -webkit-border-radius:4px;
-    -moz-border-radius:4px;
-    border-radius:4px;
+.header-content:hover{
+    background-color: #f5f8fa!important;
 }
 
-.content-info ul{
+.content-info {
+    padding: 10px 0;
+}
+
+.content-info > span {
+    float: left;
+}
+
+.content-info img {
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    border-radius: 4px;
+}
+
+.content-info ul {
     display: inline-block;
-    margin-left: 15px;
+    margin-left: 10px;
+    margin-bottom: 0;
+    line-height: 15px;
 }
 
-.content-info ul li:first-child{
+.content-info ul li {
+    margin: 0;
+    padding: 0;
+    height: 20px;
 }
 
+.content-info ul li:first-child {
+}
 
+.username {
+    font-weight: bold;
+    font-size: 18px;
+}
+.dynamic-time{
+    color: rgb(145, 151, 163);
+    font-size: 12px;
+}
