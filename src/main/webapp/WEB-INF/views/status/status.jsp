@@ -50,10 +50,10 @@
                         </div>
 
                         <select id="type" class="selectpicker" data-size="10">
-                            <option value="1">新增</option>
+                            <option value="1">新功能</option>
                             <option value="2">已修复</option>
-                            <option value="3">建议</option>
-                            <option value="4">正在修复</option>
+                            <option value="3">提建议</option>
+                            <option value="4">修复中</option>
                             <option value="5">未修复</option>
                         </select>
                     </div>

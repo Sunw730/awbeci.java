@@ -56,8 +56,7 @@
                     </ul>
                     <div class="websiteinfo">
                         <a href="${current_user.name}/navigation" class="btn btn-primary  btn-block abc-btn">
-                            <span class="octicon octicon-repo"></span>
-                            进入我的导航
+                            我的导航<span class="badge abc-badge">4</span>
                         </a>
                     </div>
                 </div>

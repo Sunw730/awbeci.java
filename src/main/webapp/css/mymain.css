@@ -294,3 +294,7 @@ a.list-group-item:hover, a.list-group-item:focus {
 .media-left a img {
     border-radius: 6px;
 }
+
+.abc-badge{
+    margin-left: 5px;
+}

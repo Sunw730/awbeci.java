@@ -1,7 +1,8 @@
-#main-container{
+#main-container {
     padding: 0 15px;
     margin-top: 10px;
 }
+
 .melogo p {
     text-align: center;
     font-size: 100px;
@@ -28,29 +29,26 @@
 }
 
 /* main-header */
-.container-left{
-    width: 49%;
+.container-left {
+    width: 25%;
     float: left;
 }
 
-.container-right{
+.container-right {
     float: left;
-    width: 49%;
-    margin-left: 20px;
+    width: 74%;
+    margin-left: 10px;
 }
+
 .main-header {
     width: 960px;
     margin: 0 auto;
 }
 
-.header-content{
-    border: 1px solid #eee;
-    padding: 10px 20px;
-    margin-top:-1px;
-}
-
-.header-content:hover{
-    background-color: #f5f8fa!important;
+.header-content {
+    border: 1px solid #ddd;
+    padding: 4px 12px;
+    margin-top: -1px;
 }
 
 .content-info {
@@ -87,7 +85,41 @@
     font-weight: bold;
     font-size: 18px;
 }
-.dynamic-time{
+
+.dynamic-time {
     color: rgb(145, 151, 163);
     font-size: 12px;
+}
+
+.container-header {
+    border: 1px solid #ddd;
+    background: #f9f9f9;
+    font-weight: bold;
+    padding: 8px 10px;
+    border-radius: 4px 4px 0 0;
+    font-size: 14px;
+    position: relative;
+}
+
+.body-content-a {
+    width: 33%;
+    float: left;
+}
+
+.body-content-a > strong {
+    display: block;
+}
+
+.container-left .header-content {
+    height: 150px;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    border-radius: 4px;
+}
+.body-content{
+    text-align: center;
+    margin-top: 10px;
+}
+.container-left .content-body {
+
 }

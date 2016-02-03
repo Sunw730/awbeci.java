@@ -25,11 +25,11 @@ function initInfo() {
                         typeClass = 'success';
                         break;
                     case 3:
-                        typeTxt = '建议';
+                        typeTxt = '提建议';
                         typeClass = 'info';
                         break;
                     case 4:
-                        typeTxt = '正在修复';
+                        typeTxt = '修复中';
                         typeClass = 'warning';
                         break;
                     case 5:
