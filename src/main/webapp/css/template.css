@@ -203,6 +203,7 @@ footer p {
 
 footer {
     padding: 10px 0px;
+    clear: both;
 }
 
 footer a {

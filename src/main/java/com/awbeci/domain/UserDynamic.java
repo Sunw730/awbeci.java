@@ -6,9 +6,11 @@ import java.util.Date;
 public class UserDynamic {
     private String id;
     private String uid;
-    private String userName;
-    private String userUrl;
-    private String type;
+    private String objId;
+    //1:网址
+    private String objType;
+    //1：添加 ，2：编辑，3：删除
+    private String action;
     private String content;
     private Date createDt;
     private Date updateDt;
@@ -29,28 +31,28 @@ public class UserDynamic {
         this.uid = uid;
     }
 
-    public String getUserName() {
-        return userName;
+    public String getObjId() {
+        return objId;
     }
 
-    public void setUserName(String userName) {
-        this.userName = userName;
+    public void setObjId(String objId) {
+        this.objId = objId;
     }
 
-    public String getUserUrl() {
-        return userUrl;
+    public String getObjType() {
+        return objType;
     }
 
-    public void setUserUrl(String userUrl) {
-        this.userUrl = userUrl;
+    public void setObjType(String objType) {
+        this.objType = objType;
     }
 
-    public String getType() {
-        return type;
+    public String getAction() {
+        return action;
     }
 
-    public void setType(String type) {
-        this.type = type;
+    public void setAction(String action) {
+        this.action = action;
     }
 
     public String getContent() {
