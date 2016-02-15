@@ -8,4 +8,7 @@
         <result property="icon" column="icon"/>
         <result property="sortNo" column="sortNo"/>
     </resultMap>
+    <resultMap id="UserSitesCount" type="java.lang.Integer">
+        <id property="id" column="id"/>
+    </resultMap>
 </mapper>

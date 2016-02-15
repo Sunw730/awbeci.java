@@ -40,9 +40,15 @@ public class MainController {
      */
     @RequestMapping("/")
     public String index(Model model, HttpSession session) {
-        if (session.getAttribute("user") == null) {
+        Object sessionuser = session.getAttribute("user");
+        if (sessionuser == null) {
             return "main/index";
         } else {
+            User user = (User)sessionuser;
+            List<UserFollow> followingUsers = userFollowService.getFollowingByUid(user.getId());
+            model.addAttribute("followingsCount", followingUsers.size());
+            List<UserFollow> followers = userFollowService.getFollowerByUid(user.getId());
+            model.addAttribute("followersCount", followers.size());
             return "/main/main";
         }
     }

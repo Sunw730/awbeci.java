@@ -1,3 +1,4 @@
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -14,24 +15,24 @@
         <div class="header-content">
             <div class="content-info">
             <span>
-                <img src="http://static.awbeci.com/img/avatar/20160128134040" width="40" height="40"></span>
+                <img src="${user.avatarUrl}" alt="${user.avatarUrl}" width="40" height="40"></span>
                 <ul>
                     <li>
-                        <a href="#" class="username">zhangwei</a>
+                        <a href="${user.name}" class="username">${user.name}</a>
                     </li>
                     <li>
-                        <small class="dynamic-time">2015-11-11 12:32</small>
+                        <small class="dynamic-time"><spring:eval expression="user.createDt"/></small>
                     </li>
                 </ul>
             </div>
             <div class="content-body">
                 <div class="body-content">
                     <a href="#" class="body-content-a">
-                        <strong>12</strong>
+                        <strong>${followingsCount}</strong>
                         <span>正在关注</span>
                     </a>
                     <a href="#" class="body-content-a">
-                        <strong>12</strong>
+                        <strong>${followersCount}</strong>
                         <span>关注者</span>
                     </a>
                     <a href="#"  class="body-content-a">

@@ -34,4 +34,8 @@ public interface IUserSitesDao {
 
     @Select("select * from usersites where categoryId=#{categoryId}")
     List<UserSites> getUserSitesByCategoryId(@Param("categoryId") String categoryId);
+
+    @Select("SELECT count(*) count FROM usersites " +
+            "where uid = #{uid}")
+    int getUserSitesCountByUid(@Param("uid") String uid);
 }
