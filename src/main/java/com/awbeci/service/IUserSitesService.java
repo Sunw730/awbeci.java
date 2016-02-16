@@ -21,4 +21,6 @@ public interface IUserSitesService {
     String uploadAvatar(String properties,InputStream content,String uid,String avatarImgUrl);
 
     List<UserSites> getUserSitesByCategoryId(String categoryId);
+
+    int getUserSitesCountByUid(String uid);
 }

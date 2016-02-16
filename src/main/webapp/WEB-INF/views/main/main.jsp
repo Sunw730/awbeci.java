@@ -35,8 +35,8 @@
                         <strong>${followersCount}</strong>
                         <span>关注者</span>
                     </a>
-                    <a href="#"  class="body-content-a">
-                        <strong>12</strong>
+                    <a href="${user.name}/navigation" class="body-content-a">
+                        <strong>${sitesCount}</strong>
                         <span>网址</span>
                     </a>
                 </div>
@@ -61,34 +61,46 @@
                 </ul>
             </div>
             <div class="content-body">
-                添加了网址：<a id="4a723a16-f72b-4251-a44c-bafff75b1c66" target="_blank" href="https://twitter.com/" categoryid="8fefc360-7eb5-4a21-92b4-e0e54a2a03f3"><img width="16px" height="16px" style="margin-right:5px;" src="http://static.awbeci.com/img/siteicon/20160202213925.ico">twitter </a><a id="4a723a16-f72b-4251-a44c-bafff75b1c66" target="_blank" href="https://twitter.com/" categoryid="8fefc360-7eb5-4a21-92b4-e0e54a2a03f3"><img width="16px" height="16px" style="margin-right:5px;" src="http://static.awbeci.com/img/siteicon/20160202213925.ico">twitter </a><a id="4a723a16-f72b-4251-a44c-bafff75b1c66" target="_blank" href="https://twitter.com/" categoryid="8fefc360-7eb5-4a21-92b4-e0e54a2a03f3"><img width="16px" height="16px" style="margin-right:5px;" src="http://static.awbeci.com/img/siteicon/20160202213925.ico">twitter </a><a id="4a723a16-f72b-4251-a44c-bafff75b1c66" target="_blank" href="https://twitter.com/" categoryid="8fefc360-7eb5-4a21-92b4-e0e54a2a03f3"><img width="16px" height="16px" style="margin-right:5px;" src="http://static.awbeci.com/img/siteicon/20160202213925.ico">twitter </a><a id="4a723a16-f72b-4251-a44c-bafff75b1c66" target="_blank" href="https://twitter.com/" categoryid="8fefc360-7eb5-4a21-92b4-e0e54a2a03f3"><img width="16px" height="16px" style="margin-right:5px;" src="http://static.awbeci.com/img/siteicon/20160202213925.ico">twitter </a>
+                添加了网址：<a id="4a723a16-f72b-4251-a44c-bafff75b1c66" target="_blank" href="https://twitter.com/"
+                         categoryid="8fefc360-7eb5-4a21-92b4-e0e54a2a03f3"><img width="16px" height="16px"
+                                                                                style="margin-right:5px;"
+                                                                                src="http://static.awbeci.com/img/siteicon/20160202213925.ico">twitter
+            </a><a id="4a723a16-f72b-4251-a44c-bafff75b1c66" target="_blank" href="https://twitter.com/"
+                   categoryid="8fefc360-7eb5-4a21-92b4-e0e54a2a03f3"><img width="16px" height="16px"
+                                                                          style="margin-right:5px;"
+                                                                          src="http://static.awbeci.com/img/siteicon/20160202213925.ico">twitter
+            </a><a id="4a723a16-f72b-4251-a44c-bafff75b1c66" target="_blank" href="https://twitter.com/"
+                   categoryid="8fefc360-7eb5-4a21-92b4-e0e54a2a03f3"><img width="16px" height="16px"
+                                                                          style="margin-right:5px;"
+                                                                          src="http://static.awbeci.com/img/siteicon/20160202213925.ico">twitter
+            </a><a id="4a723a16-f72b-4251-a44c-bafff75b1c66" target="_blank" href="https://twitter.com/"
+                   categoryid="8fefc360-7eb5-4a21-92b4-e0e54a2a03f3"><img width="16px" height="16px"
+                                                                          style="margin-right:5px;"
+                                                                          src="http://static.awbeci.com/img/siteicon/20160202213925.ico">twitter
+            </a><a id="4a723a16-f72b-4251-a44c-bafff75b1c66" target="_blank" href="https://twitter.com/"
+                   categoryid="8fefc360-7eb5-4a21-92b4-e0e54a2a03f3"><img width="16px" height="16px"
+                                                                          style="margin-right:5px;"
+                                                                          src="http://static.awbeci.com/img/siteicon/20160202213925.ico">twitter
+            </a>
             </div>
         </div>
     </div>
     <div class="container-right">
         <div class="container-header">
-            网址排名
+            收藏最多
         </div>
         <div class="header-content">
             <div class="content-body">
                 <ul class="list-group">
                     <li class="list-group-item">
-                        <img width="16px" height="16px" src="http://com-awbeci-static.oss-cn-qingdao.aliyuncs.com/img/siteicon/20151225113107.ico">
+                        <img width="16px" height="16px"
+                             src="http://com-awbeci-static.oss-cn-qingdao.aliyuncs.com/img/siteicon/20151225113107.ico">
                         <span class="badge">14</span>
-                        <a href="#">Dapibus ac facilisis in</a>
-                    </li>
-                    <li class="list-group-item">
-                        <img width="16px" height="16px" src="http://com-awbeci-static.oss-cn-qingdao.aliyuncs.com/img/siteicon/20151225113107.ico">
-                        <span class="badge">2</span>
-                        <a href="#">Dapibus ac facilisis in</a>
-                    </li>
-                    <li class="list-group-item">
-                        <img width="16px" height="16px" src="http://com-awbeci-static.oss-cn-qingdao.aliyuncs.com/img/siteicon/20151225113107.ico">
-                        <span class="badge">1</span>
                         <a href="#">Dapibus ac facilisis in</a>
                     </li>
                 </ul>
             </div>
+        </div>
     </div>
 
 </div>

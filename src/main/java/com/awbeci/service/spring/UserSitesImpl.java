@@ -162,4 +162,8 @@ public class UserSitesImpl implements IUserSitesService {
     public List<UserSites> getUserSitesByCategoryId(String categoryId) {
         return userSitesDao.getUserSitesByCategoryId(categoryId);
     }
+
+    public int getUserSitesCountByUid(String uid) {
+        return userSitesDao.getUserSitesCountByUid(uid);
+    }
 }

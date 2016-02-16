@@ -7,6 +7,7 @@ import com.awbeci.domain.UserFollow;
 import com.awbeci.service.IUserCategoryService;
 import com.awbeci.service.IUserFollowService;
 import com.awbeci.service.IUserService;
+import com.awbeci.service.IUserSitesService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -30,6 +31,9 @@ public class MainController {
     private IUserService userService;
 
     @Autowired
+    private IUserSitesService userSitesService;
+
+    @Autowired
     private IUserCategoryService userCategoryService;
 
     @Autowired
@@ -44,11 +48,14 @@ public class MainController {
         if (sessionuser == null) {
             return "main/index";
         } else {
-            User user = (User)sessionuser;
+            User user = (User) sessionuser;
             List<UserFollow> followingUsers = userFollowService.getFollowingByUid(user.getId());
             model.addAttribute("followingsCount", followingUsers.size());
             List<UserFollow> followers = userFollowService.getFollowerByUid(user.getId());
             model.addAttribute("followersCount", followers.size());
+
+            int sitesCount = userSitesService.getUserSitesCountByUid(user.getId());
+            model.addAttribute("sitesCount", sitesCount);
             return "/main/main";
         }
     }
