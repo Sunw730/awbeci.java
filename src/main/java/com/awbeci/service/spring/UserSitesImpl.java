@@ -15,10 +15,7 @@ import org.springframework.stereotype.Service;
 import java.io.InputStream;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.List;
-import java.util.Properties;
-import java.util.UUID;
+import java.util.*;
 
 @Service
 public class UserSitesImpl implements IUserSitesService {
@@ -165,5 +162,9 @@ public class UserSitesImpl implements IUserSitesService {
 
     public int getUserSitesCountByUid(String uid) {
         return userSitesDao.getUserSitesCountByUid(uid);
+    }
+
+    public List<Map> getTopUrl(String uid) {
+        return userSitesDao.getTopUrl(uid);
     }
 }

@@ -56,6 +56,8 @@ public class MainController {
 
             int sitesCount = userSitesService.getUserSitesCountByUid(user.getId());
             model.addAttribute("sitesCount", sitesCount);
+            List<Map> topUrl = userSitesService.getTopUrl(user.getId());
+            model.addAttribute("topUrls", topUrl);
             return "/main/main";
         }
     }
@@ -67,7 +69,8 @@ public class MainController {
      * @return
      */
     @RequestMapping(value = "/{username}/navigation")
-    public String usersPage(@PathVariable String username, HttpSession session, Model model) {
+    public String usersPage(@PathVariable String username, HttpSession session, Model model,HttpServletRequest request) {
+        //String url = request.getParameter("url");
         User user = userService.selectUserByName(username);
         if (user == null) {
             return "error/404";

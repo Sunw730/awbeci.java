@@ -5,6 +5,7 @@ import com.awbeci.domain.UserSites;
 
 import java.io.InputStream;
 import java.util.List;
+import java.util.Map;
 
 public interface IUserSitesService {
 
@@ -23,4 +24,6 @@ public interface IUserSitesService {
     List<UserSites> getUserSitesByCategoryId(String categoryId);
 
     int getUserSitesCountByUid(String uid);
+
+    List<Map> getTopUrl(String uid);
 }

@@ -1,4 +1,5 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -92,12 +93,15 @@
         <div class="header-content">
             <div class="content-body">
                 <ul class="list-group">
-                    <li class="list-group-item">
-                        <img width="16px" height="16px"
-                             src="http://com-awbeci-static.oss-cn-qingdao.aliyuncs.com/img/siteicon/20151225113107.ico">
-                        <span class="badge">14</span>
-                        <a href="#">Dapibus ac facilisis in</a>
-                    </li>
+                    <c:forEach items="${topUrls}" var="topUrl">
+                        <li class="list-group-item">
+                            <img width="16px" height="16px"
+                                 src="${topUrl.icon}">
+                            <span class="badge">${topUrl.topUrlCount}</span>
+                            <a href="${user.name}/navigation?url=${topUrl.topUrl}">${topUrl.topUrl}</a>
+                        </li>
+                    </c:forEach>
+
                 </ul>
             </div>
         </div>

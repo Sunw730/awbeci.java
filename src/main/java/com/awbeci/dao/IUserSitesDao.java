@@ -6,6 +6,7 @@ import org.apache.ibatis.annotations.*;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Map;
 
 @Repository("IUserSitesDao")
 public interface IUserSitesDao {
@@ -38,4 +39,12 @@ public interface IUserSitesDao {
     @Select("SELECT count(*) count FROM usersites " +
             "where uid = #{uid}")
     int getUserSitesCountByUid(@Param("uid") String uid);
+
+    @Select("SELECT fn_get_topDomainName_from_url(url) topUrl,count(fn_get_topDomainName_from_url(url))  topUrlCount,icon " +
+            " FROM usersites " +
+            " where uid=#{uid} " +
+            " group by topUrl " +
+            " order by topUrlCount desc " +
+            " limit 0,50")
+    List<Map> getTopUrl(@Param("uid") String uid);
 }

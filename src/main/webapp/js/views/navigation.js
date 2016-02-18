@@ -17,6 +17,7 @@ $(function () {
     $('#siteClose').on('click', function () {
         canceleditLink();
     });
+    //todo:获取参数显示
     querySite();
 });
 
