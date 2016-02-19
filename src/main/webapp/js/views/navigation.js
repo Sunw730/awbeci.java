@@ -3,11 +3,17 @@ var siteflag = '';
 //点击分类的时候(注意是子分类)
 var clickCategoryId = '';
 
+function GetQueryString(name) {
+    var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
+    var r = window.location.search.substr(1).match(reg);
+    if (r != null)return unescape(r[2]);
+    return null;
+}
+
 $(function () {
     $("[data-toggle='tooltip']").tooltip({html: true});
     //$("#showlink ul").dragsort({});
     initCategory();
-    initSite();
     editCategorySite();
     addcategory();
     addSite();
@@ -17,9 +23,23 @@ $(function () {
     $('#siteClose').on('click', function () {
         canceleditLink();
     });
-    //todo:获取参数显示
     querySite();
+    var name = GetQueryString('domainName');
+    initQuerySite(name);
 });
+
+function initQuerySite(name){
+    if ($.trim(name).length > 0) {
+        $.post('/json/querySiteByDomainName.json', {
+            param: name
+        }, function (data) {
+            showSite(data);
+        })
+    }
+    else{
+        initSite();
+    }
+}
 
 //按回车查询网址
 function querySite() {

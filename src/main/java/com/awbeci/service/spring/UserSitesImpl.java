@@ -167,4 +167,9 @@ public class UserSitesImpl implements IUserSitesService {
     public List<Map> getTopUrl(String uid) {
         return userSitesDao.getTopUrl(uid);
     }
+
+    public List<UserSites> querySiteByUrl(String param, String uid) {
+        return userSitesDao.querySiteByUrl(param, uid);
+    }
+
 }

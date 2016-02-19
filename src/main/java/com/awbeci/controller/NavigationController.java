@@ -219,4 +219,16 @@ public class NavigationController {
             return null;
         }
     }
+
+    @RequestMapping(value = "/json/querySiteByDomainName.json", method = RequestMethod.POST)
+    @ResponseBody
+    public List<UserSites> querySiteByDomainName(String param, HttpSession session) {
+        try {
+            String uid = (String) session.getAttribute("current_navigation_id");
+            return userSitesService.querySiteByUrl(param, uid);
+        } catch (Exception e) {
+            log.debug("错误原因:" + e.getMessage());
+            return null;
+        }
+    }
 }

@@ -97,8 +97,8 @@
                         <li class="list-group-item">
                             <img width="16px" height="16px"
                                  src="${topUrl.icon}">
-                            <span class="badge">${topUrl.topUrlCount}</span>
-                            <a href="${user.name}/navigation?url=${topUrl.topUrl}">${topUrl.topUrl}</a>
+                            <span class="badge">${topUrl.topUrlNameCount}</span>
+                            <a href="${user.name}/navigation?domainName=${topUrl.topUrlName}">${topUrl.topUrlName}</a>
                         </li>
                     </c:forEach>
 

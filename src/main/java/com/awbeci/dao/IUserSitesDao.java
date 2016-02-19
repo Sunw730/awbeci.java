@@ -32,6 +32,9 @@ public interface IUserSitesDao {
     @Select("select * from usersites where name like '%${param}%' and uId=#{uid}")
     List<UserSites> querySiteByParam(@Param("param") String param, @Param("uid") String uid);
 
+    @Select("select * from usersites where url like '%${param}%' and uId=#{uid}")
+    List<UserSites> querySiteByUrl(@Param("param") String param, @Param("uid") String uid);
+
 
     @Select("select * from usersites where categoryId=#{categoryId}")
     List<UserSites> getUserSitesByCategoryId(@Param("categoryId") String categoryId);
@@ -40,11 +43,12 @@ public interface IUserSitesDao {
             "where uid = #{uid}")
     int getUserSitesCountByUid(@Param("uid") String uid);
 
-    @Select("SELECT fn_get_topDomainName_from_url(url) topUrl,count(fn_get_topDomainName_from_url(url))  topUrlCount,icon " +
+    @Select("SELECT getTopDomainNameFromUrl(url) topUrlName,count(getTopDomainNameFromUrl(url)) topUrlNameCount,icon " +
             " FROM usersites " +
             " where uid=#{uid} " +
-            " group by topUrl " +
-            " order by topUrlCount desc " +
+            " group by topUrlName " +
+            " having topUrlNameCount>=2" +
+            " order by topUrlNameCount desc " +
             " limit 0,50")
     List<Map> getTopUrl(@Param("uid") String uid);
 }
