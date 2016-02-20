@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.awbeci.mapper.UserDynamicMapper">
+    <resultMap id="UserDynamicResult" type="UserDynamic">
+        <id property="id" column="id"/>
+        <result property="uid" column="uid"/>
+        <result property="objId" column="objId"/>
+        <result property="objType" column="objType"/>
+        <result property="action" column="action"/>
+        <result property="content" column="content"/>
+        <result property="createDt" column="createDt"/>
+        <result property="updateDt" column="updateDt"/>
+        <association property="user" javaType="User">
+            <id property="id" column="userid"/>
+            <result property="name" column="name"/>
+            <result property="avatarUrl" column="avatarUrl"/>
+            <result property="niceName" column="niceName"/>
+            <result property="location" column="location"/>
+            <result property="createDt" column="usercreatedt"/>
+        </association>
+    </resultMap>
+</mapper>

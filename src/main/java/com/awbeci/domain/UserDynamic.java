@@ -15,6 +15,10 @@ public class UserDynamic {
     private Date createDt;
     private Date updateDt;
 
+    private User user;
+
+    private UserSites userSites;
+
     public String getId() {
         return id;
     }
@@ -77,5 +81,21 @@ public class UserDynamic {
 
     public void setUpdateDt(Date updateDt) {
         this.updateDt = updateDt;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public UserSites getUserSites() {
+        return userSites;
+    }
+
+    public void setUserSites(UserSites userSites) {
+        this.userSites = userSites;
     }
 }

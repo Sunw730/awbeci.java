@@ -2,9 +2,12 @@ package com.awbeci.service.spring;
 
 import com.awbeci.aliyun.oss.BucketObject;
 import com.awbeci.dao.IUserDao;
+import com.awbeci.dao.IUserDynamicDao;
 import com.awbeci.dao.IUserSitesDao;
 import com.awbeci.domain.UserCategory;
+import com.awbeci.domain.UserDynamic;
 import com.awbeci.domain.UserSites;
+import com.awbeci.service.IUserDynamicService;
 import com.awbeci.service.IUserSitesService;
 import com.awbeci.util.MyProperties;
 import org.slf4j.Logger;
@@ -25,6 +28,9 @@ public class UserSitesImpl implements IUserSitesService {
 
     @Autowired
     private IUserDao userDao;
+
+    @Autowired
+    private IUserDynamicDao userDynamicDao;
 
     Logger log = LoggerFactory.getLogger(BucketObject.class);
     MyProperties myProperties = new MyProperties();
@@ -68,9 +74,22 @@ public class UserSitesImpl implements IUserSitesService {
             userSites.setUpdateDt(date);
 
             if (flag.equals("add")) {
-                userSites.setId(UUID.randomUUID().toString());
+                String userSiteId = UUID.randomUUID().toString();
+                userSites.setId(userSiteId);
                 userSites.setCreateDt(date);
                 int val = userSitesDao.insertSite(userSites);
+                //添加用户动态
+                UserDynamic userDynamic = new UserDynamic();
+                String userDynamicId = UUID.randomUUID().toString();
+                userDynamic.setId(userDynamicId);
+                userDynamic.setUid(userSites.getuId());
+                userDynamic.setObjId(userSiteId);
+                userDynamic.setObjType("1");//1：表示添加的是网址
+                userDynamic.setAction("1");//1:表示添加
+                userDynamic.setCreateDt(date);
+                userDynamic.setUpdateDt(date);
+
+                userDynamicDao.insertUserDynamic(userDynamic);
                 return val;
             }
             if (flag.equals("update")) {

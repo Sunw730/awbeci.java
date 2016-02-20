@@ -1,13 +1,7 @@
 package com.awbeci.controller;
 
-import com.awbeci.domain.SystemCode;
-import com.awbeci.domain.User;
-import com.awbeci.domain.UserCategory;
-import com.awbeci.domain.UserFollow;
-import com.awbeci.service.IUserCategoryService;
-import com.awbeci.service.IUserFollowService;
-import com.awbeci.service.IUserService;
-import com.awbeci.service.IUserSitesService;
+import com.awbeci.domain.*;
+import com.awbeci.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -39,6 +33,9 @@ public class MainController {
     @Autowired
     IUserFollowService userFollowService;
 
+    @Autowired
+    IUserDynamicService userDynamicService;
+
     /**
      * 网站主页
      */
@@ -58,6 +55,9 @@ public class MainController {
             model.addAttribute("sitesCount", sitesCount);
             List<Map> topUrl = userSitesService.getTopUrl(user.getId());
             model.addAttribute("topUrls", topUrl);
+
+            List<UserDynamic> userDynamics = userDynamicService.selectMyUserDynamic(user.getId());
+            model.addAttribute("userDynamics", userDynamics);
             return "/main/main";
         }
     }
@@ -69,7 +69,7 @@ public class MainController {
      * @return
      */
     @RequestMapping(value = "/{username}/navigation")
-    public String usersPage(@PathVariable String username, HttpSession session, Model model,HttpServletRequest request) {
+    public String usersPage(@PathVariable String username, HttpSession session, Model model, HttpServletRequest request) {
         //String url = request.getParameter("url");
         User user = userService.selectUserByName(username);
         if (user == null) {

@@ -12,11 +12,16 @@
         <result property="updateDt" column="updatedt"/>
         <association property="user" javaType="User">
             <id property="id" column="userid"/>
-            <result property="name" column="name"/>
+            <result property="name" column="userName"/>
             <result property="avatarUrl" column="avatarUrl"/>
             <result property="niceName" column="niceName"/>
             <result property="location" column="location"/>
             <result property="createDt" column="usercreatedt"/>
+        </association>
+        <association property="userSites" javaType="UserSites">
+            <result property="name" column="userSitesName"/>
+            <result property="url" column="url"/>
+            <result property="icon" column="icon"/>
         </association>
     </resultMap>
 </mapper>
