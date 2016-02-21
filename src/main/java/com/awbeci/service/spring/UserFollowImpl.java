@@ -35,4 +35,12 @@ public class UserFollowImpl implements IUserFollowService {
     public int deleteUserFollow(String uid, String followid) {
         return userFollowDao.deleteUserFollow(uid, followid);
     }
+
+    public int getFollowerByUidCount(String uid) {
+        return userFollowDao.getFollowerByUidCount(uid);
+    }
+
+    public int getFollowingByUidCount(String uid) {
+        return userFollowDao.getFollowingByUidCount(uid);
+    }
 }

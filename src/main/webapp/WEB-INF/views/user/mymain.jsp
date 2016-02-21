@@ -56,7 +56,7 @@
                     </ul>
                     <div class="websiteinfo">
                         <a href="${current_user.name}/navigation" class="btn btn-primary  btn-block abc-btn">
-                            我的导航<span class="badge abc-badge">4</span>
+                            我的导航<span class="badge abc-badge">${sitesCount}</span>
                         </a>
                     </div>
                 </div>

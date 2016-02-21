@@ -46,10 +46,11 @@ public class MainController {
             return "main/index";
         } else {
             User user = (User) sessionuser;
-            List<UserFollow> followingUsers = userFollowService.getFollowingByUid(user.getId());
-            model.addAttribute("followingsCount", followingUsers.size());
-            List<UserFollow> followers = userFollowService.getFollowerByUid(user.getId());
-            model.addAttribute("followersCount", followers.size());
+            int followingUsersCount = userFollowService.getFollowingByUidCount(user.getId());
+            model.addAttribute("followingsCount", followingUsersCount);
+
+            int followersCount = userFollowService.getFollowerByUidCount(user.getId());
+            model.addAttribute("followersCount", followersCount);
 
             int sitesCount = userSitesService.getUserSitesCountByUid(user.getId());
             model.addAttribute("sitesCount", sitesCount);

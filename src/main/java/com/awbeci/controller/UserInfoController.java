@@ -4,6 +4,7 @@ import com.awbeci.domain.User;
 import com.awbeci.domain.UserFollow;
 import com.awbeci.service.IUserFollowService;
 import com.awbeci.service.IUserService;
+import com.awbeci.service.IUserSitesService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,6 +32,9 @@ public class UserInfoController {
     @Autowired
     IUserFollowService userFollowService;
 
+    @Autowired
+    IUserSitesService userSitesService;
+
     @RequestMapping("/{username}")
     public String mymain(@PathVariable String username, HttpSession session, Model model) {
         User user = userService.selectUserByName(username);
@@ -47,6 +51,10 @@ public class UserInfoController {
 
             model.addAttribute("followers", followers);
             model.addAttribute("followersCount", followers.size());
+
+            int sitesCount = userSitesService.getUserSitesCountByUid(user.getId());
+            model.addAttribute("sitesCount", sitesCount);
+
             Object uidObj = session.getAttribute("uid");
             if (uidObj != null) {
                 String uid = uidObj.toString();
@@ -171,5 +179,24 @@ public class UserInfoController {
             log.debug("错误原因:" + e.getMessage());
         }
         return 0;
+    }
+
+    //------------------------------------------------------------------------------------------------------------
+
+    @RequestMapping(value = "/json/getUserInfoDlg.json", method = RequestMethod.POST)
+    @ResponseBody
+    public Map getUserInfo(String uid) {
+        Map<String, Object> map = new HashMap<String, Object>();
+        User user = userService.selectUserById(uid);
+        map.put("user", user);
+        int followingUsersCount = userFollowService.getFollowingByUidCount(user.getId());
+        map.put("followingsCount", followingUsersCount);
+
+        int followersCount = userFollowService.getFollowerByUidCount(user.getId());
+        map.put("followersCount", followersCount);
+
+        int sitesCount = userSitesService.getUserSitesCountByUid(user.getId());
+        map.put("sitesCount", sitesCount);
+        return map;
     }
 }

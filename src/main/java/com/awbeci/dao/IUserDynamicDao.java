@@ -19,13 +19,25 @@ public interface IUserDynamicDao {
             "(#{id},#{uid},#{objId},#{objType},#{action},#{content},#{createDt},#{updateDt})")
     int insertUserDynamic(UserDynamic userDynamic);
 
-    //todo:
-    @Select(" SELECT distinct a.*,b.id userid,b.name userName,a.createdt,b.AVATARURL" +
+    @Select(" SELECT " +
+            " a.uid         as dynamic_user_id," +
+            " a.objid       as dynamic_userSites_id," +
+            " a.objtype     as dynamic_userSites_type," +
+            " a.action      as dynamic_action," +
+            " date_format(a.createdt,'%Y-%m-%d %T')    as dynamic_createdt," +
+            " b.id          as user_id," +
+            " b.name        as user_name," +
+            " b.AVATARURL   as user_AVATARURL," +
+            " c.id          as userSites_id," +
+            " c.name        as userSites_name," +
+            " c.icon        as userSites_icon," +
+            " c.url         as userSites_url" +
             " FROM userdynamic a" +
-            " left join user b on a.uid= b.id" +
-            " left join usersites c on c.uid=a.uid" +
+            " left outer join user b on a.uid= b.id" +
+            " left outer join usersites c on c.id=a.objid" +
             " where a.UID in (select followid from userfollow where uid=#{uid}) or a.uid=#{uid}" +
-            " order by CREATEDT desc")
-    @ResultMap("com.awbeci.mapper.UserDynamicMapper.UserDynamicResult")
+            " order by a.CREATEDT desc" +
+            " limit 0,100")
+    @ResultMap("com.awbeci.mapper.UserDynamicMapper.UserDynamicResultComplex")
     List<UserDynamic> selectMyUserDynamic(@Param("uid") String uid);
 }

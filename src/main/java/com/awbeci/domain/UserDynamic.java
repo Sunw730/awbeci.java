@@ -1,6 +1,9 @@
 package com.awbeci.domain;
 
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import org.springframework.format.annotation.DateTimeFormat;
+
 import java.util.Date;
 
 public class UserDynamic {
@@ -12,6 +15,9 @@ public class UserDynamic {
     //1：添加 ，2：编辑，3：删除
     private String action;
     private String content;
+
+    @DateTimeFormat(pattern="yyyy年MM月dd日 HH:mm:ss")
+    @JsonFormat(pattern="yyyy年MM月dd日 HH:mm:ss",timezone = "GMT+8")
     private Date createDt;
     private Date updateDt;
 

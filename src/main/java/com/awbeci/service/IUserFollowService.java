@@ -16,4 +16,8 @@ public interface IUserFollowService {
     int insertUserFollow(UserFollow userFollow);
 
     int deleteUserFollow(String uid, String followid);
+
+    int getFollowerByUidCount(String uid);
+
+    int getFollowingByUidCount(String uid);
 }

@@ -40,4 +40,15 @@ public interface IUserFollowDao {
     @Delete("delete from userfollow where uid=#{uid} and followId=#{followid}")
     int deleteUserFollow(@Param("uid") String uid, @Param("followid") String followid);
 
+    @Select(" select count(*) count " +
+            " from userfollow a " +
+            " left join user b on a.uid=b.id" +
+            " where a.followid=#{uid}")
+    int getFollowerByUidCount(@Param("uid") String uid);
+
+    @Select("select count(*) count" +
+            " from userfollow a " +
+            " left join user b on a.followid=b.id" +
+            " where a.uid=#{uid}")
+    int getFollowingByUidCount(@Param("uid") String uid);
 }

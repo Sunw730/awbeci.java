@@ -51,8 +51,12 @@
     margin: 0 auto;
 }
 
-.header-content {
+.header-content-body {
     border: 1px solid #ddd;
+    border-top: none;
+}
+
+.header-content {
     padding: 4px 12px;
     margin-top: -1px;
 }
@@ -92,8 +96,8 @@
 }
 
 .username {
-    font-weight: bold;
     font-size: 18px;
+    color: #000;
 }
 
 .dynamic-time {
@@ -103,7 +107,7 @@
 
 .container-header {
     border: 1px solid #ddd;
-    background: #fff/*f9f9f9*/;
+    background: #f9f9f9;
     font-weight: bold;
     padding: 8px 10px;
     border-radius: 4px 4px 0 0;
@@ -148,6 +152,11 @@
 
 }
 
+.container-center .content-body {
+    font-size: 14px;
+    color: rgb(145, 151, 163);
+}
+
 .container-right .header-content {
     border: none;
     padding: 0;
@@ -158,7 +167,23 @@
     border-top-right-radius: 0;
 }
 
-.list-group-item{
+.list-group-item {
     font-size: 14px;
     padding: 8px;
+}
+
+.userInfoDlg {
+    padding-top: 10px;
+    position: absolute;
+    background-color: #fff;
+    width: 300px;
+    border: 1px solid #ddd;
+    height: 150px;
+    display: none;
+    -webkit-border-radius:4px;
+    -moz-border-radius:4px;
+    border-radius:4px;
+    z-index: 999;
+    -webkit-box-shadow: 0px 3px 12px rgba(0, 0, 0, 0.15);
+    box-shadow: 0px 3px 12px rgba(0, 0, 0, 0.15);
 }

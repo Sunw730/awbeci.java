@@ -182,7 +182,7 @@ a.list-group-item:hover {
 /*原来的写法*/
 .treeview-head {
     border: 1px solid #ddd;
-    background: #fff/*f9f9f9*/;
+    background: #f9f9f9;
     font-weight: bold;
     border-bottom: none;
     padding: 8px 10px;
