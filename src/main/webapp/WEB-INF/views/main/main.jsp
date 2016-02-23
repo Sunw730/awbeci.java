@@ -61,7 +61,9 @@
                         <ul>
                             <li>
                                 <a href="/${userDynamic.user.name}" class="username hoverUserName"
-                                   id="${userDynamic.user.id}">${userDynamic.user.name}</a>
+                                   id="${userDynamic.user.id}">
+                                        ${userDynamic.user.name}
+                                </a>
                             </li>
                             <li>
                                 <small class="dynamic-time">

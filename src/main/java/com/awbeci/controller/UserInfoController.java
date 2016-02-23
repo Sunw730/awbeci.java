@@ -185,18 +185,9 @@ public class UserInfoController {
 
     @RequestMapping(value = "/json/getUserInfoDlg.json", method = RequestMethod.POST)
     @ResponseBody
-    public Map getUserInfo(String uid) {
-        Map<String, Object> map = new HashMap<String, Object>();
-        User user = userService.selectUserById(uid);
-        map.put("user", user);
-        int followingUsersCount = userFollowService.getFollowingByUidCount(user.getId());
-        map.put("followingsCount", followingUsersCount);
-
-        int followersCount = userFollowService.getFollowerByUidCount(user.getId());
-        map.put("followersCount", followersCount);
-
-        int sitesCount = userSitesService.getUserSitesCountByUid(user.getId());
-        map.put("sitesCount", sitesCount);
-        return map;
+    public List<Map> getUserInfo(HttpSession session) {
+        User user = (User) session.getAttribute("user");
+        List<Map> userComplexs = userFollowService.getUserInfoComplex(user.getId());
+        return userComplexs;
     }
 }

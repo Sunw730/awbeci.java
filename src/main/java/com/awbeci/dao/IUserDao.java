@@ -47,5 +47,6 @@ public interface IUserDao {
     @Update("update user set password=#{password} where id=#{id}")
     int updatePassword(User user);
 
-
+    @Select("select * from user where id=#{id}")
+    User selectUserByMyFollowing(@Param("id") String id);
 }

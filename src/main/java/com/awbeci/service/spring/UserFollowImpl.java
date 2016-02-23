@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class UserFollowImpl implements IUserFollowService {
@@ -42,5 +43,9 @@ public class UserFollowImpl implements IUserFollowService {
 
     public int getFollowingByUidCount(String uid) {
         return userFollowDao.getFollowingByUidCount(uid);
+    }
+
+    public List<Map> getUserInfoComplex(String uid) {
+        return userFollowDao.getUserInfoComplex(uid);
     }
 }

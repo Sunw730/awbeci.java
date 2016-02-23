@@ -1,43 +1,46 @@
-/**
- * Created by zhangwei on 2015/9/28.
- */
 $(function () {
+    initMyFollowUser()
     initDlg();
 });
-
-function initDlg() {
-    $('.container-center').on('mouseenter mouseleave',
-        function (event) {
-            var $findhovera = $(this).children().find('a.hoverUserName');
-            if (event.type == 'mouseenter') {
-                var id = $findhovera.attr('id');
-                var positon = $findhovera.position();
-                $('.userInfoDlg').css({
-                    left: positon.left,
-                    top: positon.top + 29
-                });
-
-                $.post('/json/getUserInfoDlg.json',
-                    {uid: id},
-                    function (data) {
-                        $("#content-info-img img").attr('src', data.user.avatarUrl);
-                        $('#dynamic-time').text(data.user.createDt);
-                        $("#content-info-username a").attr({
-                            href: data.user.name
-                        }).text(data.user.name);
-                        $('#followingCount').text(data.followingsCount);
-                        $('#followerCount').text(data.followersCount);
-                        $('#sitesCount').text(data.sitesCount);
-                        $('#sitesCountNavigation').attr('href', data.user.name + '/navigation');
-                        $('.userInfoDlg').fadeTo('fast', 1);
-                    }, 'json');
-            } else {
-                var $target = event.relatedTarget
-                $('.userInfoDlg').hide();
+var myFollowUser;
+function initMyFollowUser() {
+    $.post('/json/getUserInfoDlg.json',
+        function (data) {
+            if (data){
+                myFollowUser = data;
             }
+        }, 'json');
+}
+
+var showtimeoutid;
+function initDlg() {
+    $('.hoverUserName').hover(function (e) {
+        var id = $(this).attr('id');
+        var positon = $(this).position();
+
+        $('.userInfoDlg').css({
+            left: positon.left,
+            top: positon.top + 22
         });
 
-    //$('.userInfoDlg').on('mouseleave', function (e) {
-    //    $('.userInfoDlg').hide();
-    //});
+        //$("#content-info-img img").attr('src', data.user.avatarUrl);
+        //$('#dynamic-time').text(data.user.createDt);
+        //$("#content-info-username a").attr({
+        //    href: data.user.name
+        //}).text(data.user.name);
+        //$('#followingCount').text(data.followingsCount);
+        //$('#followerCount').text(data.followersCount);
+        //$('#sitesCount').text(data.sitesCount);
+        //$('#sitesCountNavigation').attr('href', data.user.name + '/navigation');
+        //$('.userInfoDlg').fadeIn();
+    }, function (e) {
+        showtimeoutid = setTimeout(function () {
+            $('.userInfoDlg').hide()
+        }, 100)
+    });
+    $('.userInfoDlg').hover(function (e) {
+        clearTimeout(showtimeoutid)
+    }, function (e) {
+        $('.userInfoDlg').hide();
+    });
 }

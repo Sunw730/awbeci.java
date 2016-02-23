@@ -6,6 +6,7 @@ import org.apache.ibatis.annotations.*;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Map;
 
 @Repository
 public interface IUserFollowDao {
@@ -51,4 +52,13 @@ public interface IUserFollowDao {
             " left join user b on a.followid=b.id" +
             " where a.uid=#{uid}")
     int getFollowingByUidCount(@Param("uid") String uid);
+
+    @Select("select b.*," +
+            "(select count(*) from userfollow c left join user d on c.followid=d.id where c.uid=b.id) followingCount," +
+            "(select count(*) from userfollow c left join user d on c.uid=d.id where c.followid=b.id) followerCount," +
+            "(select count(*) FROM usersites c where c.uid=b.id) siteCount" +
+            "             from userfollow a" +
+            "             left join user b on a.followid=b.id" +
+            "             where a.uid=#{uid}")
+    List<Map> getUserInfoComplex(@Param("uid") String uid);
 }

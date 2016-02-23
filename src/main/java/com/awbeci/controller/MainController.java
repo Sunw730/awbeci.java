@@ -14,6 +14,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -54,11 +55,13 @@ public class MainController {
 
             int sitesCount = userSitesService.getUserSitesCountByUid(user.getId());
             model.addAttribute("sitesCount", sitesCount);
+
             List<Map> topUrl = userSitesService.getTopUrl(user.getId());
             model.addAttribute("topUrls", topUrl);
 
             List<UserDynamic> userDynamics = userDynamicService.selectMyUserDynamic(user.getId());
             model.addAttribute("userDynamics", userDynamics);
+
             return "/main/main";
         }
     }

@@ -4,6 +4,7 @@ import com.awbeci.domain.User;
 import com.awbeci.domain.UserFollow;
 
 import java.util.List;
+import java.util.Map;
 
 public interface IUserFollowService {
 
@@ -20,4 +21,6 @@ public interface IUserFollowService {
     int getFollowerByUidCount(String uid);
 
     int getFollowingByUidCount(String uid);
+
+    List<Map> getUserInfoComplex(String uid);
 }

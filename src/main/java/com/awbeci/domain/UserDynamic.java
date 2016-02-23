@@ -20,9 +20,7 @@ public class UserDynamic {
     @JsonFormat(pattern="yyyy年MM月dd日 HH:mm:ss",timezone = "GMT+8")
     private Date createDt;
     private Date updateDt;
-
     private User user;
-
     private UserSites userSites;
 
     public String getId() {
