@@ -24,7 +24,8 @@
                             <a href="${user.name}" class="username">${user.name}</a>
                         </li>
                         <li>
-                            <small class="dynamic-time"><spring:eval expression="user.createDt"/></small>
+                            <small class="dynamic-time">
+                                加入于 <spring:eval expression="user.createDt"/></small>
                         </li>
                     </ul>
                 </div>

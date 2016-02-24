@@ -2,11 +2,11 @@ $(function () {
     initMyFollowUser()
     initDlg();
 });
-var myFollowUser;
+var myFollowUser;//todo:后面要用redis做缓存服务
 function initMyFollowUser() {
     $.post('/json/getUserInfoDlg.json',
         function (data) {
-            if (data){
+            if (data) {
                 myFollowUser = data;
             }
         }, 'json');
@@ -22,17 +22,29 @@ function initDlg() {
             left: positon.left,
             top: positon.top + 22
         });
+        var showFlag = false;
+        if (myFollowUser) {
+            for (var i = 0; i < myFollowUser.length; i++) {
+                if (myFollowUser[i].ID == id) {
+                    $("#content-info-img img").attr('src', myFollowUser[i].AVATARURL);
+                    $('#dynamic-time').text('加入于 ' + myFollowUser[i].mycreatedt);
+                    $("#content-info-username a").attr({
+                        href: myFollowUser[i].NAME
+                    }).text(myFollowUser[i].NAME);
+                    $('#followingCount').text(myFollowUser[i].followingCount);
+                    $('#followerCount').text(myFollowUser[i].followerCount);
+                    $('#sitesCount').text(myFollowUser[i].siteCount);
+                    $('#sitesCountNavigation').attr('href', myFollowUser[i].NAME + '/navigation');
+                }
+                if (!showFlag && myFollowUser[i].uid == id) {
+                    showFlag = true;
+                }
+            }
+            if (!showFlag) {
+                $('.userInfoDlg').fadeIn();
+            }
+        }
 
-        //$("#content-info-img img").attr('src', data.user.avatarUrl);
-        //$('#dynamic-time').text(data.user.createDt);
-        //$("#content-info-username a").attr({
-        //    href: data.user.name
-        //}).text(data.user.name);
-        //$('#followingCount').text(data.followingsCount);
-        //$('#followerCount').text(data.followersCount);
-        //$('#sitesCount').text(data.sitesCount);
-        //$('#sitesCountNavigation').attr('href', data.user.name + '/navigation');
-        //$('.userInfoDlg').fadeIn();
     }, function (e) {
         showtimeoutid = setTimeout(function () {
             $('.userInfoDlg').hide()

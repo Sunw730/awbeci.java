@@ -53,7 +53,7 @@ public interface IUserFollowDao {
             " where a.uid=#{uid}")
     int getFollowingByUidCount(@Param("uid") String uid);
 
-    @Select("select b.*," +
+    @Select("select a.uid,b.*,date_format(b.createdt,'%Y年%m月%d日') mycreatedt," +
             "(select count(*) from userfollow c left join user d on c.followid=d.id where c.uid=b.id) followingCount," +
             "(select count(*) from userfollow c left join user d on c.uid=d.id where c.followid=b.id) followerCount," +
             "(select count(*) FROM usersites c where c.uid=b.id) siteCount" +
