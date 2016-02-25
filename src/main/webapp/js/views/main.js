@@ -20,7 +20,7 @@ function initDlg() {
 
         $('.userInfoDlg').css({
             left: positon.left,
-            top: positon.top + 22
+            top: positon.top -190
         });
         var showFlag = false;
         if (myFollowUser) {

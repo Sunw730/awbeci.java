@@ -123,6 +123,9 @@
                     </div>
                 </div>
             </div>
+            <div class="hover-offset">
+                <div class="arrow" style=""></div>
+            </div>
         </div>
     </div>
     <div class="container-right">
