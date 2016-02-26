@@ -358,6 +358,9 @@ footer a {
 .logo > span {
     padding-top: 5px;
 }
+.logo img{
+    margin-top: 5px;
+}
 
 /*重写tipcss*/
 .tooltip-inner {

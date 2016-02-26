@@ -46,13 +46,13 @@
         <div class="collapse navbar-collapse" id="navbar-collapse-01">
             <c:choose>
                 <c:when test="${sessionScope.uid!=null}">
-                    <h1 class="logo"></h1>
+                    <h1 class="logo"><img src="http://static.awbeci.com/logo/awbeci.png" height="32"></h1>
                     <ul class="nav navbar-nav navbar-left">
                         <li><a href="/" class="header-nav-link">首页</a></li>
-                        <li><a href="/${sessionScope.userName}" class="header-nav-link">个人主页</a></li>
+                        <li><a href="/${sessionScope.userName}/navigation" class="header-nav-link">我的导航</a></li>
                         <li><a href="/search" class="header-nav-link">搜索</a></li>
                         <li><a href="/aboutme" class="header-nav-link">关于</a></li>
-                        <li><a href="/status" class="header-nav-link">功能更新</a></li>
+                        <li><a href="/status" class="header-nav-link">功能反馈</a></li>
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
                         <li class="dropdown">
