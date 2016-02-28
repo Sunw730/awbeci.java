@@ -49,6 +49,7 @@
                     <h1 class="logo"><img src="http://static.awbeci.com/logo/awbeci.png" height="32"></h1>
                     <ul class="nav navbar-nav navbar-left">
                         <li><a href="/" class="header-nav-link">首页</a></li>
+                        <li><a href="/${sessionScope.userName}" class="header-nav-link">个人主页</a></li>
                         <li><a href="/${sessionScope.userName}/navigation" class="header-nav-link">我的导航</a></li>
                         <li><a href="/search" class="header-nav-link">搜索</a></li>
                         <li><a href="/aboutme" class="header-nav-link">关于</a></li>

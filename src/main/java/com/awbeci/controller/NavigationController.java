@@ -5,11 +5,13 @@ import com.awbeci.domain.UserCategory;
 import com.awbeci.domain.UserSites;
 import com.awbeci.service.IUserCategoryService;
 import com.awbeci.service.IUserSitesService;
+import org.apache.commons.collections.map.HashedMap;
 import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
+import org.jsoup.select.Collector;
 import org.jsoup.select.Elements;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -32,6 +34,7 @@ import java.io.InputStream;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.*;
+import java.util.stream.Collectors;
 
 @Controller
 public class NavigationController {
@@ -82,11 +85,16 @@ public class NavigationController {
 
     @RequestMapping(value = "/json/getCategoryChild.json", method = RequestMethod.POST)
     @ResponseBody
-    public List<UserCategory> getCategoryChild(HttpSession session) {
+    public Map getCategoryChild(HttpSession session) {
         String uid = (String) session.getAttribute("current_navigation_id");
+        Map map = new HashedMap();
         if (uid != null) {
             List<UserCategory> userCategories = userCategoryService.selectCategoryChild(uid);
-            return userCategories;
+            List<UserCategory> childs = userCategories.stream().filter(pid -> (pid.getPid() != null || !pid.getPid().trim().equals(""))).collect(Collectors.toList());
+            List<UserCategory> parents = userCategories.stream().filter(pid -> (pid.getPid() == null || pid.getPid().trim().equals(""))).collect(Collectors.toList());
+            map.put("childs",childs);
+            map.put("parents",parents);
+            return map;
         } else {
             return null;
         }
@@ -173,15 +181,15 @@ public class NavigationController {
             List userSites = userSitesService.getUserSitesByCategoryId(id);
             if (userSites.size() > 0) {
                 map.put("success", false);
-                map.put("msg","该分类下存在网址，请先删除网址再删除该分类");
+                map.put("msg", "该分类下存在网址，请先删除网址再删除该分类");
             } else {
                 int val = userCategoryService.deleteCategory(id);
                 map.put("success", true);
-                map.put("msg","删除成功");
+                map.put("msg", "删除成功");
             }
         } else {
             map.put("success", false);
-            map.put("msg","请先登录");
+            map.put("msg", "请先登录");
         }
         return map;
     }

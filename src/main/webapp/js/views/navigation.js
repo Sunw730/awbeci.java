@@ -28,7 +28,7 @@ $(function () {
     initQuerySite(name);
 });
 
-function initQuerySite(name){
+function initQuerySite(name) {
     if ($.trim(name).length > 0) {
         $.post('/json/querySiteByDomainName.json', {
             param: name
@@ -36,7 +36,7 @@ function initQuerySite(name){
             showSite(data);
         })
     }
-    else{
+    else {
         initSite();
     }
 }
@@ -160,24 +160,26 @@ function bindCategories(id) {
 }
 
 //绑定网址
-//todo:
-function bindSite() {
+function bindSite(bindid) {
     $('#siteType').empty();
     //$.ajaxSettings.async = false;
     $.post('/json/getCategoryChild.json', function (data) {
         var html = '';
         var flag = false;
-        for (var i = 0; i < data.length; i++) {
-            if (data[i].pid == '' || data[i].pid == null) {
-                html += '<optgroup label="' + data[i].name + '">'
-                for (var j = 0; j < data.length; j++) {
-                    if (data[j].pid == data[i].id) {
+        for (var i = 0; i < data.parents.length; i++) {
+                html += '<optgroup label="' + data.parents[i].name + '">'
+                for (var j = 0; j < data.childs.length; j++) {
+                    if (data.childs[j].pid == data.parents[i].id) {
                         flag = true;
-                        html += '<option value="' + data[j].id + '">' + data[j].name + '</option>'
+                        if (data.childs[j].id == bindid) {
+                            html += '<option value="' + data.childs[j].id + '" selected="selected">' + data.childs[j].name + '</option>';
+                        }
+                        else {
+                            html += '<option value="' + data.childs[j].id + '">' + data.childs[j].name + '</option>';
+                        }
                     }
                 }
-                html += '</optgroup>'
-            }
+                html += '</optgroup>';
         }
         if (!flag) {
             Lobibox.notify('info', {
@@ -422,10 +424,11 @@ function editDelSite() {
             left: $positon.left + 6,
             top: $positon.top + 39
         });
-        bindSite('');
+        var bindid = $(this).parent().children('a').attr('categoryid');
+        bindSite(bindid);
         $('#siteid').val($(this).parent().children('a').attr('id'));
-        $('#siteid').attr('icon', $(this).parent().children('a').children('img').attr('src'))
-        $('#siteType').selectpicker('val', $(this).parent().children('a').attr('categoryid'));
+        $('#siteid').attr('icon', $(this).parent().children('a').children('img').attr('src'));
+        $('#siteType').selectpicker('val', bindid);
     });
 
     $('.linkdelicon').on('click', function (event, data) {
