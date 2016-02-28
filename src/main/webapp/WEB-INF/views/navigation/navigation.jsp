@@ -5,11 +5,9 @@
 <head>
     <title>我的导航</title>
     <link href="/js/bootstrap-select/css/bootstrap-select.min.css" rel="stylesheet">
-    <link href="/js/github/github.css" rel="stylesheet">
     <link href="/css/navigation.css" rel="stylesheet">
     <script type="text/javascript" src="/js/dragsort-0.5.2/jquery.dragsort-0.5.2.min.js"></script>
     <script type="text/javascript" src="/js/bootstrap-select/js/bootstrap-select.min.js"></script>
-    <script type="text/javascript" src="/js/github/github.js"></script>
     <script type="text/javascript" src="/js/views/navigation.js"></script>
 </head>
 <body>
@@ -19,7 +17,8 @@
             <c:choose>
                 <c:when test="${hadFollow}">
                     <ul>
-                        <li><a href="javascript:void(0)" class="btn btn-default abc-btn" onclick="follow(this,'${sessionScope.current_user.id}','${sessionScope.current_user.name}')">
+                        <li><a href="javascript:void(0)" class="btn btn-default abc-btn"
+                               onclick="follow(this,'${sessionScope.current_user.id}','${sessionScope.current_user.name}')">
                             <span aria-hidden="true" class="octicon octicon-person commonOction"></span>
                             取消关注</a>
                         </li>
@@ -27,7 +26,8 @@
                 </c:when>
                 <c:otherwise>
                     <ul>
-                        <li><a href="javascript:void(0)" class="btn btn-default abc-btn" onclick="follow(this,'${sessionScope.current_user.id}','${sessionScope.current_user.name}')">
+                        <li><a href="javascript:void(0)" class="btn btn-default abc-btn"
+                               onclick="follow(this,'${sessionScope.current_user.id}','${sessionScope.current_user.name}')">
                             <span aria-hidden="true" class="octicon octicon-person commonOction"></span>
                             关注</a>
                         </li>
@@ -48,26 +48,65 @@
             </div>
         </div>
     </c:if>
-
     <div class="row">
         <div class="col-lg-3 rowcol-left">
-            <div class="treeview-head">分类列表
+            <div class="treeview-head">
+                <strong>分类列表</strong>
                 <div class="treeview-head-right">
                     <c:if test="${sessionScope.user != null && isme}">
-                        <a href="javascript:void(0)" class="treeview-head-icon-right">
-                        <span id="addcategory" class="octicon octicon-plus" data-toggle="tooltip" data-placement="top"
-                              title="添加"></span>
+                        <a href="javascript:void(0)" class="treeview-head-icon-right" data-toggle="tooltip"
+                           data-placement="top"
+                           title="添加">
+                            <span id="addcategory" class="octicon octicon-plus"></span>
+                            添加
                         </a>
 
-                        <a href="javascript:void(0)" class="treeview-head-icon-right">
-                         <span id="editcategory" class=" octicon octicon-pencil" data-toggle="tooltip"
-                               data-placement="top" title="编辑"></span>
+                        <a href="javascript:void(0)" class="treeview-head-icon-right" data-toggle="tooltip"
+                           data-placement="top" title="编辑">
+                            <span id="editcategory" class=" octicon octicon-pencil"></span>
+                            编辑
                         </a>
                     </c:if>
                 </div>
             </div>
             <div class="sidebar-module">
-
+                <ul class="list-group">
+                    <li class="list-group-item">
+                        <a href="#">
+                            <span class="octicon octicon-repo typeoction"></span>
+                            分类一
+                        </a>
+                        <a href="#"><span class="octicon octicon-chevron-right depth-right"></span></a>
+                    </li>
+                    <li class="list-group-item">
+                        <a href="#">
+                            <span class="octicon octicon-repo typeoction"></span>
+                            分类二
+                        </a>
+                        <a href="#"><span class="octicon octicon-chevron-right depth-right"></span></a>
+                    </li>
+                    <li class="list-group-item">
+                        <a href="#">
+                            <span class="octicon octicon-repo typeoction"></span>
+                            分类三
+                        </a>
+                        <a href="#"><span class="octicon octicon-chevron-right depth-right"></span></a>
+                    </li>
+                    <li class="list-group-item">
+                        <a href="#">
+                            <span class="octicon octicon-repo typeoction"></span>
+                            分类四
+                        </a>
+                        <a href="#"><span class="octicon octicon-chevron-right depth-right"></span></a>
+                    </li>
+                    <li class="list-group-item">
+                        <a href="#">
+                            <span class="octicon octicon-repo typeoction"></span>
+                            分类五
+                        </a>
+                        <a href="#"><span class="octicon octicon-chevron-right depth-right"></span></a>
+                    </li>
+                </ul>
             </div>
             <!-- /sidebar-module -->
             <div class="editnavdlg">
@@ -86,23 +125,32 @@
                     </div>
                 </div>
                 <div class="categorytoolbar">
-                    <button type="button" class="btn btn-success btn-sm" onclick="saveCategory()"><span class="octicon octicon-check myoction"></span>确定</button>
-                    <button type="button" class="btn btn-danger btn-sm" onclick="canceleditNav()"><span class="octicon octicon-x myoction"></span>取消</button>
+                    <button type="button" class="btn btn-success btn-sm" onclick="saveCategory()"><span
+                            class="octicon octicon-check myoction"></span>确定
+                    </button>
+                    <button type="button" class="btn btn-danger btn-sm" onclick="canceleditNav()"><span
+                            class="octicon octicon-x myoction"></span>取消
+                    </button>
                 </div>
             </div>
         </div>
         <div class="col-lg-9 rowcol-right">
-            <div class="treeview-head">网址列表
+            <div class="treeview-head">
+                <strong>网址列表</strong>
                 <div class="treeview-head-right">
                     <c:if test="${sessionScope.user != null && isme}">
-                        <a href="javascript:void(0)" class="treeview-head-icon-right">
-                        <span id="addsite" class="octicon octicon-plus" data-toggle="tooltip" data-placement="top"
-                              title="" data-original-title="添加"></span>
+                        <a href="javascript:void(0)" class="treeview-head-icon-right" data-toggle="tooltip"
+                           data-placement="top"
+                           title="" data-original-title="添加">
+                            <span id="addsite" class="octicon octicon-plus"></span>
+                            添加
                         </a>
 
-                        <a href="javascript:void(0)" class="treeview-head-icon-right">
-                        <span id="editsite" class=" octicon octicon-pencil" data-toggle="tooltip" data-placement="top"
-                              title="" data-original-title="编辑"></span>
+                        <a href="javascript:void(0)" class="treeview-head-icon-right" data-toggle="tooltip"
+                           data-placement="top"
+                           title="" data-original-title="编辑">
+                            <span id="editsite" class=" octicon octicon-pencil"></span>
+                            编辑
                         </a>
                     </c:if>
                 </div>
@@ -135,15 +183,17 @@
                         </div>
                     </div>
                     <div class="sitetoolbar  form-group-sm">
-                        <button type="button" class="btn btn-success btn-sm" onclick="saveSite()"><span class="octicon octicon-check myoction"></span>确定</button>
-                        <button type="button" class="btn btn-danger btn-sm" onclick="canceleditLink()"><span class="octicon octicon-x myoction"></span>取消</button>
+                        <button type="button" class="btn btn-success btn-sm" onclick="saveSite()"><span
+                                class="octicon octicon-check myoction"></span>确定
+                        </button>
+                        <button type="button" class="btn btn-danger btn-sm" onclick="canceleditLink()"><span
+                                class="octicon octicon-x myoction"></span>取消
+                        </button>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
-</div>
 </div>
 </body>
 <script charset="gbk" src="http://www.baidu.com/js/opensug.js"></script>

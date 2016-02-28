@@ -8,6 +8,7 @@ public class UserCategory {
     private String uid;
     private String pid;
     private String name;
+    private int depth;
     private Integer sortNo;
     private Date createDt;
     private Date updateDt;
@@ -75,5 +76,13 @@ public class UserCategory {
 
     public void setUpdateDt(Date updateDt) {
         this.updateDt = updateDt;
+    }
+
+    public int getDepth() {
+        return depth;
+    }
+
+    public void setDepth(int depth) {
+        this.depth = depth;
     }
 }

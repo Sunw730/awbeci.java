@@ -7,12 +7,14 @@ import org.apache.ibatis.annotations.*;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+
 @Repository
 public interface IUserCategoryDao {
 
-    @Select("select * from usercategory where uid=#{uid}" +
+    @Select(" select * from usercategory " +
+            " where uid=#{uid} and depth=#{depth} " +
             " order by sortNo")
-    List<UserCategory> selectCategoryByUid(String uid);
+    List<UserCategory> selectCategoryByUid(@Param("uid") String uid, @Param("depth")int depth);
 
     @Select("select * from usercategory " +
             "where uid=#{uid} and ( pid is null or pid = '') " +

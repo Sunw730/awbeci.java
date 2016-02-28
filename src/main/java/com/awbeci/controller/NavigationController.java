@@ -49,10 +49,10 @@ public class NavigationController {
 
     @RequestMapping(value = "/json/getCategoryByUid.json", method = RequestMethod.POST)
     @ResponseBody
-    public List<UserCategory> selectAllCategory(HttpSession session) {
+    public List<UserCategory> selectAllCategory(int depth, HttpSession session) {
         String uid = (String) session.getAttribute("current_navigation_id");
         if (uid != null) {
-            List<UserCategory> userCategories = userCategoryService.selectCategoryByUid(uid);
+            List<UserCategory> userCategories = userCategoryService.selectCategoryByUid(uid, depth);
             return userCategories;
         } else {
             return null;
@@ -92,8 +92,8 @@ public class NavigationController {
             List<UserCategory> userCategories = userCategoryService.selectCategoryChild(uid);
             List<UserCategory> childs = userCategories.stream().filter(pid -> (pid.getPid() != null || !pid.getPid().trim().equals(""))).collect(Collectors.toList());
             List<UserCategory> parents = userCategories.stream().filter(pid -> (pid.getPid() == null || pid.getPid().trim().equals(""))).collect(Collectors.toList());
-            map.put("childs",childs);
-            map.put("parents",parents);
+            map.put("childs", childs);
+            map.put("parents", parents);
             return map;
         } else {
             return null;

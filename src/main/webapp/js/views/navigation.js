@@ -13,7 +13,7 @@ function GetQueryString(name) {
 $(function () {
     $("[data-toggle='tooltip']").tooltip({html: true});
     //$("#showlink ul").dragsort({});
-    initCategory();
+    //todo:initCategory();
     editCategorySite();
     addcategory();
     addSite();
@@ -85,7 +85,9 @@ function showSite(data) {
 //初始化分类
 function initCategory() {
     $('.sidebar-module').empty();
-    $.post('/json/getCategoryByUid.json', function (data) {
+    $.post('/json/getCategoryByUid.json', {
+        depth: 1
+    }, function (data) {
         var html = '<ul>';
         for (var i = 0; i < data.length; i++) {
             if (data[i].pid == null || data[i].pid == '') {
@@ -167,19 +169,19 @@ function bindSite(bindid) {
         var html = '';
         var flag = false;
         for (var i = 0; i < data.parents.length; i++) {
-                html += '<optgroup label="' + data.parents[i].name + '">'
-                for (var j = 0; j < data.childs.length; j++) {
-                    if (data.childs[j].pid == data.parents[i].id) {
-                        flag = true;
-                        if (data.childs[j].id == bindid) {
-                            html += '<option value="' + data.childs[j].id + '" selected="selected">' + data.childs[j].name + '</option>';
-                        }
-                        else {
-                            html += '<option value="' + data.childs[j].id + '">' + data.childs[j].name + '</option>';
-                        }
+            html += '<optgroup label="' + data.parents[i].name + '">'
+            for (var j = 0; j < data.childs.length; j++) {
+                if (data.childs[j].pid == data.parents[i].id) {
+                    flag = true;
+                    if (data.childs[j].id == bindid) {
+                        html += '<option value="' + data.childs[j].id + '" selected="selected">' + data.childs[j].name + '</option>';
+                    }
+                    else {
+                        html += '<option value="' + data.childs[j].id + '">' + data.childs[j].name + '</option>';
                     }
                 }
-                html += '</optgroup>';
+            }
+            html += '</optgroup>';
         }
         if (!flag) {
             Lobibox.notify('info', {

@@ -5,7 +5,7 @@ import com.awbeci.domain.UserCategory;
 import java.util.List;
 
 public interface IUserCategoryService {
-    List<UserCategory> selectCategoryByUid(String uid);
+    List<UserCategory> selectCategoryByUid(String uid, int depth);
 
     List<UserCategory> selectCategoryParent(String uid);
 

@@ -3,6 +3,13 @@
 <mapper namespace="com.awbeci.mapper.UserCategoryMapper">
     <resultMap id="UserCategoryResult" type="UserCategory">
         <id property="id" column="id"/>
+        <result property="uid" column="uid"/>
+        <result property="pid" column="pid"/>
+        <result property="name" column="name"/>
+        <result property="depth" column="depth"/>
+        <result property="sortNo" column="sortNo"/>
+        <result property="createDt" column="createDt"/>
+        <result property="updateDt" column="updateDt"/>
         <collection property="userSiteses" resultMap="UserSitesResult"/>
     </resultMap>
 </mapper>
