@@ -13,7 +13,7 @@ function GetQueryString(name) {
 $(function () {
     $("[data-toggle='tooltip']").tooltip({html: true});
     //$("#showlink ul").dragsort({});
-    //todo:initCategory();
+    initCategory();
     editCategorySite();
     addcategory();
     addSite();
@@ -84,47 +84,37 @@ function showSite(data) {
 
 //初始化分类
 function initCategory() {
-    $('.sidebar-module').empty();
+    $('#category-list').empty();
     $.post('/json/getCategoryByUid.json', {
         depth: 1
     }, function (data) {
-        var html = '<ul>';
+        var html = '';
         for (var i = 0; i < data.length; i++) {
-            if (data[i].pid == null || data[i].pid == '') {
-                html += '<li class="js-expand-btn">';
-                html += '<h3>';
-                html += '<a id="' + data[i].id + '" href="#" class="categoryParent">';
-                html += '<span class="octicon octicon-chevron-right arrow-btn" aria-hidden="true"></span>';
-                html += data[i].name;
-                html += '</a>';
-                html += '<span class="navedit navediticon octicon octicon-pencil" ></span>';
-                html += '<span class="navedit navdelicon octicon octicon-x"></span>';
-                html += '</h3>';
-                html += '<ul class="js-guides">';
-
-                for (var j = 0; j < data.length; j++) {
-                    if (data[j].pid == data[i].id) {
-                        html += '<li class="list-item">';
-                        html += '<a class="categoryChild" href="javascript:void(0)" id="' + data[j].id + '" pid="' + data[j].pid + '"><span class="octicon octicon-repo typeoction"></span>' + data[j].name + '</a>';
-                        html += '<span class="navedit navediticon octicon octicon-pencil"></span>';
-                        html += '<span class="navedit navdelicon octicon octicon-x"></span>';
-                        html += '</li>';
-                    }
-                }
-
-                html += '</ul>';
-                html += '</li>';
-            }
+            html += '  <li class="list-group-item">' +
+                ' <a href="#">' +
+                ' <span class="octicon octicon-repo typeoction"></span>' + data[i].name +
+                '  </a>' +
+                '  <a href="#">' +
+                ' <span class="navedit octicon octicon-pencil depth-right-edit" ></span>' +
+                ' </a>' +
+                ' <a href="#">' +
+                '  <span class="navedit octicon octicon-x depth-right-del"></span>' +
+                '  </a>' +
+                '  <a href="javascript:void(0)" onclick="depthRightIn()">' +
+                '   <span class="octicon octicon-triangle-right depth-right-in"></span>' +
+                '   </a>' +
+                '   </li>';
         }
-        html += '</ul>';
-        $('.sidebar-module').append($(html));
+        $('#category-list').append($(html));
         $('.navedit').addClass('hide');
 
-        //this funciton in github.js
-        setSiteBar();
         editDelCategory();
         categoryChildClick();
     }, 'json');
+}
+
+function depthRightIn() {
+
 }
 
 //分类子节点单击事件

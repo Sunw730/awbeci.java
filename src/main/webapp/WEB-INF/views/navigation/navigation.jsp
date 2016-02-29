@@ -70,42 +70,7 @@
                 </div>
             </div>
             <div class="sidebar-module">
-                <ul class="list-group">
-                    <li class="list-group-item">
-                        <a href="#">
-                            <span class="octicon octicon-repo typeoction"></span>
-                            分类一
-                        </a>
-                        <a href="#"><span class="octicon octicon-chevron-right depth-right"></span></a>
-                    </li>
-                    <li class="list-group-item">
-                        <a href="#">
-                            <span class="octicon octicon-repo typeoction"></span>
-                            分类二
-                        </a>
-                        <a href="#"><span class="octicon octicon-chevron-right depth-right"></span></a>
-                    </li>
-                    <li class="list-group-item">
-                        <a href="#">
-                            <span class="octicon octicon-repo typeoction"></span>
-                            分类三
-                        </a>
-                        <a href="#"><span class="octicon octicon-chevron-right depth-right"></span></a>
-                    </li>
-                    <li class="list-group-item">
-                        <a href="#">
-                            <span class="octicon octicon-repo typeoction"></span>
-                            分类四
-                        </a>
-                        <a href="#"><span class="octicon octicon-chevron-right depth-right"></span></a>
-                    </li>
-                    <li class="list-group-item">
-                        <a href="#">
-                            <span class="octicon octicon-repo typeoction"></span>
-                            分类五
-                        </a>
-                        <a href="#"><span class="octicon octicon-chevron-right depth-right"></span></a>
-                    </li>
+                <ul id="category-list" class="list-group">
                 </ul>
             </div>
             <!-- /sidebar-module -->

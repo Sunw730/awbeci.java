@@ -219,7 +219,6 @@ a.list-group-item:hover {
 
 .treeview-head-icon-right {
     line-height: 1.42857;
-    font-size: 16px;
     padding-right: 10px;
 }
 
@@ -371,12 +370,28 @@ a.list-group-item:hover {
 
 /*new pages for awbeci 2.2*/
 .list-group-item a{
-    font-size: 14px;
+    font-size: 13px;
     font-weight: bold;
 }
 
-.depth-right{
+.depth-right-in,.depth-right-del,.depth-right-edit{
     float: right;
-    display: inline-block;
     font-size: 20px;
+    display: inline-block;
+    position: absolute;
+    top: 0px;
+    height: 30px;
+    width: 30px;
+    line-height: 30px;
+    border-left: 1px solid #ddd;
+    text-align: center;
+}
+.depth-right-in{
+    right: 0;
+}
+.depth-right-edit{
+    right: 62px;
+}
+.depth-right-del{
+    right: 31px;
 }
