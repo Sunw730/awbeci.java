@@ -13,9 +13,8 @@ function GetQueryString(name) {
 $(function () {
     $("[data-toggle='tooltip']").tooltip({html: true});
     //$("#showlink ul").dragsort({});
-    initCategory();
+    initCategory('', 1);
     editCategorySite();
-    addcategory();
     addSite();
     $('#categoryClose').on('click', function () {
         canceleditNav();
@@ -83,10 +82,13 @@ function showSite(data) {
 }
 
 //初始化分类
-function initCategory() {
+function initCategory(pid, depth) {
+    $('#category-list').attr('depth', depth);
+    $('#category-list').attr('pid', pid);
     $('#category-list').empty();
+    //todo:根据Pid来查，不是根据depth
     $.post('/json/getCategoryByUid.json', {
-        depth: 1
+        depth: depth
     }, function (data) {
         var html = '';
         for (var i = 0; i < data.length; i++) {
@@ -101,7 +103,7 @@ function initCategory() {
                 '  <span class="navedit octicon octicon-x depth-right-del"></span>' +
                 '  </a>' +
                 '  <a href="javascript:void(0)" onclick="depthRightIn()">' +
-                '   <span class="octicon octicon-triangle-right depth-right-in"></span>' +
+                '   <span class="octicon octicon-chevron-right depth-right-in"></span>' +
                 '   </a>' +
                 '   </li>';
         }
@@ -131,23 +133,6 @@ function clickCategoryShowSite() {
         categoryId: clickCategoryId
     }, function (data) {
         showSite(data);
-    }, 'json');
-}
-
-//绑定类型
-function bindCategories(id) {
-    $('#categoryType').empty();
-    //$.ajaxSettings.async = false;
-    $.post('/json/getCategoryParent.json', function (data) {
-        var html = '<option value="">主分类</option>';
-        for (var i = 0; i < data.length; i++) {
-            if (data[i].id != id) {
-                html += '<option value="' + data[i].id + '">' + data[i].name + '</option>'
-            }
-        }
-        $('#categoryType').append(html);
-        $('#categoryType').selectpicker('refresh');
-        $('.editnavdlg').addClass('show')
     }, 'json');
 }
 
@@ -190,25 +175,24 @@ function bindSite(bindid) {
 }
 
 //添加分类
-function addcategory() {
-    $('#addcategory').on('click', function () {
-        categoryflag = 'add';
-        $('.header-title').text('添加');
-        var positon = $(this).parent().parent().position();
-        $("#categoryName").val('');
-        $('#categoryId').val('');
-        $('.editnavdlg').css({
-            left: '1px',
-            top: positon.top + 29
-        });
-        bindCategories();
+function addcategory(that) {
+    categoryflag = 'add';
+    $('.header-title').text('添加');
+    var positon = $(that).position();
+    $("#categoryName").val('');
+    $('#categoryId').val('');
+    $('.editnavdlg').css({
+        left: '1px',
+        top: positon.top + 29
     });
+    $('.editnavdlg').addClass('show')
 }
 
 //保存分类
 function saveCategory() {
+    var depth = $('#category-list').attr('depth');
+    var pid = $('#category-list').attr('pid');
     var categoryname = $('#categoryName').val();
-    var category = $('#categoryType').val();
     if ($.trim(categoryname).length == 0) {
         Lobibox.notify('info', {
             size: 'mini',
@@ -217,16 +201,16 @@ function saveCategory() {
         });
         return;
     }
-    //todo:注意：添加的时候不能允许名称重复
     $.post('/json/saveCategory.json', {
         id: $('#categoryId').val(),
         name: categoryname,
-        pid: category,
+        pid: pid,
+        depth: depth,
         flag: categoryflag
     }, function (data) {
         if (data != 0) {
             canceleditNav();
-            initCategory();
+            initCategory(pid, depth);
         }
         else {
             Lobibox.notify('info', {

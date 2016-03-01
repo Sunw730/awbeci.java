@@ -56,8 +56,8 @@
                     <c:if test="${sessionScope.user != null && isme}">
                         <a href="javascript:void(0)" class="treeview-head-icon-right" data-toggle="tooltip"
                            data-placement="top"
-                           title="添加">
-                            <span id="addcategory" class="octicon octicon-plus"></span>
+                           title="添加" onclick="addcategory(this)">
+                            <span  class="octicon octicon-plus"></span>
                             添加
                         </a>
 
@@ -83,10 +83,6 @@
                     <div class="form-group">
                         <input type="text" class="form-control" id="categoryName" placeholder="请输入名称">
                         <input type="hidden" id="categoryId">
-                    </div>
-                    <div class="form-group">
-                        <select id="categoryType" class="selectpicker  show-tick" data-size="10">
-                        </select>
                     </div>
                 </div>
                 <div class="categorytoolbar">

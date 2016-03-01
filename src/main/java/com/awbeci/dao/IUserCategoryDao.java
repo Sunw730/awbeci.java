@@ -27,8 +27,8 @@ public interface IUserCategoryDao {
     @Select("select * from usercategory where uid=#{uid}")
     List<UserCategory> selectCategoryChild(String uid);
 
-    @Insert("insert into usercategory(id,uid,pid,name,sortno,createdt,updatedt)" +
-            "values(#{id},#{uid},#{pid},#{name},#{sortNo},#{createDt},#{updateDt})")
+    @Insert("insert into usercategory(id,uid,pid,name,depth,sortno,createdt,updatedt)" +
+            "values(#{id},#{uid},#{pid},#{name},#{depth},#{sortNo},#{createDt},#{updateDt})")
     int insertCategory(UserCategory userCategory);
 
     @Update("update usercategory " +

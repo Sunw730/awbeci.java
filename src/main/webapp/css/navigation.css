@@ -383,15 +383,24 @@ a.list-group-item:hover {
     height: 30px;
     width: 30px;
     line-height: 30px;
-    border-left: 1px solid #ddd;
     text-align: center;
 }
 .depth-right-in{
     right: 0;
 }
+
+.depth-right-in:hover{
+    background-color: #428bca;
+    color: #fff;
+}
+
+
 .depth-right-edit{
     right: 62px;
+    font-size: 16px;
 }
 .depth-right-del{
     right: 31px;
+    font-size: 16px;
 }
+
