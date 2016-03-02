@@ -49,10 +49,10 @@ public class NavigationController {
 
     @RequestMapping(value = "/json/getCategoryByUid.json", method = RequestMethod.POST)
     @ResponseBody
-    public List<UserCategory> selectAllCategory(int depth, HttpSession session) {
+    public List<UserCategory> selectAllCategory(String pid, HttpSession session) {
         String uid = (String) session.getAttribute("current_navigation_id");
         if (uid != null) {
-            List<UserCategory> userCategories = userCategoryService.selectCategoryByUid(uid, depth);
+            List<UserCategory> userCategories = userCategoryService.selectCategoryByUid(uid, pid);
             return userCategories;
         } else {
             return null;

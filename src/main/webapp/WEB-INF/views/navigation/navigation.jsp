@@ -62,8 +62,8 @@
                         </a>
 
                         <a href="javascript:void(0)" class="treeview-head-icon-right" data-toggle="tooltip"
-                           data-placement="top" title="编辑">
-                            <span id="editcategory" class=" octicon octicon-pencil"></span>
+                           data-placement="top" title="编辑" onclick="showEditCategoryBtn()">
+                            <span class="octicon octicon-pencil"></span>
                             编辑
                         </a>
                     </c:if>

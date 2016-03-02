@@ -14,8 +14,8 @@ public class UserCagetoryImpl implements IUserCategoryService {
     private IUserCategoryDao userCategoryDao;
 
 
-    public List<UserCategory> selectCategoryByUid(String uid, int depth) {
-        return userCategoryDao.selectCategoryByUid(uid, depth);
+    public List<UserCategory> selectCategoryByUid(String uid, String pid) {
+        return userCategoryDao.selectCategoryByUid(uid, pid);
     }
 
 

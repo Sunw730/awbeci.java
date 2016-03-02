@@ -12,9 +12,9 @@ import java.util.List;
 public interface IUserCategoryDao {
 
     @Select(" select * from usercategory " +
-            " where uid=#{uid} and depth=#{depth} " +
+            " where uid=#{uid} and pid=#{pid} " +
             " order by sortNo")
-    List<UserCategory> selectCategoryByUid(@Param("uid") String uid, @Param("depth")int depth);
+    List<UserCategory> selectCategoryByUid(@Param("uid") String uid, @Param("pid")String pid);
 
     @Select("select * from usercategory " +
             "where uid=#{uid} and ( pid is null or pid = '') " +

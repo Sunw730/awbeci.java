@@ -352,29 +352,32 @@ a.list-group-item:hover {
 .bootstrap-select:not([class*=col-]):not([class*=form-control]):not(.input-group-btn) {
     width: 100%;
 }
-.currUserInfo ul{
+
+.currUserInfo ul {
     float: right;
 }
-.currUserInfo-detail{
+
+.currUserInfo-detail {
     margin-bottom: 15px;
     padding-left: 3px;
 }
 
-.typeoction{
+.typeoction {
     color: #000;
     margin-right: 5px;
 }
-.myoction{
+
+.myoction {
     margin-right: 5px;
 }
 
 /*new pages for awbeci 2.2*/
-.list-group-item a{
+.list-group-item a {
     font-size: 13px;
     font-weight: bold;
 }
 
-.depth-right-in,.depth-right-del,.depth-right-edit{
+.depth-right-in, .depth-right-del, .depth-right-edit {
     float: right;
     font-size: 20px;
     display: inline-block;
@@ -385,22 +388,35 @@ a.list-group-item:hover {
     line-height: 30px;
     text-align: center;
 }
-.depth-right-in{
+
+.depth-right-in {
     right: 0;
 }
 
-.depth-right-in:hover{
+.depth-right-in:hover {
     background-color: #428bca;
     color: #fff;
 }
 
-
-.depth-right-edit{
-    right: 62px;
-    font-size: 16px;
-}
-.depth-right-del{
+.depth-right-edit {
     right: 31px;
     font-size: 16px;
 }
+
+.depth-right-edit:hover {
+    background-color: #428bca;
+    color: #fff;
+}
+
+.depth-right-del {
+    right: 0;
+    font-size: 16px;
+}
+
+.depth-right-del:hover {
+    background-color: red;
+    color: #fff;
+}
+
+
 
