@@ -1,8 +1,7 @@
 var categoryflag = '';
 var siteflag = '';
 //点击分类的时候(注意是子分类)
-var clickCategoryId = '';
-
+var categoryObj = [];//导航分类层次数组
 function GetQueryString(name) {
     var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
     var r = window.location.search.substr(1).match(reg);
@@ -14,8 +13,6 @@ $(function () {
     $("[data-toggle='tooltip']").tooltip({html: true});
     //$("#showlink ul").dragsort({});
     initCategory('', 1);
-    editCategorySite();
-    addSite();
     $('#categoryClose').on('click', function () {
         canceleditNav();
     });
@@ -69,23 +66,49 @@ function showSite(data) {
         html += '<div class="showlinkicon">';
         html += '<a id="' + data[i].id + '" target="_blank" href="' + data[i].url + '" categoryid="' + data[i].categoryId + '">';
         html += '<img width="16px" height="16px" style="margin-right:5px;" src="' + data[i].icon + '">';
-        html += data[i].name;
+        html += '<span class="siteName">' + data[i].name + '</span>';
         html += ' </img>';
-        html += '</a>'
-        html += '<span class="linkedit linkediticon octicon octicon-pencil"></span>';
-        html += '<span class="linkedit linkdelicon octicon octicon-x"></span></div>';
+        html += '</a>';
+        html += '<a href="javascript:void(0)" onclick="showEditSiteDlg(this)"><span class="linkedit linkediticon octicon octicon-pencil"></span></a>';
+        html += '<a href="javascript:void(0)" onclick="delSite(this)"><span class="linkedit linkdelicon octicon octicon-x"></span></a></div>';
         html += ' </li>';
     }
     $('#showmysite').append(html);
     $('.linkedit').addClass('hide');
-    editDelSite();
+}
+
+//返回上一级分类
+function backCategory() {
+    categoryObj.pop();
+    var category = categoryObj.pop();
+    initCategory(category.pid, category.depth);
+}
+
+//添加到分类层级数组中
+function pushCategory(pid, depth) {
+    var iscategoryObj = false;
+    for (var i = 0; i < categoryObj.length; i++) {
+        if (categoryObj[i].pid == pid && categoryObj[i].depth == depth) {
+            iscategoryObj = true;
+        }
+    }
+    if (!iscategoryObj) {
+        categoryObj.push({pid: pid, depth: depth});
+    }
 }
 
 //初始化分类
 function initCategory(pid, depth) {
+    pushCategory(pid, depth);
     $('#category-list').attr('depth', depth);
     $('#category-list').attr('pid', pid);
     $('#category-list').empty();
+    if (depth > 1) {
+        $('#backCategory').css({'display': 'inline-block'});
+    }
+    else {
+        $('#backCategory').css({'display': 'none'});
+    }
 
     $.post('/json/getCategoryByUid.json', {
         pid: pid
@@ -93,84 +116,62 @@ function initCategory(pid, depth) {
         var html = '';
         for (var i = 0; i < data.length; i++) {
             html += '  <li class="list-group-item">' +
-                        ' <a href="javascript:void(0)" categoryid="' + data[i].id + '">' +
-                        ' <span class="octicon octicon-repo typeoction"></span>' + data[i].name +
-                        '  </a>' +
-                        '  <a href="javascript:void(0)" onclick="editCategory(this)">' +
-                        ' <span class="octicon octicon-pencil oction-category depth-right-edit" ></span>' +
-                        ' </a>' +
-                        ' <a href="javascript:void(0)" onclick="delCategory(this)">' +
-                        '  <span class="octicon octicon-x oction-category depth-right-del"></span>' +
-                        '  </a>' +
-                        '  <a href="javascript:void(0)" onclick="depthRightIn()">' +
-                        '   <span class="octicon octicon-chevron-right depth-right-in"></span>' +
-                        '   </a>' +
+                ' <a href="javascript:void(0)" categoryid="' + data[i].id + '" onclick="clickCategoryShowSite(this,\'' + data[i].id + '\')">' +
+                ' <span class="categoryname">' + data[i].name + '</span>' +
+                '  </a>' +
+                '  <a href="javascript:void(0)" onclick="editCategory(this)">' +
+                ' <span class="octicon octicon-pencil oction-category depth-right-edit" ></span>' +
+                ' </a>' +
+                ' <a href="javascript:void(0)" onclick="delCategory(this,\'' + data[i].id + '\',' + data[i].sitescount + ',' + data[i].categorycount + ')">' +
+                '  <span class="octicon octicon-x oction-category depth-right-del"></span>' +
+                '  </a>' +
+                '  <a href="javascript:void(0)" onclick="initCategory(\'' + data[i].id + '\',' + (depth + 1) + ')">' +
+                '   <span class="octicon octicon-chevron-right depth-right-in"></span>' +
+                '   </a>' +
                 '   </li>';
         }
         $('#category-list').append($(html));
         $('.oction-category').addClass('hide');
-
-        editDelCategory();
-        categoryChildClick();
     }, 'json');
 }
 
-function depthRightIn() {
-
-}
-
-//分类子节点单击事件
-function categoryChildClick() {
-    $('.categoryChild').on('click', function () {
-        clickCategoryId = $(this).attr('id');
-        clickCategoryShowSite();
-    });
-}
-
 //点击分类的时候显示网址列表
-function clickCategoryShowSite() {
+function clickCategoryShowSite(that, id) {
+    $('#category-list li').removeClass('list-group-item-active');
+    $(that).parent().addClass('list-group-item-active');
     $.post('/json/getSiteByCategoryId.json', {
-        categoryId: clickCategoryId
+        categoryId: id
+    }, function (data) {
+        showSite(data);
+    }, 'json');
+}
+
+function addSiteShowSite(id) {
+    $.post('/json/getSiteByCategoryId.json', {
+        categoryId: id
     }, function (data) {
         showSite(data);
     }, 'json');
 }
 
 //绑定网址
-function bindSite(bindid) {
+function bindSiteForCategory(pid, bindid) {
     $('#siteType').empty();
-    //$.ajaxSettings.async = false;
-    $.post('/json/getCategoryChild.json', function (data) {
+    $.post('/json/getCategoryByUid.json', {
+        pid: pid
+    }, function (data) {
         var html = '';
-        var flag = false;
-        for (var i = 0; i < data.parents.length; i++) {
-            html += '<optgroup label="' + data.parents[i].name + '">'
-            for (var j = 0; j < data.childs.length; j++) {
-                if (data.childs[j].pid == data.parents[i].id) {
-                    flag = true;
-                    if (data.childs[j].id == bindid) {
-                        html += '<option value="' + data.childs[j].id + '" selected="selected">' + data.childs[j].name + '</option>';
-                    }
-                    else {
-                        html += '<option value="' + data.childs[j].id + '">' + data.childs[j].name + '</option>';
-                    }
-                }
+        for (var i = 0; i < data.length; i++) {
+            if (bindid == data[i].id) {
+                html += '<option value="' + data[i].id + '" selected="selected">' + data[i].name + '</option>';
             }
-            html += '</optgroup>';
+            else {
+                html += '<option value="' + data[i].id + '">' + data[i].name + '</option>';
+            }
         }
-        if (!flag) {
-            Lobibox.notify('info', {
-                size: 'mini',
-                title: 'awbeci提示',
-                msg: '请先在主分类下面添加子分类再添加网址.'
-            });
-            return;
-        }
-        else {
-            $('#siteType').append(html);
-            $('#siteType').selectpicker('refresh');
-            $('.editlinkdlg').addClass('show');
-        }
+        $('#siteType').append(html);
+        $('#siteType').selectpicker('refresh');
+        $('.editlinkdlg').addClass('show');
     }, 'json');
 }
 
@@ -183,7 +184,7 @@ function addcategory(that) {
     $('#categoryId').val('');
     $('.editnavdlg').css({
         left: '1px',
-        top: positon.top + 29
+        top: positon.top + 31
     });
     $('.editnavdlg').show()
 }
@@ -210,7 +211,12 @@ function saveCategory() {
     }, function (data) {
         if (data != 0) {
             canceleditNav();
-            initCategory(pid, depth);
+            if (categoryflag == 'update') {
+                $('.editCategoryName').prev().find('.categoryname').text(categoryname);
+            }
+            else {
+                initCategory(pid, depth);
+            }
         }
         else {
             Lobibox.notify('info', {
@@ -224,25 +230,25 @@ function saveCategory() {
 }
 
 //添加网址
-function addSite() {
-    $('#addsite').on('click', function (event, data) {
-        siteflag = 'add';
-        $('.header-title').text('添加');
-        var $positon = $(this).position();
-        $('#siteid').val('');
-        $('#siteid').attr('icon', '');
-        $("#sitename").val('');
-        $("#siteurl").val('');
-        $('.editlinkdlg').css({
-            left: $positon.left - 221,
-            top: $positon.top + 25
-        });
-        bindSite('');
-    })
+function showAddSiteDlg(that) {
+    siteflag = 'add';
+    var pid = $('#category-list').attr('pid');
+    $('.header-title').text('添加');
+    var $positon = $(that).position();
+    $('#siteid').val('');
+    $('#siteid').attr('icon', '');
+    $("#sitename").val('');
+    $("#siteurl").val('');
+    $('.editlinkdlg').css({
+        left: $positon.left - 160,
+        top: $positon.top + 30
+    });
+    bindSiteForCategory(pid, '');
 }
 
 //保存网址
 function saveSite() {
+    var clickcategoryid = $('.list-group-item-active>a').attr('categoryid');//当前被选中的分类
     var sitename = $('#sitename').val();
     var siteurl = $('#siteurl').val();
     var siteicon = $('#siteid').attr('icon');
@@ -278,11 +284,10 @@ function saveSite() {
     }, function (data) {
         if (data != 0) {
             canceleditLink();
-            if (clickCategoryId == null || clickCategoryId == '') {
-                initSite();
-            }
-            else {
-                clickCategoryShowSite();
+            //如果当前被选中的分类等于已经添加网址的分类，就要重新显示
+            if (clickcategoryid == categoryid) {
+                //todo:再显示一下编辑按钮
+                addSiteShowSite(categoryid);
             }
         }
         else {
@@ -301,29 +306,27 @@ function showEditCategoryBtn() {
     $('.header-title').text('编辑');
     if ($('.oction-category').hasClass('hide')) {
         $('.oction-category').removeClass('hide').addClass('show');
-        $('.depth-right-in').removeClass('show').addClass('hide');
     }
     else {
         $('.oction-category').removeClass('show').addClass('hide');
-        $('.depth-right-in').removeClass('hide').addClass('show');
     }
     canceleditNav();
 }
 
-function editCategorySite() {
-    $("#editsite").on('click', function (e) {
-        if ($('.linkedit').hasClass('hide')) {
-            $('.linkedit').removeClass('hide').addClass('show');
-        }
-        else {
-            $('.linkedit').removeClass('show').addClass('hide');
-        }
-        canceleditLink();
-    });
+function showEditSiteOction() {
+    if ($('.linkedit').hasClass('hide')) {
+        $('.linkedit').removeClass('hide').addClass('show');
+    }
+    else {
+        $('.linkedit').removeClass('show').addClass('hide');
+    }
+    canceleditLink();
 }
 
 function editCategory(that) {
     categoryflag = 'update';
+    $('.list-group-item a').removeClass('editCategoryName');
+    $(that).addClass('editCategoryName');
     var $parent = $(that).parent();
     var $children = $parent.children('a');
     var positon = $parent.position();
@@ -337,16 +340,12 @@ function editCategory(that) {
 }
 
 //删除分类
-function delCategory(that) {
-    //todo:删除
-    var $that = $(that);
-    var parents = $(this).parent().parent().find('.list-item');
-    var parent = $(this).parent();
-    if (parents.length > 0 && !parent.hasClass('list-item')) {
+function delCategory(that, id, sitescount, categorycount) {
+    if (sitescount > 0 || categorycount > 0) {
         Lobibox.notify('info', {
             size: 'mini',
             title: 'awbeci提示',
-            msg: '该分类下存在子分类，请先删除子分类，再删除此分类.'
+            msg: '请先删除子分类和网址，再删除此分类.'
         });
         return;
     }
@@ -363,17 +362,11 @@ function delCategory(that) {
         },
         callback: function ($this, type, ev) {
             if (type === 'yes') {
-                var id = $that.parent().children('a').attr('id');
                 $.post('/json/deleteCategory.json', {
                     id: id
                 }, function (data) {
                     if (data.success) {
-                        initCategory();
-                        Lobibox.notify('info', {
-                            size: 'mini',
-                            title: 'awbeci提示',
-                            msg: data.msg
-                        });
+                        $(that).parent().remove();
                     }
                     else {
                         Lobibox.notify('info', {
@@ -388,69 +381,67 @@ function delCategory(that) {
     });
 }
 
-/*编辑删除网址放到一起*/
-function editDelSite() {
-    $('.linkediticon').on('click', function (event, data) {
-        siteflag = 'update';
-        $('.header-title').text('编辑');
-        var $positon = $(this).parent().position();
-        $("#sitename").val($.trim($(this).parent().children('a').text()));
-        $("#siteurl").val($.trim($(this).parent().children('a').attr('href')));
-        $('.editlinkdlg').css({
-            left: $positon.left + 6,
-            top: $positon.top + 39
-        });
-        var bindid = $(this).parent().children('a').attr('categoryid');
-        bindSite(bindid);
-        $('#siteid').val($(this).parent().children('a').attr('id'));
-        $('#siteid').attr('icon', $(this).parent().children('a').children('img').attr('src'));
-        $('#siteType').selectpicker('val', bindid);
-    });
-
-    $('.linkdelicon').on('click', function (event, data) {
-        var $that = $(this);
-        var iconurl = $(this).parent().children('a').children('img').attr('src');
-        if (iconurl.search('6000.png') != -1) {
-            iconurl = '';
-        }
-
-        Lobibox.confirm({
+//显示编辑网址对话框
+function showEditSiteDlg(that) {
+    var $findcategory = $('#category-list').find('.list-group-item-active');
+    if ($findcategory.length == 0) {
+        Lobibox.notify('info', {
+            size: 'mini',
             title: 'awbeci提示',
-            msg: "您确定删除此网址？",
-            buttons: {
-                yes: {
-                    text: '确定'
-                },
-                no: {
-                    text: '取消'
-                }
-            },
-            callback: function ($this, type, ev) {
-                if (type === 'yes') {
-                    $.post('/json/deleteSite.json', {
-                        id: $that.parent().children('a').attr('id'),
-                        iconurl: iconurl
-                    }, function (data) {
-                        if (data != 0) {
-                            if (clickCategoryId == null || clickCategoryId == '') {
-                                initSite();
-                            }
-                            else {
-                                clickCategoryShowSite();
-                            }
-                        }
-                        else {
-                            Lobibox.notify('info', {
-                                size: 'mini',
-                                title: 'awbeci提示',
-                                msg: '删除失败.'
-                            });
-                            return;
-                        }
-                    }, 'json');
-                }
-            }
+            msg: '请先选择分类，再点击编辑.'
         });
+        return;
+    }
+    siteflag = 'update';
+    $('.header-title').text('编辑');
+    var $positon = $(that).parent().position();
+    $("#sitename").val($.trim($(that).prev().find('.siteName').text()));
+    $("#siteurl").val($.trim($(that).prev().attr('href')));
+    $('.editlinkdlg').css({
+        left: $positon.left + 6,
+        top: $positon.top + 39
+    });
+    var pid = $('#category-list').attr('pid');
+    var categoryid = $(that).prev().attr('categoryid');
+    bindSiteForCategory(pid, categoryid);
+    $('#siteid').val($(that).prev().attr('id'));
+    $('#siteid').attr('icon', $(that).prev().find('img').attr('src'));
+}
+
+/*编辑删除网址放到一起*/
+function delSite(that) {
+    var iconurl = $(that).prev().prev().find('img').attr('src');
+    Lobibox.confirm({
+        title: 'awbeci提示',
+        msg: "您确定删除此网址？",
+        buttons: {
+            yes: {
+                text: '确定'
+            },
+            no: {
+                text: '取消'
+            }
+        },
+        callback: function ($this, type, ev) {
+            if (type === 'yes') {
+                $.post('/json/deleteSite.json', {
+                    id: $(that).prev().prev().attr('id'),
+                    iconurl: iconurl
+                }, function (data) {
+                    if (data != 0) {
+                        $(that).parent().remove();
+                    }
+                    else {
+                        Lobibox.notify('info', {
+                            size: 'mini',
+                            title: 'awbeci提示',
+                            msg: '删除失败.'
+                        });
+                        return;
+                    }
+                }, 'json');
+            }
+        }
     });
 }
 

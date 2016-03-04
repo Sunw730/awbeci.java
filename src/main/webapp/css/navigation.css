@@ -109,6 +109,7 @@ a.list-group-item:hover {
     width: 100%;
     height: 100%;
     border: 1px solid #ddd;
+    border-top: none;
     padding: 4px;
     background-color: #f9f9f9;
 }
@@ -171,7 +172,7 @@ a.list-group-item:hover {
 }
 
 .list-group-item {
-    padding: 5px 15px;
+    padding: 5px 15px 5px 25px;
 }
 
 .list-group-item:first-child {
@@ -183,7 +184,6 @@ a.list-group-item:hover {
 .treeview-head {
     border: 1px solid #ddd;
     background: #f9f9f9;
-    border-bottom: none;
     padding: 8px 10px;
     border-radius: 4px 4px 0 0;
     font-size: 14px;
@@ -316,16 +316,6 @@ a.list-group-item:hover {
     box-shadow: 0px 3px 12px rgba(0, 0, 0, 0.15);
 }
 
-/*链接编辑样式*/
-.linkedit, .navedit {
-    color: #3C3C3C;
-}
-
-.linkedit:hover, .navedit:hover {
-    cursor: pointer;
-    color: #4183c4;
-}
-
 .linkediticon {
     position: absolute;
     right: 30px;
@@ -368,7 +358,7 @@ a.list-group-item:hover {
 }
 
 .myoction {
-    margin-right: 5px;
+    margin-right: 4px;
 }
 
 /*new pages for awbeci 2.2*/
@@ -377,7 +367,11 @@ a.list-group-item:hover {
     font-weight: bold;
 }
 
-.depth-right-in, .depth-right-del, .depth-right-edit {
+ .list-group-item a:first-child:focus {
+    text-decoration: none;
+}
+
+.depth-right-del, .depth-right-edit,.linkediticon,.linkdelicon {
     float: right;
     font-size: 20px;
     display: inline-block;
@@ -389,15 +383,38 @@ a.list-group-item:hover {
     text-align: center;
 }
 
-.depth-right-in {
-    right: 0;
+.linkediticon {
+    right: 31px;
+    font-size: 16px;
 }
 
-.depth-right-in:hover {
+.linkediticon:hover {
     background-color: #428bca;
     color: #fff;
 }
 
+.linkdelicon {
+    right: 0;
+    font-size: 16px;
+}
+
+.linkdelicon:hover {
+    background-color: red;
+    color: #fff;
+}
+
+.depth-right-in {
+    left: 0;
+    border-left: 2px solid #fff;
+    font-size: 20px;
+    display: inline-block;
+    position: absolute;
+    top: 0px;
+    height: 30px;
+    width: 25px;
+    line-height: 30px;
+    text-align: center;
+}
 .depth-right-edit {
     right: 31px;
     font-size: 16px;
@@ -418,5 +435,10 @@ a.list-group-item:hover {
     color: #fff;
 }
 
+.list-group-item:first-child {
+    border-top: none;
+}
 
-
+.list-group-item-active .depth-right-in{
+    border-left: 2px solid #d26911;
+}

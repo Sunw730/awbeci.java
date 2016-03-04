@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class UserCagetoryImpl implements IUserCategoryService {
@@ -14,7 +15,7 @@ public class UserCagetoryImpl implements IUserCategoryService {
     private IUserCategoryDao userCategoryDao;
 
 
-    public List<UserCategory> selectCategoryByUid(String uid, String pid) {
+    public List<Map> selectCategoryByUid(String uid, String pid) {
         return userCategoryDao.selectCategoryByUid(uid, pid);
     }
 

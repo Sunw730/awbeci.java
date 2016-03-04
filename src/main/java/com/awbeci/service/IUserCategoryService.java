@@ -3,9 +3,10 @@ package com.awbeci.service;
 import com.awbeci.domain.UserCategory;
 
 import java.util.List;
+import java.util.Map;
 
 public interface IUserCategoryService {
-    List<UserCategory> selectCategoryByUid(String uid, String pid);
+    List<Map> selectCategoryByUid(String uid, String pid);
 
     List<UserCategory> selectCategoryParent(String uid);
 

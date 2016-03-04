@@ -54,19 +54,20 @@
                 <strong>分类列表</strong>
                 <div class="treeview-head-right">
                     <c:if test="${sessionScope.user != null && isme}">
-                        <a href="javascript:void(0)" class="treeview-head-icon-right" data-toggle="tooltip"
-                           data-placement="top"
-                           title="添加" onclick="addcategory(this)">
-                            <span  class="octicon octicon-plus"></span>
+                        <a href="javascript:void(0)" class="treeview-head-icon-right" onclick="addcategory(this)">
+                            <span class="octicon octicon-plus"></span>
                             添加
                         </a>
 
-                        <a href="javascript:void(0)" class="treeview-head-icon-right" data-toggle="tooltip"
-                           data-placement="top" title="编辑" onclick="showEditCategoryBtn()">
+                        <a href="javascript:void(0)" onclick="showEditCategoryBtn()">
                             <span class="octicon octicon-pencil"></span>
                             编辑
                         </a>
                     </c:if>
+                    <a id="backCategory" href="javascript:void(0)" onclick="backCategory()" style="padding-left: 10px;">
+                        <span class="octicon octicon-mail-reply"></span>
+                        返回
+                    </a>
                 </div>
             </div>
             <div class="sidebar-module">
@@ -100,17 +101,13 @@
                 <strong>网址列表</strong>
                 <div class="treeview-head-right">
                     <c:if test="${sessionScope.user != null && isme}">
-                        <a href="javascript:void(0)" class="treeview-head-icon-right" data-toggle="tooltip"
-                           data-placement="top"
-                           title="" data-original-title="添加">
-                            <span id="addsite" class="octicon octicon-plus"></span>
+                        <a href="javascript:void(0)" class="treeview-head-icon-right" onclick="showAddSiteDlg(this)">
+                            <span class="octicon octicon-plus"></span>
                             添加
                         </a>
 
-                        <a href="javascript:void(0)" class="treeview-head-icon-right" data-toggle="tooltip"
-                           data-placement="top"
-                           title="" data-original-title="编辑">
-                            <span id="editsite" class=" octicon octicon-pencil"></span>
+                        <a href="javascript:void(0)" onclick="showEditSiteOction()">
+                            <span class=" octicon octicon-pencil"></span>
                             编辑
                         </a>
                     </c:if>

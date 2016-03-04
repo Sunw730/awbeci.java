@@ -7,14 +7,20 @@ import org.apache.ibatis.annotations.*;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Map;
 
 @Repository
 public interface IUserCategoryDao {
 
-    @Select(" select * from usercategory " +
-            " where uid=#{uid} and pid=#{pid} " +
-            " order by sortNo")
-    List<UserCategory> selectCategoryByUid(@Param("uid") String uid, @Param("pid")String pid);
+    @Select(" select a.id,a.name,a.depth,count(b.id) sitescount,(select count(*)" +
+            " from usercategory" +
+            " where pid=a.id and uid=#{uid}) categorycount" +
+            " from usercategory a" +
+            " left join usersites b on a.id=b.categoryid" +
+            " where a.uid=#{uid} and pid=#{pid}" +
+            " group by a.id,a.name,a.depth" +
+            " order by a.sortNo")
+    List<Map> selectCategoryByUid(@Param("uid") String uid, @Param("pid")String pid);
 
     @Select("select * from usercategory " +
             "where uid=#{uid} and ( pid is null or pid = '') " +
