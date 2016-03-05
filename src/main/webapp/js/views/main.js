@@ -11,17 +11,26 @@ function initMyFollowUser() {
             }
         }, 'json');
 }
-
 var showtimeoutid;
 function initDlg() {
     $('.hoverUserName').hover(function (e) {
         var id = $(this).attr('id');
         var positon = $(this).position();
-
-        $('.userInfoDlg').css({
-            left: positon.left,
-            top: positon.top -190
-        });
+        var rect = this.getBoundingClientRect();//获取div相对浏览器窗口位置
+        if (rect.top < 200) {
+            $('.userInfoDlg').css({
+                left: positon.left,
+                top: positon.top + 26
+            });
+            $('.hover-offset').removeClass('hover-offset-top').addClass('hover-offset-bottom')
+        }
+        else {
+            $('.userInfoDlg').css({
+                left: positon.left,
+                top: positon.top - 190
+            });
+            $('.hover-offset').removeClass('hover-offset-bottom').addClass('hover-offset-top')
+        }
         var showFlag = false;
         if (myFollowUser) {
             for (var i = 0; i < myFollowUser.length; i++) {
@@ -44,10 +53,9 @@ function initDlg() {
                 $('.userInfoDlg').fadeIn();
             }
         }
-
     }, function (e) {
         showtimeoutid = setTimeout(function () {
-            $('.userInfoDlg').hide()
+            $('.userInfoDlg').hide();
         }, 100)
     });
     $('.userInfoDlg').hover(function (e) {
