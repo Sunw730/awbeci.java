@@ -20,6 +20,7 @@ $(function () {
         canceleditLink();
     });
     querySite();
+    queryCategory();
     var name = GetQueryString('domainName');
     initQuerySite(name);
 });
@@ -47,6 +48,18 @@ function querySite() {
             }, function (data) {
                 showSite(data);
             })
+        }
+    });
+}
+
+//按回车查询分类
+function queryCategory() {
+    $('#txtQueryCategory').keydown(function (e) {
+        if (e.keyCode == 13) {
+            var depth = $('#category-list').attr('depth');
+            var pid = $('#category-list').attr('pid');
+            var param = $('#txtQueryCategory').val();
+            initCategory(pid, depth, $.trim(param));
         }
     });
 }
@@ -98,7 +111,7 @@ function pushCategory(pid, depth) {
 }
 
 //初始化分类
-function initCategory(pid, depth) {
+function initCategory(pid, depth, param) {
     pushCategory(pid, depth);
     $('#category-list').attr('depth', depth);
     $('#category-list').attr('pid', pid);
@@ -111,7 +124,8 @@ function initCategory(pid, depth) {
     }
 
     $.post('/json/getCategoryByUid.json', {
-        pid: pid
+        pid: pid,
+        name: param
     }, function (data) {
         var html = '';
         for (var i = 0; i < data.length; i++) {
@@ -408,7 +422,7 @@ function showEditSiteDlg(that) {
     $('#siteid').attr('icon', $(that).prev().find('img').attr('src'));
 }
 
-/*编辑删除网址放到一起*/
+//删除网址
 function delSite(that) {
     var iconurl = $(that).prev().prev().find('img').attr('src');
     Lobibox.confirm({

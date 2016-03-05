@@ -49,10 +49,10 @@ public class NavigationController {
 
     @RequestMapping(value = "/json/getCategoryByUid.json", method = RequestMethod.POST)
     @ResponseBody
-    public List<Map> selectAllCategory(String pid, HttpSession session) {
+    public List<Map> selectAllCategory(String pid, String name, HttpSession session) {
         String uid = (String) session.getAttribute("current_navigation_id");
         if (uid != null) {
-            List<Map> userCategories = userCategoryService.selectCategoryByUid(uid, pid);
+            List<Map> userCategories = userCategoryService.selectCategoryByUid(uid, pid, name);
             return userCategories;
         } else {
             return null;
@@ -222,6 +222,18 @@ public class NavigationController {
         try {
             String uid = (String) session.getAttribute("current_navigation_id");
             return userSitesService.querySiteByParam(param, uid);
+        } catch (Exception e) {
+            log.debug("错误原因:" + e.getMessage());
+            return null;
+        }
+    }
+
+    @RequestMapping(value = "/json/queryCategoryByParam.json", method = RequestMethod.POST)
+    @ResponseBody
+    public List<UserCategory> queryCategoryByParam(String param, HttpSession session) {
+        try {
+            String uid = (String) session.getAttribute("current_navigation_id");
+            return userCategoryService.queryCategoryByParam(param, uid);
         } catch (Exception e) {
             log.debug("错误原因:" + e.getMessage());
             return null;

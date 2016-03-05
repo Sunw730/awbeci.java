@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 public interface IUserCategoryService {
-    List<Map> selectCategoryByUid(String uid, String pid);
+    List<Map> selectCategoryByUid(String uid, String pid,String name);
 
     List<UserCategory> selectCategoryParent(String uid);
 
@@ -20,4 +20,5 @@ public interface IUserCategoryService {
 
     int deleteCategory(String id);
 
+    List<UserCategory> queryCategoryByParam(String param, String uid);
 }

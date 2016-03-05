@@ -111,7 +111,7 @@ a.list-group-item:hover {
     border: 1px solid #ddd;
     border-top: none;
     padding: 4px;
-    background-color: #f9f9f9;
+    background-color: #FAFAFA;
 }
 
 #showlink ul:not([class*=dropdown-menu]) li {
@@ -124,7 +124,7 @@ a.list-group-item:hover {
     font-size: 14px;
     border: 1px solid #d3dce3; /*#ddd;*/
     padding: 5px;
-    margin: 6px;
+    margin: 5px 6px;
     background: #fff;
 }
 
@@ -367,11 +367,11 @@ a.list-group-item:hover {
     font-weight: bold;
 }
 
- .list-group-item a:first-child:focus {
+.list-group-item a:first-child:focus {
     text-decoration: none;
 }
 
-.depth-right-del, .depth-right-edit,.linkediticon,.linkdelicon {
+.depth-right-del, .depth-right-edit, .linkediticon, .linkdelicon {
     float: right;
     font-size: 20px;
     display: inline-block;
@@ -415,6 +415,7 @@ a.list-group-item:hover {
     line-height: 30px;
     text-align: center;
 }
+
 .depth-right-edit {
     right: 31px;
     font-size: 16px;
@@ -434,11 +435,30 @@ a.list-group-item:hover {
     background-color: red;
     color: #fff;
 }
+.list-group-item{
+    height:30px;
+    line-height: 20px;
+}
 
 .list-group-item:first-child {
     border-top: none;
 }
 
-.list-group-item-active .depth-right-in{
+.list-group-item-active .depth-right-in {
     border-left: 2px solid #d26911;
+}
+
+.sidebar-module-search {
+    padding: 4px 0;
+    background: #FAFAFA;
+    border-left: 1px solid #ddd;
+    border-right: 1px solid #ddd;
+    border-bottom: 1px solid #ddd;
+}
+
+.input-sm, .form-group-sm .form-control{
+    height: 26px;
+    padding: 5px 10px;
+    font-size: 11px;
+    border-radius: 10px;
 }

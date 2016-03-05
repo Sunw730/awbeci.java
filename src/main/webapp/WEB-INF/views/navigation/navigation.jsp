@@ -17,7 +17,7 @@
             <c:choose>
                 <c:when test="${hadFollow}">
                     <ul>
-                        <li><a href="javascript:void(0)" class="btn btn-default abc-btn"
+                        <li><a href="javascript:void(0)" class="btn btn-default btn-sm"
                                onclick="follow(this,'${sessionScope.current_user.id}','${sessionScope.current_user.name}')">
                             <span aria-hidden="true" class="octicon octicon-person commonOction"></span>
                             取消关注</a>
@@ -26,7 +26,7 @@
                 </c:when>
                 <c:otherwise>
                     <ul>
-                        <li><a href="javascript:void(0)" class="btn btn-default abc-btn"
+                        <li><a href="javascript:void(0)" class="btn btn-default btn-sm"
                                onclick="follow(this,'${sessionScope.current_user.id}','${sessionScope.current_user.name}')">
                             <span aria-hidden="true" class="octicon octicon-person commonOction"></span>
                             关注</a>
@@ -71,6 +71,15 @@
                 </div>
             </div>
             <div class="sidebar-module">
+                <div class="sidebar-module-search">
+                    <div class="btn-search">
+                        <div class="form-group form-group-sm" style="margin-bottom: 0">
+                            <input id="txtQueryCategory" type="text" class="form-control" placeholder="请输入查询内容">
+                        </div>
+                        <!-- /btn-group -->
+                    </div>
+                </div>
+
                 <ul id="category-list" class="list-group">
                 </ul>
             </div>

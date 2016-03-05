@@ -17,10 +17,10 @@ public interface IUserCategoryDao {
             " where pid=a.id and uid=#{uid}) categorycount" +
             " from usercategory a" +
             " left join usersites b on a.id=b.categoryid" +
-            " where a.uid=#{uid} and pid=#{pid}" +
+            " where a.uid=#{uid} and pid=#{pid} and a.name like '%${name}%'" +
             " group by a.id,a.name,a.depth" +
             " order by a.sortNo")
-    List<Map> selectCategoryByUid(@Param("uid") String uid, @Param("pid")String pid);
+    List<Map> selectCategoryByUid(@Param("uid") String uid, @Param("pid") String pid, @Param("name") String name);
 
     @Select("select * from usercategory " +
             "where uid=#{uid} and ( pid is null or pid = '') " +
@@ -43,4 +43,7 @@ public interface IUserCategoryDao {
 
     @Delete("delete from usercategory where id=#{id}")
     int deleteCategory(String id);
+
+    @Select("select * from usercategory where name like '%${param}%' and uid=#{uid}")
+    List<UserCategory> queryCategoryByParam(@Param("param") String param, @Param("uid") String uid);
 }

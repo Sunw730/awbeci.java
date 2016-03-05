@@ -15,8 +15,8 @@ public class UserCagetoryImpl implements IUserCategoryService {
     private IUserCategoryDao userCategoryDao;
 
 
-    public List<Map> selectCategoryByUid(String uid, String pid) {
-        return userCategoryDao.selectCategoryByUid(uid, pid);
+    public List<Map> selectCategoryByUid(String uid, String pid, String name) {
+        return userCategoryDao.selectCategoryByUid(uid, pid, name);
     }
 
 
@@ -47,6 +47,11 @@ public class UserCagetoryImpl implements IUserCategoryService {
 
     public int deleteCategory(String id) {
         return userCategoryDao.deleteCategory(id);
+    }
+
+    @Override
+    public List<UserCategory> queryCategoryByParam(String param, String uid) {
+        return userCategoryDao.queryCategoryByParam(param, uid);
     }
 
 }
