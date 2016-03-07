@@ -210,7 +210,7 @@ a.list-group-item:hover {
 
 .treeview-head-right a {
     text-decoration: none;
-    color: #000;
+    color: #767676;
 }
 
 .treeview-head-right a:hover {
@@ -352,6 +352,12 @@ a.list-group-item:hover {
     padding-left: 3px;
 }
 
+.currUserInfo-detail img {
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    border-radius: 4px;
+}
+
 .typeoction {
     color: #000;
     margin-right: 5px;
@@ -414,6 +420,11 @@ a.list-group-item:hover {
     width: 25px;
     line-height: 30px;
     text-align: center;
+    color: #9A9A9A;
+}
+
+.depth-right-in:hover {
+    color: #428bca;
 }
 
 .depth-right-edit {
@@ -435,8 +446,9 @@ a.list-group-item:hover {
     background-color: red;
     color: #fff;
 }
-.list-group-item{
-    height:30px;
+
+.list-group-item {
+    height: 30px;
     line-height: 20px;
 }
 
@@ -456,9 +468,9 @@ a.list-group-item:hover {
     border-bottom: 1px solid #ddd;
 }
 
-.input-sm, .form-group-sm .form-control{
+.input-sm, .form-group-sm .form-control {
     height: 26px;
     padding: 5px 10px;
     font-size: 11px;
-    border-radius: 10px;
+    border-radius: 12px;
 }

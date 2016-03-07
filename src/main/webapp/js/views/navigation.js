@@ -174,6 +174,14 @@ function bindSiteForCategory(pid, bindid) {
     $.post('/json/getCategoryByUid.json', {
         pid: pid
     }, function (data) {
+        if (data.length == 0) {
+            Lobibox.notify('info', {
+                size: 'mini',
+                title: 'awbeci提示',
+                msg: '请先添加分类'
+            });
+            return;
+        }
         var html = '';
         for (var i = 0; i < data.length; i++) {
             if (bindid == data[i].id) {
@@ -254,7 +262,7 @@ function showAddSiteDlg(that) {
     $("#sitename").val('');
     $("#siteurl").val('');
     $('.editlinkdlg').css({
-        left: $positon.left - 160,
+        left: $positon.left - 170,
         top: $positon.top + 30
     });
     bindSiteForCategory(pid, '');
@@ -288,6 +296,7 @@ function saveSite() {
     }
 
     var categoryid = $('#siteType').val();
+    canceleditLink();//不管添加成功还是失败都必须关闭对话框
     $.post('/json/saveSite.json', {
         id: $('#siteid').val(),
         name: sitename,
@@ -297,7 +306,6 @@ function saveSite() {
         flag: siteflag
     }, function (data) {
         if (data != 0) {
-            canceleditLink();
             //如果当前被选中的分类等于已经添加网址的分类，就要重新显示
             if (clickcategoryid == categoryid) {
                 //todo:再显示一下编辑按钮
