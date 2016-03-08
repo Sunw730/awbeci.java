@@ -10,6 +10,7 @@ function GetQueryString(name) {
 }
 
 $(function () {
+    $( '#ss' ).ladda( 'bind');
     $("[data-toggle='tooltip']").tooltip({html: true});
     //$("#showlink ul").dragsort({});
     initCategory('', 1);
@@ -213,6 +214,7 @@ function addcategory(that) {
 
 //保存分类
 function saveCategory() {
+    return;
     var depth = $('#category-list').attr('depth');
     var pid = $('#category-list').attr('pid');
     var categoryname = $('#categoryName').val();
