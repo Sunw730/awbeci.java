@@ -8,9 +8,9 @@ function GetQueryString(name) {
     if (r != null)return unescape(r[2]);
     return null;
 }
-
+var l = null;
 $(function () {
-    $( '#ss' ).ladda( 'bind');
+    l = Ladda.create(document.querySelector('#addCategory'));
     $("[data-toggle='tooltip']").tooltip({html: true});
     //$("#showlink ul").dragsort({});
     initCategory('', 1);
@@ -200,6 +200,8 @@ function bindSiteForCategory(pid, bindid) {
 
 //添加分类
 function addcategory(that) {
+
+    l.start();
     categoryflag = 'add';
     $('.header-title').text('添加');
     var positon = $(that).position();

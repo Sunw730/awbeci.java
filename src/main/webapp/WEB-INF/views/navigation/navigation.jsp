@@ -7,9 +7,8 @@
     <link href="/js/bootstrap-select/css/bootstrap-select.min.css" rel="stylesheet">
     <link href="/css/navigation.css" rel="stylesheet">
     <link href="/js/ladda/ladda-themeless.min.css" rel="stylesheet">
-    <script type="text/javascript" src="/js/ladda/ladda.min.js"></script>
     <script type="text/javascript" src="/js/ladda/spin.min.js"></script>
-    <script type="text/javascript" src="/js/ladda/ladda.jquery.min.js"></script>
+    <script type="text/javascript" src="/js/ladda/ladda.min.js"></script>
     <script type="text/javascript" src="/js/dragsort-0.5.2/jquery.dragsort-0.5.2.min.js"></script>
     <script type="text/javascript" src="/js/bootstrap-select/js/bootstrap-select.min.js"></script>
     <script type="text/javascript" src="/js/views/navigation.js"></script>
@@ -100,7 +99,7 @@
                     </div>
                 </div>
                 <div class="categorytoolbar">
-                    <button id="ss" type="button" class="btn btn-success ladda-button" data-style="slide-down" onclick="saveCategory()">
+                    <button id="addCategory" type="button" class="btn btn-success" onclick="saveCategory()">
                         <span class="octicon octicon-check myoction"></span>确定
 
                     </button>
