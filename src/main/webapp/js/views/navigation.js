@@ -8,9 +8,8 @@ function GetQueryString(name) {
     if (r != null)return unescape(r[2]);
     return null;
 }
-var l = null;
 $(function () {
-    l = Ladda.create(document.querySelector('#addCategory'));
+
     $("[data-toggle='tooltip']").tooltip({html: true});
     //$("#showlink ul").dragsort({});
     initCategory('', 1);
@@ -24,6 +23,8 @@ $(function () {
     queryCategory();
     var name = GetQueryString('domainName');
     initQuerySite(name);
+    //todo:setTimeout("$('body').showLoading();",2000);
+
 });
 
 function initQuerySite(name) {
@@ -113,6 +114,7 @@ function pushCategory(pid, depth) {
 
 //初始化分类
 function initCategory(pid, depth, param) {
+
     pushCategory(pid, depth);
     $('#category-list').attr('depth', depth);
     $('#category-list').attr('pid', pid);
@@ -200,8 +202,6 @@ function bindSiteForCategory(pid, bindid) {
 
 //添加分类
 function addcategory(that) {
-
-    l.start();
     categoryflag = 'add';
     $('.header-title').text('添加');
     var positon = $(that).position();
@@ -215,8 +215,9 @@ function addcategory(that) {
 }
 
 //保存分类
-function saveCategory() {
-    return;
+function saveCategory(that) {
+    var l = Ladda.create(that);
+    l.start();
     var depth = $('#category-list').attr('depth');
     var pid = $('#category-list').attr('pid');
     var categoryname = $('#categoryName').val();
@@ -229,30 +230,33 @@ function saveCategory() {
         return;
     }
     $.post('/json/saveCategory.json', {
-        id: $('#categoryId').val(),
-        name: categoryname,
-        pid: pid,
-        depth: depth,
-        flag: categoryflag
-    }, function (data) {
-        if (data != 0) {
-            canceleditNav();
-            if (categoryflag == 'update') {
-                $('.editCategoryName').prev().find('.categoryname').text(categoryname);
+            id: $('#categoryId').val(),
+            name: categoryname,
+            pid: pid,
+            depth: depth,
+            flag: categoryflag
+        }, function (data) {
+            if (data != 0) {
+                canceleditNav();
+                if (categoryflag == 'update') {
+                    $('.editCategoryName').prev().find('.categoryname').text(categoryname);
+                }
+                else {
+                    initCategory(pid, depth);
+                }
             }
             else {
-                initCategory(pid, depth);
+                Lobibox.notify('info', {
+                    size: 'mini',
+                    title: 'awbeci提示',
+                    msg: '添加失败.'
+                });
+                return;
             }
-        }
-        else {
-            Lobibox.notify('info', {
-                size: 'mini',
-                title: 'awbeci提示',
-                msg: '添加失败.'
-            });
-            return;
-        }
-    }, 'json');
+        }, 'json')
+        .always(function () {
+            l.stop();
+        });
 }
 
 //添加网址
@@ -273,7 +277,9 @@ function showAddSiteDlg(that) {
 }
 
 //保存网址
-function saveSite() {
+function saveSite(that) {
+    var l = Ladda.create(that);
+    l.start();
     var clickcategoryid = $('.list-group-item-active>a').attr('categoryid');//当前被选中的分类
     var sitename = $('#sitename').val();
     var siteurl = $('#siteurl').val();
@@ -300,7 +306,6 @@ function saveSite() {
     }
 
     var categoryid = $('#siteType').val();
-    canceleditLink();//不管添加成功还是失败都必须关闭对话框
     $.post('/json/saveSite.json', {
         id: $('#siteid').val(),
         name: sitename,
@@ -324,7 +329,11 @@ function saveSite() {
             });
             return;
         }
-    }, 'json');
+    }, 'json')
+    .always(function(){
+        l.stop();
+        canceleditLink();
+    });
 }
 
 //编辑导航

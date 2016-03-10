@@ -7,10 +7,12 @@
     <link href="/js/bootstrap-select/css/bootstrap-select.min.css" rel="stylesheet">
     <link href="/css/navigation.css" rel="stylesheet">
     <link href="/js/ladda/ladda-themeless.min.css" rel="stylesheet">
+    <link href="/js/showLoading/css/showLoading.css">
     <script type="text/javascript" src="/js/ladda/spin.min.js"></script>
     <script type="text/javascript" src="/js/ladda/ladda.min.js"></script>
     <script type="text/javascript" src="/js/dragsort-0.5.2/jquery.dragsort-0.5.2.min.js"></script>
     <script type="text/javascript" src="/js/bootstrap-select/js/bootstrap-select.min.js"></script>
+    <script type="text/javascript" src="/js/showLoading/js/jquery.showLoading.min.js"></script>
     <script type="text/javascript" src="/js/views/navigation.js"></script>
 </head>
 <body>
@@ -99,7 +101,7 @@
                     </div>
                 </div>
                 <div class="categorytoolbar">
-                    <button id="addCategory" type="button" class="btn btn-success" onclick="saveCategory()">
+                    <button type="button" class="btn btn-success btn-sm ladda-button" data-style="slide-down" onclick="saveCategory(this)">
                         <span class="octicon octicon-check myoction"></span>确定
 
                     </button>
@@ -154,7 +156,7 @@
                         </div>
                     </div>
                     <div class="sitetoolbar  form-group-sm">
-                        <button type="button" class="btn btn-success btn-sm" onclick="saveSite()"><span
+                        <button type="button" class="btn btn-success btn-sm ladda-button" data-style="slide-down" onclick="saveSite(this)"><span
                                 class="octicon octicon-check myoction"></span>确定
                         </button>
                         <button type="button" class="btn btn-danger btn-sm" onclick="canceleditLink()"><span
