@@ -5,9 +5,12 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title>账户设置</title>
     <link href="/js/cropper/cropper.min.css" rel="stylesheet">
+    <link href="/js/ladda/ladda-themeless.min.css" rel="stylesheet">
     <link href="/css/setting.css" rel="stylesheet">
     <script src="/js/cropper/cropper.min.js"></script>
     <script src="/js/cropper/canvas-toBlob.js"></script>
+    <script type="text/javascript" src="/js/ladda/spin.min.js"></script>
+    <script type="text/javascript" src="/js/ladda/ladda.min.js"></script>
     <script src="/js/views/setting.js"></script>
 </head>
 <body>
@@ -21,11 +24,11 @@
             </div>
             <div class="person-info-setlist">
                 <div class="list-group">
-                    <a href="#" class="list-group-item" onclick="settingProfile(1)">
+                    <a href="javascript:void(0)" class="list-group-item" onclick="settingProfile(1)">
                         个人资料
                         <span class="octicon octicon-chevron-right"></span>
                     </a>
-                    <a href="#" class="list-group-item" onclick="settingProfile(2)">修改密码
+                    <a href="javascript:void(0)" class="list-group-item" onclick="settingProfile(2)">修改密码
                         <span class="octicon octicon-chevron-right"></span>
                     </a>
                 </div>
@@ -89,7 +92,7 @@
                             </dd>
                         </dl>
                         <p>
-                            <button class="btn btn-success" onclick="updateProfile()">更新资料</button>
+                            <button class="btn btn-success ladda-button" data-style="slide-down" onclick="updateProfile(this)">更新资料</button>
                         </p>
                     </div>
                     <div class="setting-detail-tab tab2">
@@ -115,7 +118,7 @@
                             </dd>
                         </dl>
                         <p>
-                            <button class="btn btn-success" onclick="updatePwd()">更新密码</button>
+                            <button class="btn btn-success ladda-button" data-style="slide-down" onclick="updatePwd(this)">更新密码</button>
                         </p>
                     </div>
                     <div class="setting-detail-tab tab3">333</div>
@@ -149,7 +152,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
-                <a class="btn btn-primary" id="download" href="javascript:void(0);" onclick="uploadAvator()">确定</a>
+                <a class="btn btn-primary ladda-button" data-style="slide-down" id="download" href="javascript:void(0);" onclick="uploadAvator(this)">确定</a>
             </div>
         </div><!-- /.modal-content -->
     </div><!-- /.modal -->

@@ -9,7 +9,6 @@ function GetQueryString(name) {
     return null;
 }
 $(function () {
-
     $("[data-toggle='tooltip']").tooltip({html: true});
     //$("#showlink ul").dragsort({});
     initCategory('', 1);
@@ -23,8 +22,6 @@ $(function () {
     queryCategory();
     var name = GetQueryString('domainName');
     initQuerySite(name);
-    //todo:setTimeout("$('body').showLoading();",2000);
-
 });
 
 function initQuerySite(name) {
@@ -114,7 +111,7 @@ function pushCategory(pid, depth) {
 
 //初始化分类
 function initCategory(pid, depth, param) {
-
+    $('body').showLoading({vPos:'top'});
     pushCategory(pid, depth);
     $('#category-list').attr('depth', depth);
     $('#category-list').attr('pid', pid);
@@ -149,7 +146,10 @@ function initCategory(pid, depth, param) {
         }
         $('#category-list').append($(html));
         $('.oction-category').addClass('hide');
-    }, 'json');
+    }, 'json')
+    .always(function(){
+        $('body').hideLoading();
+    });
 }
 
 //点击分类的时候显示网址列表
@@ -168,7 +168,7 @@ function addSiteShowSite(id) {
         categoryId: id
     }, function (data) {
         showSite(data);
-    }, 'json');
+    }, 'json')
 }
 
 //绑定网址
@@ -217,7 +217,7 @@ function addcategory(that) {
 //保存分类
 function saveCategory(that) {
     var l = Ladda.create(that);
-    l.start();
+
     var depth = $('#category-list').attr('depth');
     var pid = $('#category-list').attr('pid');
     var categoryname = $('#categoryName').val();
@@ -229,6 +229,7 @@ function saveCategory(that) {
         });
         return;
     }
+    l.start();
     $.post('/json/saveCategory.json', {
             id: $('#categoryId').val(),
             name: categoryname,
@@ -279,7 +280,6 @@ function showAddSiteDlg(that) {
 //保存网址
 function saveSite(that) {
     var l = Ladda.create(that);
-    l.start();
     var clickcategoryid = $('.list-group-item-active>a').attr('categoryid');//当前被选中的分类
     var sitename = $('#sitename').val();
     var siteurl = $('#siteurl').val();
@@ -306,6 +306,7 @@ function saveSite(that) {
     }
 
     var categoryid = $('#siteType').val();
+    l.start();
     $.post('/json/saveSite.json', {
         id: $('#siteid').val(),
         name: sitename,

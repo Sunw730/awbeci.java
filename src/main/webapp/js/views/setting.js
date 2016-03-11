@@ -62,7 +62,8 @@ function activeProfile() {
 }
 
 //更新个人资料
-function updateProfile() {
+function updateProfile(that) {
+    var l = Ladda.create(that);
     var name = $("#name").val();
     var niceName = $("#niceName").val();
     var email = $("#email").val();
@@ -85,6 +86,7 @@ function updateProfile() {
     //    });
     //    return;
     //}
+
     if ($.trim(email).length == 0) {
         Lobibox.notify('info', {
             size: 'mini',
@@ -93,7 +95,7 @@ function updateProfile() {
         });
         return;
     }
-
+    l.start();
     $.post("/json/updateProfile.json", {
         name: name,
         niceName: niceName,
@@ -115,6 +117,8 @@ function updateProfile() {
                 msg: '更新失败.'
             });
         }
+    },'json').always(function(){
+        l.stop();
     })
 }
 
@@ -142,7 +146,8 @@ function settingProfile(type) {
 }
 
 //更新密码
-function updatePwd() {
+function updatePwd(that) {
+    var l = Ladda.create(that);
     var oldPwd = $("#oldPwd").val();
     var newPwd = $("#newPwd").val();
     var newPwd2 = $("#newPwd2").val();
@@ -180,6 +185,7 @@ function updatePwd() {
         });
         return;
     }
+    l.start();
     $.post("/json/updatePassword.json", {
         oldPwd: oldPwd,
         newPwd: newPwd,
@@ -199,11 +205,14 @@ function updatePwd() {
                 msg: '更新失败'
             });
         }
+    },'json').always(function(){
+        l.stop();
     })
 }
 
 //上传头像
-function uploadAvator() {
+function uploadAvator(that) {
+    var l = Ladda.create(that);
     var $avatar = $("#userAvatar");
     var $image = $('#avatorImg');
     var $modal = $('#myModal');
@@ -211,6 +220,7 @@ function uploadAvator() {
         var formData = new FormData();
         formData.append('croppedImage', blob);
         formData.append('avatarUrl', $avatar.attr('src'));
+        l.start();
         $.ajax('/json/uploadAvatar.json', {
             method: "POST",
             data: formData,
@@ -230,6 +240,8 @@ function uploadAvator() {
             error: function () {
                 console.log('Upload error');
             }
+        }).always(function(){
+            l.stop();
         });
     });
     //$avatarForm = $("#avatarForm");

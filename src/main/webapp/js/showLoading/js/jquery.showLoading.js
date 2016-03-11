@@ -17,7 +17,7 @@ jQuery.fn.setLoading = function(pct) {
 }
 
 jQuery.fn.showLoading = function(options) {
-    
+    $('body').addClass('modal-open');
     var indicatorID;
     var settings = {
        	'addClass': '',
@@ -240,7 +240,7 @@ jQuery.fn.showLoading = function(options) {
 
 
 jQuery.fn.hideLoading = function(options) {
-    
+    $('body').removeClass('modal-open')
     
     var settings = {};
     

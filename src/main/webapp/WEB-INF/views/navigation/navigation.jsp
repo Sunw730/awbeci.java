@@ -7,12 +7,12 @@
     <link href="/js/bootstrap-select/css/bootstrap-select.min.css" rel="stylesheet">
     <link href="/css/navigation.css" rel="stylesheet">
     <link href="/js/ladda/ladda-themeless.min.css" rel="stylesheet">
-    <link href="/js/showLoading/css/showLoading.css">
+    <link href="/js/showLoading/css/showLoading.css" rel="stylesheet">
     <script type="text/javascript" src="/js/ladda/spin.min.js"></script>
     <script type="text/javascript" src="/js/ladda/ladda.min.js"></script>
     <script type="text/javascript" src="/js/dragsort-0.5.2/jquery.dragsort-0.5.2.min.js"></script>
     <script type="text/javascript" src="/js/bootstrap-select/js/bootstrap-select.min.js"></script>
-    <script type="text/javascript" src="/js/showLoading/js/jquery.showLoading.min.js"></script>
+    <script type="text/javascript" src="/js/showLoading/js/jquery.showLoading.js"></script>
     <script type="text/javascript" src="/js/views/navigation.js"></script>
 </head>
 <body>
